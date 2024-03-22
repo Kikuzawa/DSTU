@@ -1,0 +1,12 @@
+PyQt5
+numpy
+pandas
+prettytable
+mimesis
+sqlalchemy
+environs
+russian-names
+arrow
+requests
+classes
+Subscriber
