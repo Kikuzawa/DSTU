@@ -12,3 +12,6 @@ out/
 .idea
 .venv
 
+### Gradle ###
+.gradle
+**/build/

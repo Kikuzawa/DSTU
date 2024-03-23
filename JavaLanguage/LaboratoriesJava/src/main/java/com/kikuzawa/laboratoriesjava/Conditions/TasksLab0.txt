@@ -1,0 +1,402 @@
+package Lab_Zero;
+
+public class Main {
+    public static void main(String[] args) {
+        print_task(0);
+        example();
+        print_task(1);
+        task1();
+        print_task(2);
+        task2();
+        print_task(3);
+        task3();
+        print_task(4);
+        task4();
+    }
+    static void example(){
+        //Example 1
+        System.out.print("Моя первая программа и она работает!\n");
+        //Example 2
+        stick();
+        System.out.println("Первая строка");
+        System.out.println("Вторая строка");
+        //Example 3
+        stick();
+        System.out.print("Первая строка\n" + "Вторая строка\n");
+    }
+
+    static void task1(){
+        System.out.println("Mesa called Jar Jar Binks, mesa your humble servant!");
+
+        stick();
+
+        System.out.print("Ve have ti get out of here\n" + "We need transport\n");
+
+        stick();
+
+        for (int i = 0; i < 5; i++){
+            System.out.print("Destroy Droidekas!\n");
+        }
+
+        stick();
+
+        int a=4;
+        int b=3;
+        int c=a-b;
+        Integer.toString(c);
+        System.out.println(c);
+
+        stick();
+
+        int x = 2;
+        int y = 12;
+
+        y = x + y;
+        x = y - x;
+        y = y - x;
+
+        System.out.println(x);
+        System.out.println(y);
+
+        stick();
+
+        System.out.print("The");
+        System.out.print(" car");
+        System.out.print(" is ");
+        System.out.print("ready ");
+        System.out.print("for");
+        System.out.print(" the");
+        System.out.println(" race");
+    }
+
+    static void task2(){
+        String jedi = "Hello";
+        System.out.printf("%s\n", jedi);
+
+        stick();
+
+        int number = 2;
+        Integer.toString(number);
+        System.out.println(number*number);
+
+        stick();
+
+        for (int i = 1; i < 11; i++){
+            System.out.println("may the Force be with you\n");
+        }
+
+        stick();
+
+        String s = "Anakin ";
+        System.out.print(s);
+        //System.out.println("how are you? ");
+        //System.out.println("I am ");
+        //System.out.println("glad ");
+        //System.out.print("to see you.");
+        //System.out.println("This Lightsaber ");
+        System.out.print("is ");
+        //System.out.print("Your");
+        System.out.print("a hero");
+        System.out.println("!");
+
+        stick();
+
+        String mol = "Mol";
+        String text = "Darth " + mol + "!";
+        System.out.println(text);
+
+        stick();
+
+        System.out.println("Код находится в классе Solution");
+
+        stick();
+
+        int i = 5;
+        sqr(i);
+
+        stick();
+
+        //int a = 1;
+        double b = 1.5;
+        double c = b + 1.5;
+        //int d = a + 12;
+        //double e = 12.3;
+        //String s = "Luke, " + a;
+        String s1 = "Twice ";
+        //String s2 = "a";
+        String s3 = s1 + "the pride, ";
+        String s4 = " the fall.";
+        System.out.println(s3 + c + s4);
+
+        stick();
+
+        System.out.println("Код в Solution 2");
+
+        stick();
+
+        System.out.println("Код в Solution 3");
+
+    }
+
+    static void task3(){
+
+        System.out.println("Код в Solution4");
+
+        stick();
+
+        System.out.println("Код в Solution 5");
+
+        stick();
+
+        System.out.println("Код в Solution 6");
+
+        stick();
+
+        System.out.println("Код в Solution 7");
+
+        stick();
+
+        System.out.println("Код в Solution 8");
+
+        stick();
+
+        System.out.println("Код в Solution 9");
+
+        stick();
+
+        System.out.println("Код в Solution 10");
+
+
+
+
+    }
+    static void task4(){
+
+        System.out.println(min(12, 33));
+        System.out.println(min(-20, 0));
+        System.out.println(min(-10, -20));
+
+    }
+    static void stick(){
+        System.out.println("---------------------");
+    }
+    static void print_task(int i){
+        System.out.println("===== ===== ===== =====");
+        System.out.printf("=      Задание №%s     =\n", i);
+        System.out.println("===== ===== ===== =====");
+    }
+
+    static void sqr(int i){
+        System.out.println(i*i);
+    }
+
+
+    public static int min(int a, int b) {
+        if (a < b) { return a;} else { return b;}
+    }
+}
+
+
+------------------------------
+
+package Lab_Zero;
+
+public class Gungans {
+    // создание переменной строкового типа String
+    String name = "Jar-Jar";
+
+    // это метод вывода строки на экран
+    void display_info(){
+        System.out.printf("Name: %s", name);
+    }
+}
+
+-------------------------------
+
+package Lab_Zero;
+
+public class Solution {
+    public static int a = 1;
+    public static int b = 3;
+    public static int c = 9;
+    public static int d = 27;
+
+    public static void main(String[] args) {
+        int result = - a + b - c + d;
+        System.out.println(result);
+    }
+
+}
+
+--------------------------------
+
+package Lab_Zero;
+
+public class Solution2 {
+    public static void main(String[] args) {
+        print("The power is easy to use!");
+        print("The power opens many opportunities!");
+    }
+    public static void print(String s) {
+        for (int i = 1; i < 5; i++){
+            System.out.println(s);
+        }
+    }
+
+}
+
+-----------------------------------
+
+package Lab_Zero;
+
+public class Solution3 {
+    public static void main(String[] args) {
+        count(5);
+    }
+    public static void count(int n) {
+        System.out.println("Первая степень числа "+n+" = "+n);
+        System.out.println("Квадрат числа "+n+" = "+n*n);
+        System.out.println("Куб числа "+n+" = "+n*n*n);
+        System.out.println("Четвертая степень числа "+n+" = "+n*n*n*n);
+    }
+
+}
+
+----------------------------------------
+
+package Lab_Zero;
+
+public class Solution4 {
+    public static void main(String[] args) {
+        increaseSpeed(700);
+    }
+
+    public static void increaseSpeed(int a){
+        int n = a + 100;
+        System.out.print("Your speed is:" + n + " km/h.");
+    }
+}
+
+-----------------------------------------
+
+package Lab_Zero;
+
+public class Solution5 {
+    public static void main(String[] args) {
+        Zam zam = new Zam();
+        Dron dron = new Dron();
+
+        zam.spy = dron;
+        dron.hunter = zam;
+    }
+    public static class Zam {
+        public int kam;
+        public int dam;
+        public Dron spy;
+    }
+    public static class Dron {
+        public int tron;
+        public int kron;
+        public Zam hunter;
+    }
+
+}
+
+-----------------------------------------
+package Lab_Zero;
+
+public class Solution6 {
+    public static void main(String[] args) {
+        Jedi jedi1 = new Jedi();
+        jedi1.name = "Obi-Wan";
+        Jedi jedi2 = new Jedi();
+        jedi2.name = "Anakin";
+        Jedi jedi3 = new Jedi();
+        jedi3.name = "John";
+    }
+
+    public static class Jedi{
+        public String name;
+    }
+}
+
+-----------------------------------------
+package Lab_Zero;
+
+public class Solution7 {
+    public static void main(String[] args) {
+        Clone clone1 = new Clone();
+        Clone clone2 = new Clone();
+        Clone clone3  = new Clone();
+        Clone clone4  = new Clone();
+        Clone clone5 = new Clone();
+        Clone clone6 = new Clone();
+        Clone clone7 = new Clone();
+        Clone clone8 = new Clone();
+        Clone clone9 = new Clone();
+        Clone clone10 = new Clone();
+
+    }
+    public static class Clone{
+
+    }
+}
+
+-----------------------------------------
+package Lab_Zero;
+
+public class Solution8 {
+    public static void main(String[] args) {
+        Clone1 clone1 = new Clone1();
+        Clone2 clone2 = new Clone2();
+        Clone3 clone3 = new Clone3();
+        Dias dias = new Dias();
+        clone1.owner = dias;
+        clone2.owner = dias;
+        clone3.owner = dias;
+    }
+    public static class Clone1 {
+        public Dias owner;
+    }
+    public static class Clone2 {
+        public Dias owner;
+    }
+    public static class Clone3 {
+        public Dias owner;
+    }
+    public static class Dias {
+    }
+
+}
+
+-----------------------------------------
+package Lab_Zero;
+
+public class Solution9 {
+    public static void main(String[] args) {
+        System.out.println(getWeight(888));
+    }
+
+    public static double getWeight(int weight){
+        weight=weight/6;
+        return weight;
+    }
+}
+
+-----------------------------------------
+package Lab_Zero;
+
+public class Solution10 {
+
+    public static void main(String[] args) {
+        print3("dump");
+        print3("cargo");
+    }
+
+    public static void print3(String s) {
+        System.out.print(s + " " + s + " " + s);
+    }
+}
+
+#####
+#####
