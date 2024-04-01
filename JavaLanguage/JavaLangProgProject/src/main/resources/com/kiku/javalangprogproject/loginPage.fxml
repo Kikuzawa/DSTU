@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kiku.javalangprogproject.loginPageController">
+   <children>
+      <Label layoutX="416.0" layoutY="62.0" text="Обувная фабрика" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonLogin" layoutX="520.0" layoutY="422.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="LOGIN" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonClear" layoutX="699.0" layoutY="422.0" mnemonicParsing="false" onAction="#clearAllFileds" text="CLEAR" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="487.0" layoutY="259.0" text="Login:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="487.0" layoutY="311.0" text="Password:" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="loginField" layoutX="605.0" layoutY="263.0" prefHeight="27.0" prefWidth="204.0" />
+      <TextField fx:id="passowordField" layoutX="605.0" layoutY="315.0" prefHeight="27.0" prefWidth="204.0" />
+      <Label fx:id="exceptionLaber" alignment="CENTER" contentDisplay="CENTER" layoutX="472.0" layoutY="375.0" prefHeight="19.0" prefWidth="336.0" text="" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
+      <ComboBox fx:id="comboBoxLoginPage" layoutX="565.0" layoutY="493.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
