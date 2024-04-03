@@ -19,6 +19,7 @@ import java.util.Properties;
  */
 
 //Class to retrieve connection for database and login verfication.
+@SuppressWarnings("ALL")
 public class ConnectionFactory {
 
     static final String driver = "com.mysql.cj.jdbc.Driver";
@@ -32,6 +33,18 @@ public class ConnectionFactory {
     Statement statement = null;
     ResultSet resultSet = null;
 
+    public Connection getConnection() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            this.conn = DriverManager.getConnection(
+                    url,
+                    username,
+                    password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return conn;
+    }
     public ConnectionFactory(){
         try {
             //Username and Password saved as configurable properties to allow changes without recompilation.
@@ -46,7 +59,6 @@ public class ConnectionFactory {
         try {
             Class.forName(driver);
             conn = DriverManager.getConnection(url, username, password);
-            System.out.println("adssadasd" + conn);
             statement = conn.createStatement();
         } catch (Exception e) {
             e.printStackTrace();

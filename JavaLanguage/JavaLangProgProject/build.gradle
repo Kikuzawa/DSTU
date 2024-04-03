@@ -1,3 +1,6 @@
+//file:noinspection GroovyUnusedAssignment
+//file:noinspection GroovyUnusedAssignment
+//file:noinspection GrDeprecatedAPIUsage
 plugins {
   id 'java'
   id 'application'
@@ -20,13 +23,13 @@ ext {
 sourceCompatibility = '21'
 targetCompatibility = '21'
 
-tasks.withType(JavaCompile) {
-  options.encoding = 'UTF-8'
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }
 
 application {
   mainModule = 'com.kiku.javalangprogproject'
-  mainClass = 'com.kiku.javalangprogproject.HelloApplication'
+  mainClass = 'com.kiku.javalangprogproject.Main'
 }
 
 javafx {

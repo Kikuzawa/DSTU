@@ -6,10 +6,56 @@
 
 <AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kiku.javalangprogproject.MainMenuController">
    <children>
+      <Button defaultButton="true" layoutX="1102.0" layoutY="32.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="57.0" text="🏠">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
       <Button fx:id="buttonReturn" layoutX="1179.0" layoutY="32.0" mnemonicParsing="false" onAction="#switchToLoginPage" text="Назад">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
+      <Button fx:id="ButtonAssortment" layoutX="10.0" layoutY="71.0" mnemonicParsing="false" onAction="#switchToAssortmentPage" prefHeight="51.0" prefWidth="151.0" text="Ассортимент">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="ButtonShops" layoutX="10.0" layoutY="131.0" mnemonicParsing="false" onAction="#switchToShopsPage" prefHeight="51.0" prefWidth="151.0" text="Магазины">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="ButtonStock" layoutX="10.0" layoutY="191.0" mnemonicParsing="false" onAction="#switchToStockPage" prefHeight="51.0" prefWidth="151.0" text="Сырьё">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="ButtonSuppliers" layoutX="10.0" layoutY="251.0" mnemonicParsing="false" onAction="#switchToSuppliersPage" prefHeight="51.0" prefWidth="151.0" text="Поставщики">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="ButtonDisposal" layoutX="10.0" layoutY="311.0" mnemonicParsing="false" onAction="#switchToDisposalPage" prefHeight="51.0" prefWidth="151.0" text="Утилизация">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="ButtonTaxService" layoutX="10.0" layoutY="371.0" mnemonicParsing="false" onAction="#switchToTaxServicePage" prefHeight="51.0" prefWidth="151.0" text="Отчисления в НС">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="ButtonComplain" layoutX="10.0" layoutY="431.0" mnemonicParsing="false" onAction="#switchToComplainPage" prefHeight="51.0" prefWidth="151.0" text="Жалобы / Предложения">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="ButtonReport" layoutX="62.0" layoutY="493.0" mnemonicParsing="false" onAction="#switchToReportPage" text="Отчёт">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
+
    </children>
 </AnchorPane>

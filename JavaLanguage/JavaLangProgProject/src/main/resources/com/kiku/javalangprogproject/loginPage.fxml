@@ -32,8 +32,8 @@
          </font>
       </Label>
       <TextField fx:id="loginField" layoutX="605.0" layoutY="263.0" prefHeight="27.0" prefWidth="204.0" />
-      <TextField fx:id="passowordField" layoutX="605.0" layoutY="315.0" prefHeight="27.0" prefWidth="204.0" />
       <Label fx:id="exceptionLaber" alignment="CENTER" contentDisplay="CENTER" layoutX="472.0" layoutY="375.0" prefHeight="19.0" prefWidth="336.0" text="" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
       <ComboBox fx:id="comboBoxLoginPage" layoutX="565.0" layoutY="493.0" prefWidth="150.0" />
+      <PasswordField fx:id="passwordField" layoutX="605.0" layoutY="315.0" prefHeight="27.0" prefWidth="204.0" />
    </children>
 </AnchorPane>
