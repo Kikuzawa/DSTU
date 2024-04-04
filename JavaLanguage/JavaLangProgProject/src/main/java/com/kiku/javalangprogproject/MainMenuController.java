@@ -49,7 +49,12 @@ public class MainMenuController {
         stage.show();
     }
 
-    public void switchToShopsPage() {
+    public void switchToShopsPage(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("shops.fxml")));
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void switchToStockPage() {

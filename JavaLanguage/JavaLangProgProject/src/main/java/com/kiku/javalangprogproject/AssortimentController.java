@@ -94,7 +94,12 @@ public class AssortimentController {
         stage.show();
     }
 
-    public void switchToShopsPage(ActionEvent actionEvent) {
+    public void switchToShopsPage(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("shops.fxml")));
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void switchToStockPage(ActionEvent actionEvent) {
@@ -247,7 +252,7 @@ public class AssortimentController {
 
         refreshTable();
 
-        System.out.println(idShoe);
+
         idShoe.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameShoe.setCellValueFactory(new PropertyValueFactory<>("name"));
         costShoe.setCellValueFactory(new PropertyValueFactory<>("cost"));
@@ -280,6 +285,7 @@ public class AssortimentController {
             preparedStatement.executeUpdate();
 
             exceptionLabel.setText("Обувь успешно добавлена.");
+            refreshTable();
         } catch (Exception e) {
             exceptionLabel.setText("Обувь не была добавлена. Причина: " + e.getMessage());
         }
@@ -292,6 +298,7 @@ public class AssortimentController {
             String query = "DELETE FROM shoes WHERE id = " + id;
             connection.prepareStatement(query).executeUpdate();
             exceptionLabel.setText("Обувь успешно удалена.");
+            refreshTable();
         } catch (Exception e) {
             exceptionLabel.setText("Обувь не была удалена. Причина: " + e.getMessage());
         }
@@ -315,6 +322,7 @@ public class AssortimentController {
                 preparedStatement.setString(8, idAddShoe.getText());
 
                 preparedStatement.executeUpdate();
+                refreshTable();
             } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
