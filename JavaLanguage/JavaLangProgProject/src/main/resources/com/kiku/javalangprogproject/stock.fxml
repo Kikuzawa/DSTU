@@ -19,8 +19,9 @@
       <columns>
          <TableColumn fx:id="idStock" prefWidth="44.0" text="ID" />
          <TableColumn fx:id="nameStock" prefWidth="163.0" text="Название" />
-         <TableColumn fx:id="quantityStock" maxWidth="301.0" minWidth="-1.0" prefWidth="154.0" text="Количество" />
-         <TableColumn fx:id="costStock" minWidth="0.0" prefWidth="182.0" text="Стоимость" />
+         <TableColumn fx:id="quantityStock" maxWidth="301.0" minWidth="-1.0" prefWidth="154.0" text="Количество (пог.м.)" />
+         <TableColumn fx:id="costStock" minWidth="0.0" prefWidth="182.0" text="Стоимость за 1 пог.м." />
+         <TableColumn fx:id="totalStock" minWidth="0.0" prefWidth="182.0" text="Общая стоимость" />
       </columns>
    </TableView>
    <Button fx:id="buttonReturn" layoutX="1179.0" layoutY="32.0" mnemonicParsing="false" onAction="#switchToLoginPage" text="Назад">

@@ -4,11 +4,24 @@ public class Stock {
 
     public int idStock;
 
-    public Stock(int idStock, String nameStock, int quantityStock, int costStock) {
+    public int getTotalStock() {
+        return totalStock;
+    }
+
+    public void setTotalStock(int totalStock) {
+        this.totalStock = totalStock;
+    }
+
+    public int totalStock;
+
+
+
+    public Stock(int idStock, String nameStock, int quantityStock, int costStock, int total) {
         this.idStock = idStock;
         this.nameStock = nameStock;
         this.quantityStock = quantityStock;
         this.costStock = costStock;
+        this.totalStock = quantityStock * costStock;
     }
 
     public int getIdStock() {

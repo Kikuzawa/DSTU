@@ -26,6 +26,7 @@ public class StockController {
     public TableColumn<Stock, String> nameStock;
     public TableColumn<Stock, Integer> quantityStock;
     public TableColumn<Stock, Integer> costStock;
+    public TableColumn<Stock, Integer> totalStock;
 
     public Button ButtonSuppliers;
     public Button buttonReturn;
@@ -48,6 +49,7 @@ public class StockController {
 
     public Label exceptionLabel;
     public Button ButtonEditStock;
+
 
 
     private Stage stage;
@@ -217,7 +219,8 @@ public class StockController {
                     resultSet.getInt("id"),
                     resultSet.getString("name"),
                     resultSet.getInt("quantity"),
-                    resultSet.getInt("cost")));
+                    resultSet.getInt("cost"),
+                    resultSet.getInt("total")));
 
             stocksTable.setItems(StockList);
 
@@ -236,6 +239,7 @@ public class StockController {
         nameStock.setCellValueFactory(new PropertyValueFactory<>("nameStock"));
         quantityStock.setCellValueFactory(new PropertyValueFactory<>("quantityStock"));
         costStock.setCellValueFactory(new PropertyValueFactory<>("costStock"));
+        totalStock.setCellValueFactory(new PropertyValueFactory<>("totalStock"));
 
 
 
