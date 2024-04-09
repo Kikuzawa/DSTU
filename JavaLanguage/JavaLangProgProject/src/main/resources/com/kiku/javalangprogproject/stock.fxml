@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kiku.javalangprogproject.StockController">
+   <Button fx:id="ButtonSuppliers" layoutX="10.0" layoutY="251.0" mnemonicParsing="false" onAction="#switchToSuppliersPage" prefHeight="51.0" prefWidth="151.0" text="Поставщики">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Button>
+   <Button fx:id="ButtonAssortment" layoutX="10.0" layoutY="71.0" mnemonicParsing="false" onAction="#switchToAssortmentPage" prefHeight="51.0" prefWidth="151.0" text="Ассортимент">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Button>
+   <TableView fx:id="stocksTable" editable="true" layoutX="174.0" layoutY="89.0" prefHeight="586.0" prefWidth="908.0" tableMenuButtonVisible="true">
+      <columns>
+         <TableColumn fx:id="idStock" prefWidth="44.0" text="ID" />
+         <TableColumn fx:id="nameStock" prefWidth="163.0" text="Название" />
+         <TableColumn fx:id="quantityStock" maxWidth="301.0" minWidth="-1.0" prefWidth="154.0" text="Количество" />
+         <TableColumn fx:id="costStock" minWidth="0.0" prefWidth="182.0" text="Стоимость" />
+      </columns>
+   </TableView>
+   <Button fx:id="buttonReturn" layoutX="1179.0" layoutY="32.0" mnemonicParsing="false" onAction="#switchToLoginPage" text="Назад">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Button>
+
+   <Button fx:id="ButtonShops" layoutX="10.0" layoutY="131.0" mnemonicParsing="false" onAction="#switchToShopsPage" prefHeight="51.0" prefWidth="151.0" text="Магазины">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Button>
+   <Button fx:id="ButtonStock" defaultButton="true" layoutX="10.0" layoutY="191.0" mnemonicParsing="false" onAction="#switchToStockPage" prefHeight="51.0" prefWidth="151.0" text="Сырьё">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Button>
+
+   <Button fx:id="ButtonDisposal" layoutX="10.0" layoutY="311.0" mnemonicParsing="false" onAction="#switchToDisposalPage" prefHeight="51.0" prefWidth="151.0" text="Утилизация">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Button>
+   <Button fx:id="ButtonTaxService" layoutX="10.0" layoutY="371.0" mnemonicParsing="false" onAction="#switchToTaxServicePage" prefHeight="51.0" prefWidth="151.0" text="Отчисления в НС">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Button>
+   <Button fx:id="ButtonComplain" layoutX="10.0" layoutY="431.0" mnemonicParsing="false" onAction="#switchToComplainPage" prefHeight="51.0" prefWidth="151.0" text="Жалобы / Предложения">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Button>
+   <Button fx:id="ButtonReport" layoutX="62.0" layoutY="493.0" mnemonicParsing="false" onAction="#switchToReportPage" text="Отчёт">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Button>
+   <Label layoutX="526.0" layoutY="25.0" text="Сырье">
+      <font>
+         <Font name="System Bold" size="36.0" />
+      </font>
+   </Label>
+   <Button fx:id="ButtonMainMenu" layoutX="1102.0" layoutY="32.0" mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="39.0" prefWidth="57.0" text="🏠">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Button>
+   <Button fx:id="ButtonRefresh" layoutX="1040.0" layoutY="32.0" mnemonicParsing="false" onAction="#refreshTable" text="🔃">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Button>
+   <Button fx:id="ButtonAddStock" layoutX="1102.0" layoutY="302.0" mnemonicParsing="false" onAction="#addNewStock" prefHeight="39.0" prefWidth="42.0" text="➕">
+      <font>
+         <Font name="System Bold" size="18.0" />
+      </font>
+   </Button>
+   <Button fx:id="ButtonRemoveStock" layoutX="1212.0" layoutY="302.0" mnemonicParsing="false" onAction="#removeStock" prefHeight="39.0" prefWidth="42.0" text="🗑">
+      <font>
+         <Font name="System Bold" size="18.0" />
+      </font>
+   </Button>
+   <TextField fx:id="idField" layoutX="1090.0" layoutY="135.0" prefHeight="27.0" prefWidth="92.0" promptText="ID" />
+   <TextField fx:id="nameField" layoutX="1090.0" layoutY="178.0" prefHeight="27.0" prefWidth="179.0" promptText="Название" />
+   <TextField fx:id="costField" layoutX="1090.0" layoutY="251.0" prefHeight="27.0" prefWidth="179.0" promptText="Стоимость" />
+
+   <Label fx:id="exceptionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="624.0" layoutY="681.0" text="..." textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
+   <Button fx:id="ButtonEditStock" layoutX="1157.0" layoutY="302.0" mnemonicParsing="false" onAction="#EditStock" prefHeight="39.0" prefWidth="39.0" text="🖋">
+      <font>
+         <Font name="System Bold" size="16.0" />
+      </font>
+   </Button>
+   <TextField fx:id="quantityField" layoutX="1088.0" layoutY="217.0" prefHeight="27.0" prefWidth="179.0" promptText="Количество" />
+
+</AnchorPane>
