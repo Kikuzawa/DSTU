@@ -60,7 +60,12 @@ public class MainMenuController {
     public void switchToStockPage() {
     }
 
-    public void switchToSuppliersPage() {
+    public void switchToSuppliersPage(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("suppliers.fxml")));
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void switchToDisposalPage() {

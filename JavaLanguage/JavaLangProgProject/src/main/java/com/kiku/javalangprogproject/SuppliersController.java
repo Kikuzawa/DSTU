@@ -20,35 +20,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class ShopsController {
-    public TableView<Shop> shopsTable = new TableView<>();
-    public TableColumn<Shop, Integer> idShop;
-    public TableColumn<Shop, String> nameShop;
-    public TableColumn<Shop, String> locationsShop;
-    public TableColumn<Shop, String> emailShop;
-    public TableColumn<Shop, String> numberShop;
-    public TableColumn<Shop, String> fioShop;
+public class SuppliersController {
+    public TableView<Supplier> suppliersTable = new TableView<>();
+    public TableColumn<Supplier, Integer> idSupplier;
+    public TableColumn<Supplier, String> nameSupplier;
+    public TableColumn<Supplier, String> numberSupplier;
+    public TableColumn<Supplier, String> locationsSupplier;
+    public TableColumn<Supplier, String> stockSupplier;
+
+    public Button ButtonSuppliers;
     public Button buttonReturn;
     public Button ButtonComplain;
     public Button ButtonReport;
     public Button ButtonTaxService;
     public Button ButtonDisposal;
-    public Button ButtonSuppliers;
+
     public Button ButtonStock;
     public Button ButtonAssortment;
     public Button ButtonShops;
     public Button ButtonMainMenu;
     public Button ButtonRefresh;
-    public Button ButtonAddShop;
-    public Button ButtonRemoveShop;
+    public Button ButtonAddSupplier;
+    public Button ButtonRemoveSupplier;
     public TextField idField;
     public TextField nameField;
     public TextField locationFIeld;
-    public TextField emailField;
+
     public Label exceptionLabel;
-    public Button ButtonEditShop;
+    public Button ButtonEditSupplier;
     public TextField numberField;
-    public TextField fioField;
+    public TextField stockField;
 
     private Stage stage;
     private Scene scene;
@@ -60,7 +61,7 @@ public class ShopsController {
 
 
 
-    ObservableList<Shop> ShopList = FXCollections.observableArrayList();
+    ObservableList<Supplier> SupplierList = FXCollections.observableArrayList();
 
     @FXML
     public void switchToLoginPage(ActionEvent event) throws IOException {
@@ -121,20 +122,19 @@ public class ShopsController {
 
 
 
-    public void addNewShop(ActionEvent actionEvent) {
+    public void addNewSupplier(ActionEvent actionEvent) {
         try {
             Connection connection = DbConnect.getConnect();
 
 
-            String query = "INSERT INTO shops (id, name, location, email, number, fio) VALUES (?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO suppliers (\uFEFFid, name, number, location, stock) VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, idField.getText());
             preparedStatement.setString(2, nameField.getText());
-            preparedStatement.setString(3, locationFIeld.getText());
-            preparedStatement.setString(4, emailField.getText());
-            preparedStatement.setString(5, numberField.getText());
-            preparedStatement.setString(6, fioField.getText());
+            preparedStatement.setString(3, numberField.getText());
+            preparedStatement.setString(4, locationFIeld.getText());
+            preparedStatement.setString(5, stockField.getText());
 
             preparedStatement.executeUpdate();
 
@@ -145,11 +145,11 @@ public class ShopsController {
         }
     }
 
-    public void removeShop(ActionEvent actionEvent) {
+    public void removeSupplier(ActionEvent actionEvent) {
         try {
             Connection connection = DbConnect.getConnect();
             int id = Integer.parseInt(idField.getText());
-            String query = "DELETE FROM shops WHERE id = " + id;
+            String query = "DELETE FROM suppliers WHERE \uFEFFid = " + id;
             connection.prepareStatement(query).executeUpdate();
             exceptionLabel.setText("Магазин успешно удален.");
             refreshTable();
@@ -158,19 +158,18 @@ public class ShopsController {
         }
     }
 
-    public void EditShop(ActionEvent actionEvent) {
+    public void EditSupplier(ActionEvent actionEvent) {
         try {
             Connection connection = DbConnect.getConnect();
 
-            String query = "UPDATE shops SET name = ?, location = ?, email = ?, number = ?, fio = ? where id = ?";
+            String query = "UPDATE suppliers SET name = ?, number = ?, location = ?, stock = ? where \uFEFFid = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, nameField.getText());
-            preparedStatement.setString(2, locationFIeld.getText());
-            preparedStatement.setString(3, emailField.getText());
-            preparedStatement.setString(4, numberField.getText());
-            preparedStatement.setString(5, fioField.getText());
-            preparedStatement.setString(6, idField.getText());
+            preparedStatement.setString(2, numberField.getText());
+            preparedStatement.setString(3, locationFIeld.getText());
+            preparedStatement.setString(4, stockField.getText());
+            preparedStatement.setString(5, idField.getText());
 
 
             preparedStatement.executeUpdate();
@@ -183,17 +182,17 @@ public class ShopsController {
 
     public void initialize() throws SQLException {
         loadDate();
-        shopsTable.setOnMouseClicked(event -> {
+        suppliersTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
-                if (shopsTable.getSelectionModel().getSelectedItem() != null) {
-                    Shop selectedItem = shopsTable.getSelectionModel().getSelectedItem();
+                if (suppliersTable.getSelectionModel().getSelectedItem() != null) {
+                    Supplier selectedItem = suppliersTable.getSelectionModel().getSelectedItem();
 
-                    idField.setText(selectedItem.getIdShop());
-                    nameField.setText(selectedItem.getNameShop());
-                    locationFIeld.setText(selectedItem.getLocationsShop());
-                    emailField.setText(selectedItem.getEmailShop());
-                    numberField.setText(selectedItem.getNumberShop());
-                    fioField.setText(selectedItem.getFioShop());
+                    idField.setText(selectedItem.getIdSupplier());
+                    nameField.setText(selectedItem.getNameSupplier());
+                    numberField.setText(selectedItem.getNumberSupplier());
+                    locationFIeld.setText(selectedItem.getLocationsSupplier());
+                    stockField.setText(selectedItem.getStockSupplier());
+
 
 
                     // И так далее
@@ -206,21 +205,20 @@ public class ShopsController {
     @FXML
     private void refreshTable() throws SQLException {
 
-        ShopList.clear();
+        SupplierList.clear();
 
-        preparedStatement = connection.prepareStatement("SELECT * FROM shops");
+        preparedStatement = connection.prepareStatement("SELECT * FROM suppliers");
         resultSet = preparedStatement.executeQuery();
 
         while (resultSet.next()) {
-            ShopList.add(new Shop(
-                    resultSet.getInt("id"),
+            SupplierList.add(new Supplier(
+                    resultSet.getInt("\uFEFFid"),
                     resultSet.getString("name"),
-                    resultSet.getString("location"),
-                    resultSet.getString("email"),
                     resultSet.getString("number"),
-                    resultSet.getString("fio")));
+                    resultSet.getString("location"),
+                    resultSet.getString("stock")));
 
-            shopsTable.setItems(ShopList);
+            suppliersTable.setItems(SupplierList);
 
         }
 
@@ -232,13 +230,12 @@ public class ShopsController {
 
         refreshTable();
 
-        idShop.setCellValueFactory(new PropertyValueFactory<>("idShop"));
+        idSupplier.setCellValueFactory(new PropertyValueFactory<>("idSupplier"));
 
-        nameShop.setCellValueFactory(new PropertyValueFactory<>("nameShop"));
-        locationsShop.setCellValueFactory(new PropertyValueFactory<>("locationsShop"));
-        emailShop.setCellValueFactory(new PropertyValueFactory<>("emailShop"));
-        numberShop.setCellValueFactory(new PropertyValueFactory<>("numberShop"));
-        fioShop.setCellValueFactory(new PropertyValueFactory<>("fioShop"));
+        nameSupplier.setCellValueFactory(new PropertyValueFactory<>("nameSupplier"));
+        numberSupplier.setCellValueFactory(new PropertyValueFactory<>("numberSupplier"));
+        locationsSupplier.setCellValueFactory(new PropertyValueFactory<>("locationsSupplier"));
+        stockSupplier.setCellValueFactory(new PropertyValueFactory<>("stockSupplier"));
 
 
 
