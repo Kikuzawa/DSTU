@@ -1,0 +1,53 @@
+
+
+#pane {
+    -fx-background-color: #f5f5dc;
+}
+
+
+/* Стилизация кнопок */
+.button {
+    -fx-background-color: #4CAF50; /* Цвет фона кнопки */
+    -fx-text-fill: white; /* Цвет текста */
+}
+
+.button:hover {
+    -fx-background-color: #29882e; /* Цвет фона кнопки при наведении */
+}
+
+/* Стилизация текстовых полей */
+.text-field {
+    -fx-background-color: #ffffff; /* Цвет фона текстового поля */
+    -fx-border-color: #000000; /* Цвет границы текстового поля */
+}
+
+/* Стилизация ComboBox */
+.combo-box {
+    -fx-background-color: white; /* Цвет фона ComboBox */
+    -fx-border-color: #000000; /* Цвет границы ComboBox */
+}
+
+/* Стилизация заголовков и текста */
+.label, .text-field, .combo-box {
+    -fx-text-fill: #4CAF50; /* Акцентный цвет - салатовый */
+    -fx-font-weight: bold; /* Жирный шрифт */
+}
+
+.table-view{
+
+    -fx-border-color: #000000; /* Цвет границы таблицы */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #d9ffb4;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+

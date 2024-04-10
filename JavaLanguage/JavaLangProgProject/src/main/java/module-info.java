@@ -6,9 +6,19 @@ module com.kiku.javalangprogproject {
 
     requires mysql.connector.java;
     requires java.sql;
+    requires javafx.media;
 
-    opens com.kiku.javalangprogproject to javafx.fxml;
-    exports com.kiku.javalangprogproject;
+
+
     opens com.kiku.javalangprogproject.Database to javafx.base;
+    exports com.kiku.javalangprogproject.classes;
+    opens com.kiku.javalangprogproject.classes to javafx.base, javafx.fxml;
+    exports com.kiku.javalangprogproject;
+    opens com.kiku.javalangprogproject to javafx.fxml;
+    exports com.kiku.javalangprogproject.controllers;
+    opens com.kiku.javalangprogproject.controllers to javafx.fxml;
+    exports com.kiku.javalangprogproject.config;
+    opens com.kiku.javalangprogproject.config to javafx.fxml;
+
 
 }

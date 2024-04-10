@@ -1,26 +1,23 @@
-package com.kiku.javalangprogproject;
+package com.kiku.javalangprogproject.controllers;
 
+import com.kiku.javalangprogproject.BaseController;
 import com.kiku.javalangprogproject.Database.DbConnect;
+import com.kiku.javalangprogproject.classes.Supplier;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 
-public class SuppliersController {
+public class SuppliersController extends BaseController {
     public TableView<Supplier> suppliersTable = new TableView<>();
     public TableColumn<Supplier, Integer> idSupplier;
     public TableColumn<Supplier, String> nameSupplier;
@@ -50,6 +47,7 @@ public class SuppliersController {
     public Button ButtonEditSupplier;
     public TextField numberField;
     public TextField stockField;
+    public Button exitAppButton;
 
     private Stage stage;
     private Scene scene;
@@ -62,68 +60,6 @@ public class SuppliersController {
 
 
     ObservableList<Supplier> SupplierList = FXCollections.observableArrayList();
-
-    @FXML
-    public void switchToLoginPage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loginPage.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToReportPage(ActionEvent actionEvent) {
-    }
-
-
-    public void switchToAssortmentPage(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("assortiment.fxml")));
-        stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToShopsPage(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("shops.fxml")));
-        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToStockPage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("stock.fxml")));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToSuppliersPage(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("suppliers.fxml")));
-        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToDisposalPage(ActionEvent actionEvent) {
-    }
-
-    public void switchToTaxServicePage(ActionEvent actionEvent) {
-    }
-
-    public void switchToComplainPage(ActionEvent actionEvent) {
-    }
-
-    public void switchToMainMenu(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainMenu.fxml")));
-        stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
 
 
 
@@ -185,7 +121,7 @@ public class SuppliersController {
 
     }
 
-    public void initialize() throws SQLException {
+    public void onInitialize() throws SQLException {
         loadDate();
         suppliersTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {

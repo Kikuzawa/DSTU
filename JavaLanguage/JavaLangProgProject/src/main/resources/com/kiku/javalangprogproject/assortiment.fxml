@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kiku.javalangprogproject.AssortimentController">
+<AnchorPane fx:id="pane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kiku.javalangprogproject.controllers.AssortimentController">
    <children>
-      <Button fx:id="ButtonAssortment" defaultButton="true" layoutX="10.0" layoutY="71.0" mnemonicParsing="false" onAction="#switchToAssortmentPage" prefHeight="51.0" prefWidth="151.0" text="Ассортимент">
+      <Button fx:id="ButtonAssortment" defaultButton="true" layoutX="10.0" layoutY="71.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="151.0" text="Ассортимент">
          <font>
             <Font size="12.0" />
          </font>
@@ -23,43 +23,54 @@
             <TableColumn fx:id="seasonShoe" maxWidth="198.0" minWidth="-1.0" prefWidth="133.0" text="Сезон" />
         </columns>
       </TableView>
-      <Button fx:id="buttonReturn" layoutX="1179.0" layoutY="32.0" mnemonicParsing="false" onAction="#switchToLoginPage" text="Назад">
+      <Button fx:id="ButtonMainMenu" defaultButton="true" layoutX="1031.0" layoutY="28.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="57.0" text="🏠">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonReturn" layoutX="1108.0" layoutY="28.0" mnemonicParsing="false" text="Назад">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="exitAppButton" layoutX="1217.0" layoutY="28.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="40.0" text="❌" textAlignment="CENTER" />
+      <Button fx:id="ButtonRefresh" layoutX="1090.0" layoutY="89.0" mnemonicParsing="false" onAction="#refreshTable" text="🔃">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
 
-      <Button fx:id="ButtonShops" layoutX="10.0" layoutY="131.0" mnemonicParsing="false" onAction="#switchToShopsPage" prefHeight="51.0" prefWidth="151.0" text="Магазины">
+      <Button fx:id="ButtonShops" layoutX="10.0" layoutY="131.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="151.0" text="Магазины">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button fx:id="ButtonStock" layoutX="10.0" layoutY="191.0" mnemonicParsing="false" onAction="#switchToStockPage" prefHeight="51.0" prefWidth="151.0" text="Сырьё">
+      <Button fx:id="ButtonStock" layoutX="10.0" layoutY="191.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="151.0" text="Сырьё">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button fx:id="ButtonSuppliers" layoutX="10.0" layoutY="251.0" mnemonicParsing="false" onAction="#switchToSuppliersPage" prefHeight="51.0" prefWidth="151.0" text="Поставщики">
+      <Button fx:id="ButtonSuppliers" layoutX="10.0" layoutY="251.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="151.0" text="Поставщики">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button fx:id="ButtonDisposal" layoutX="10.0" layoutY="311.0" mnemonicParsing="false" onAction="#switchToDisposalPage" prefHeight="51.0" prefWidth="151.0" text="Утилизация">
+      <Button fx:id="ButtonDisposal" layoutX="10.0" layoutY="311.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="151.0" text="Утилизация">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button fx:id="ButtonTaxService" layoutX="10.0" layoutY="371.0" mnemonicParsing="false" onAction="#switchToTaxServicePage" prefHeight="51.0" prefWidth="151.0" text="Отчисления в НС">
+      <Button fx:id="ButtonTaxService" layoutX="10.0" layoutY="371.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="151.0" text="Отчисления в НС">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button fx:id="ButtonComplain" layoutX="10.0" layoutY="431.0" mnemonicParsing="false" onAction="#switchToComplainPage" prefHeight="51.0" prefWidth="151.0" text="Жалобы / Предложения">
+      <Button fx:id="ButtonComplain" layoutX="10.0" layoutY="431.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="151.0" text="Жалобы / Предложения">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button fx:id="ButtonReport" layoutX="62.0" layoutY="493.0" mnemonicParsing="false" onAction="#switchToReportPage" text="Отчёт">
+      <Button fx:id="ButtonReport" layoutX="62.0" layoutY="493.0" mnemonicParsing="false" text="Отчёт">
          <font>
             <Font size="12.0" />
          </font>
@@ -69,16 +80,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="ButtonMainMenu" layoutX="1102.0" layoutY="32.0" mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="39.0" prefWidth="57.0" text="🏠">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="ButtonRefresh" layoutX="1040.0" layoutY="32.0" mnemonicParsing="false" onAction="#refreshTable" text="🔃">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
+
       <Button fx:id="ButtonAddShoe" layoutX="1104.0" layoutY="518.0" mnemonicParsing="false" onAction="#addNewShoe" prefHeight="39.0" prefWidth="42.0" text="➕">
          <font>
             <Font name="System Bold" size="18.0" />

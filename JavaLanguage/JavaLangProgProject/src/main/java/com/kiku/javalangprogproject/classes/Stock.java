@@ -1,10 +1,10 @@
-package com.kiku.javalangprogproject;
+package com.kiku.javalangprogproject.classes;
 
 public class Stock {
 
     public int idStock;
 
-    public int getTotalStock() {
+    public double getTotalStock() {
         return totalStock;
     }
 
@@ -12,11 +12,11 @@ public class Stock {
         this.totalStock = totalStock;
     }
 
-    public int totalStock;
+    public double totalStock;
 
 
 
-    public Stock(int idStock, String nameStock, int quantityStock, int costStock, int total) {
+    public Stock(int idStock, String nameStock, int quantityStock, int costStock, double total) {
         this.idStock = idStock;
         this.nameStock = nameStock;
         this.quantityStock = quantityStock;
@@ -40,7 +40,7 @@ public class Stock {
         this.nameStock = nameStock;
     }
 
-    public int getQuantityStock() {
+    public double getQuantityStock() {
         return quantityStock;
     }
 
@@ -48,7 +48,7 @@ public class Stock {
         this.quantityStock = quantityStock;
     }
 
-    public int getCostStock() {
+    public double getCostStock() {
         return costStock;
     }
 
@@ -57,8 +57,8 @@ public class Stock {
     }
 
     public String nameStock;
-    public int quantityStock;
-    public int costStock;
+    public double quantityStock;
+    public double costStock;
 
 
 }

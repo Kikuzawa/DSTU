@@ -1,4 +1,4 @@
-package com.kiku.javalangprogproject.Database;
+package com.kiku.javalangprogproject.classes;
 
 public class Shoe {
 

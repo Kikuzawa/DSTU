@@ -1,26 +1,23 @@
-package com.kiku.javalangprogproject;
+package com.kiku.javalangprogproject.controllers;
 
+import com.kiku.javalangprogproject.BaseController;
 import com.kiku.javalangprogproject.Database.DbConnect;
+import com.kiku.javalangprogproject.classes.Stock;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 
-public class StockController {
+public class StockController extends BaseController {
     public TableView<Stock> stocksTable = new TableView<>();
     public TableColumn<Stock, Integer> idStock;
     public TableColumn<Stock, String> nameStock;
@@ -28,7 +25,7 @@ public class StockController {
     public TableColumn<Stock, Integer> costStock;
     public TableColumn<Stock, Integer> totalStock;
 
-    public Button ButtonSuppliers;
+
     public Button buttonReturn;
     public Button ButtonComplain;
     public Button ButtonReport;
@@ -40,6 +37,7 @@ public class StockController {
     public Button ButtonShops;
     public Button ButtonMainMenu;
     public Button ButtonRefresh;
+    public Button ButtonSuppliers;
     public Button ButtonAddStock;
     public Button ButtonRemoveStock;
     public TextField idField;
@@ -49,7 +47,7 @@ public class StockController {
 
     public Label exceptionLabel;
     public Button ButtonEditStock;
-
+    public Button exitAppButton;
 
 
     private Stage stage;
@@ -63,68 +61,6 @@ public class StockController {
 
 
     ObservableList<Stock> StockList = FXCollections.observableArrayList();
-
-    @FXML
-    public void switchToLoginPage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loginPage.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToReportPage(ActionEvent actionEvent) {
-    }
-
-
-    public void switchToAssortmentPage(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("assortiment.fxml")));
-        stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToShopsPage(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("shops.fxml")));
-        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToStockPage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("stock.fxml")));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToSuppliersPage(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("suppliers.fxml")));
-        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToDisposalPage(ActionEvent actionEvent) {
-    }
-
-    public void switchToTaxServicePage(ActionEvent actionEvent) {
-    }
-
-    public void switchToComplainPage(ActionEvent actionEvent) {
-    }
-
-    public void switchToMainMenu(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainMenu.fxml")));
-        stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
 
 
 
@@ -184,7 +120,7 @@ public class StockController {
 
     }
 
-    public void initialize() throws SQLException {
+    public void onInitialize() throws SQLException {
         loadDate();
         stocksTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {

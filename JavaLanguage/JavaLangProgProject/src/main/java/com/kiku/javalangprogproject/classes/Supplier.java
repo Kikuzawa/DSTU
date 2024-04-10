@@ -1,4 +1,4 @@
-package com.kiku.javalangprogproject;
+package com.kiku.javalangprogproject.classes;
 
 public class Supplier {
 

@@ -1,27 +1,21 @@
-package com.kiku.javalangprogproject;
+package com.kiku.javalangprogproject.controllers;
 
+import com.kiku.javalangprogproject.BaseController;
 import com.kiku.javalangprogproject.Database.DbConnect;
-import com.kiku.javalangprogproject.Database.Shoe;
+import com.kiku.javalangprogproject.classes.Shoe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.io.IOException;
 import java.sql.*;
-import java.util.Objects;
 
 
 @SuppressWarnings("ALL")
-public class AssortimentController {
+public class AssortimentController extends BaseController {
     @FXML
     public Button buttonReturn;
     public Button ButtonComplain;
@@ -56,6 +50,8 @@ public class AssortimentController {
     public TextField size1AddShoe;
     public TextField size2AddShoe;
     public Button ButtonEditShoe;
+    public Button helpbtn;
+    public Button exitAppButton;
 
 
     String query = null;
@@ -73,62 +69,8 @@ public class AssortimentController {
     private Scene scene;
 
 
-    @FXML
-    public void switchToLoginPage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loginPage.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToReportPage(ActionEvent actionEvent) {
-    }
 
 
-    public void switchToAssortmentPage(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("assortiment.fxml")));
-        stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToShopsPage(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("shops.fxml")));
-        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToStockPage(ActionEvent actionEvent) {
-    }
-
-    public void switchToSuppliersPage(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("suppliers.fxml")));
-        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToDisposalPage(ActionEvent actionEvent) {
-    }
-
-    public void switchToTaxServicePage(ActionEvent actionEvent) {
-    }
-
-    public void switchToComplainPage(ActionEvent actionEvent) {
-    }
-
-    public void switchToMainMenu(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainMenu.fxml")));
-        stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
 
     public void getColours() {
         try {
@@ -198,8 +140,9 @@ public class AssortimentController {
         }
     }
 
-    public void initialize() throws SQLException {
+    protected void onInitialize() throws SQLException {
         loadDate();
+
         shoesTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
                 if (shoesTable.getSelectionModel().getSelectedItem() != null) {
@@ -229,6 +172,7 @@ public class AssortimentController {
 
     @FXML
     private void refreshTable() throws SQLException {
+        
 
         ShoeList.clear();
 
@@ -332,5 +276,7 @@ public class AssortimentController {
             throw new RuntimeException(ex);
         }
     }
+
+
 }
 
