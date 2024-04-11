@@ -98,6 +98,6 @@
       </font>
    </Button>
    <TextField fx:id="quantityField" layoutX="1088.0" layoutY="217.0" prefHeight="27.0" prefWidth="179.0" promptText="Количество" />
-   <ComboBox fx:id="reasonCombo" layoutX="1090.0" layoutY="257.0" prefWidth="150.0" promptText="Причина" />
+   <ComboBox fx:id="reasonCombo" layoutX="1090.0" layoutY="257.0" prefHeight="27.0" prefWidth="179.0" promptText="Причина" />
 
 </AnchorPane>
