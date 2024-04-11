@@ -1,8 +1,7 @@
 import itertools as iter
 import string
-from collections import defaultdict
 from itertools import chain
-from typing import Iterator, Any, Generator
+
 
 massT = str(input("Множество терминалов: ")).split()
 massN = str(input("Множество нетерминалов: ")).split()
@@ -136,8 +135,8 @@ def no_way_sym(lst):
        достижимые символы и возвращает их вместе с недостижимыми символами и правилами, содержащими недостижимые символы.
 
        Пример:
-       >>> lst = [('S', [('A', 'B'), ('C', 'D')]), ('A', [('A', 'A'), ('B', 'B')]), ('B', [('C', 'C'), ('D', 'D')]), ('C', [('A', 'A'), ('B', 'B')]), ('D', [('C', 'C'), ('D', 'D')])]
-       >>> no_way_sym(lst)
+        lst = [('S', [('A', 'B'), ('C', 'D')]), ('A', [('A', 'A'), ('B', 'B')]), ('B', [('C', 'C'), ('D', 'D')]), ('C', [('A', 'A'), ('B', 'B')]), ('D', [('C', 'C'), ('D', 'D')])]
+        no_way_sym(lst)
        (['A', 'C'], ['B', 'D'], [('A', [('A', 'A'), ('B', 'B')]), ('C', [('A', 'A'), ('B', 'B')])])
     """
 
@@ -168,7 +167,11 @@ def no_way_sym(lst):
         [T.append(x) for j in lst[i][1] for x in list(j) if x in massT and x not in T]
     return T, Ni, r
 
-
+################################################################################
+#                                                                              #
+# Данная функция с удаление из грамматики эпсилон-правил работает некорректно  #
+#TODO                                                                          #
+################################################################################
 def del_eps_rooles(massN, lst, S):
     """
     Функция для удаления эпсилон-правил из заданного грамматического разбора.
@@ -299,96 +302,66 @@ def left_factorize(grammar: dict[str, list[str]]) -> dict[str, list[str]]:
         Left-factorized грамматику
     """
     print('д) левой факторизации правил')
-    new_grammar = defaultdict(list)
-    for non_terminal, productions in grammar.items():
-        # Найти общий префикс среди производств текущего не терминала
-        if common_prefix := _find_common_prefix(productions):
-            # Если существует общий префикс, создаем для него новый нетерминальный символ
-            new_non_terminal = non_terminal + "`"
-            # Обновляем грамматику, чтобы отразить лево-факторные правила
-            new_grammar[non_terminal].append(common_prefix + new_non_terminal)
-            new_grammar[new_non_terminal].extend([production[len(common_prefix):] for production in productions])
-        else:
-            new_grammar[non_terminal].append(productions)
-    return new_grammar
+    updated_grammar = {}
+
+    for non_terminal in grammar:
+        productions = grammar[non_terminal]
+        common_prefixes = {}
+
+        for production in productions:
+            prefix = production[0]
+            if prefix not in common_prefixes:
+                common_prefixes[prefix] = []
+            common_prefixes[prefix].append(production)
+
+        new_productions = []
+
+        for prefix in common_prefixes:
+            if len(common_prefixes[prefix]) > 1:
+                new_non_terminal = non_terminal + "'"
+                updated_grammar[new_non_terminal] = [production[1:] for production in common_prefixes[prefix]]
+                new_productions.append(prefix + new_non_terminal)
+            else:
+                new_productions.extend(common_prefixes[prefix])
+
+        updated_grammar[non_terminal] = new_productions
+
+    grammar.update(updated_grammar)
+    return grammar
 
 
-def _find_common_prefix(productions: list[str]) -> str:
-    """
-    Находит общий префикс в списке производственных правил.
-    Параметры:
-        productions: Лист с продукциями.
-    Возвращает:
-        Общий префикс среди производственных правил.
-    """
-    if not productions:
-        return ""
-    common_prefix = []
-    for chars in zip(*productions):
-        # Проверяем, то что совпадают ли все символы в одной позиции
-        if len(set(chars)) == 1:
-            # Если все символы одинаковы, добавляем их к общему префиксу
-            common_prefix.append(chars[0])
-        else:
-            break
-    return ''.join(common_prefix)
-
-
-def _split_rules(rules: list[str], non_terminal: str) -> tuple[Iterator[str], Iterator[str]]:
-    """
-    Разделяет правила на alpha_rules и beta_rules.
-    Параметриы:
-        rules: Список правил для не терминала
-        non_terminal: Не терминал, для которого разделяются правила.
-    Возвращает:
-        Кортеж из двух итераторов: первый для правил, начинающихся с не терминала,
-        второй для остальных правил.
-    """
-    alpha_rules = (rule[len(non_terminal):] for rule in rules if rule.startswith(non_terminal))
-    beta_rules = (rule for rule in rules if not rule.startswith(non_terminal))
-    return alpha_rules, beta_rules
-
-
-def _generate_new_rules(non_terminal: str,
-                        alpha_rules: Iterator[str],
-                        beta_rules: Iterator[str]) -> tuple[Generator[str, Any, None], list[str], str]:
-    """
-    Генерирует новые правила для не терминала и его нового варианта.
-    Параметры:
-        non_terminal: Исходный не терминал
-        alpha_rules: Итератор правил, начинающихся с не терминала
-        beta_rules: Итератор остальных правил.
-    Возвращает:
-        Кортеж из трех элементов: итератор новых правил для исходного не терминала,
-        итератор новых правил для нового не терминала, и сам новый не терминал.
-    """
-    new_non_terminal = non_terminal + "'"
-    new_rules_non_terminal = (rule + new_non_terminal for rule in beta_rules)
-    new_rules_new_non_terminal = [rule + new_non_terminal for rule in alpha_rules] + ["."]
-    return new_rules_non_terminal, new_rules_new_non_terminal, new_non_terminal
-
-
-def remove_left_recursion(rules: dict[str, list[str]]) -> dict[str, list[str]]:
-    """
-    Удаляет левую рекурсию из грамматики.
-    Параметры:
-        rules: Словарь с правилами грамматики.
-    Возвращает:
-        Словарь с обновленными правилами грамматики без левой рекурсии.
-    """
+def remove_left_recursion(grammar):
     print('е) левой рекурсии')
-    non_terminals = defaultdict(list, rules)
-    for non_terminal in rules:
-        rules = non_terminals[non_terminal]
-        alpha_rules, beta_rules = _split_rules(rules, non_terminal)
+    new_grammar = {}
+    non_terminals = list(grammar.keys())
+
+    for A in non_terminals:
+        A_rules = grammar[A]
+        alpha_rules = [rule for rule in A_rules if rule.startswith(A)]
+        beta_rules = [rule for rule in A_rules if not rule.startswith(A)]
+
         if not alpha_rules:
+            new_grammar[A] = A_rules
             continue
-        new_rules_non_terminal, new_rules_new_non_terminal, new_non_terminal = _generate_new_rules(non_terminal,
-                                                                                                   alpha_rules,
-                                                                                                   beta_rules)
-        non_terminals[non_terminal] = list(new_rules_non_terminal)
-        non_terminals[new_non_terminal] = list(new_rules_new_non_terminal)
-    return non_terminals
+
+        A_prime = A + "'"
+        new_rules_A = []
+        new_rules_A_prime = []
+
+        for beta_rule in beta_rules:
+            new_rule = beta_rule + A_prime
+            new_rules_A.append(new_rule)
+
+        for alpha_rule in alpha_rules:
+            new_rule = alpha_rule[len(A):] + A_prime
+            new_rules_A_prime.append(new_rule)
+
+        new_rules_A_prime.append('.')  # точка (.) представляет собой пустую цепочку
+
+        new_grammar[A] = new_rules_A
+        new_grammar[A_prime] = new_rules_A_prime
+
+    return new_grammar
 
 
 rez, c, rooles = check_KS()
@@ -423,5 +396,8 @@ rooles1 = left_factorize({item[0]: item[1] for item in rooles})
 print(type(rooles1))
 print("\n".join(f"{key} -> {value}" for key, value in rooles1.items()))
 
-rooles1 = remove_left_recursion({item[0]: item[1] for item in rooles})
-print("\n".join(f"{key} -> {'|'.join(value)}" for key, value in rooles1.items()))
+grammar = {item[0]: item[1] for item in rooles}
+new_grammar = remove_left_recursion(grammar)
+new_grammar = {key: value for key, value in new_grammar.items()}
+print("\n".join(f"{key} -> {value}".rstrip("|") for key, value in new_grammar.items()))
+
