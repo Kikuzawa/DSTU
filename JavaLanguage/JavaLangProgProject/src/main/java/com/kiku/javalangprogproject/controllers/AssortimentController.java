@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 
 import java.sql.*;
 
+import static com.kiku.javalangprogproject.controllers.NotificationUtils.showErrorNotification;
+
 
 @SuppressWarnings("ALL")
 public class AssortimentController extends BaseController {
@@ -92,7 +94,7 @@ public class AssortimentController extends BaseController {
             colorAddShoe.setValue(items.getFirst());
 
         } catch (Exception e) {
-            System.out.println(e);
+            showErrorNotification(e.getMessage());
         }
     }
 
@@ -114,7 +116,7 @@ public class AssortimentController extends BaseController {
             complectionAddShoe.setValue(items.getFirst());
 
         } catch (Exception e) {
-            System.out.println(e);
+            showErrorNotification(e.getMessage());
         }
     }
 
@@ -136,7 +138,7 @@ public class AssortimentController extends BaseController {
             seasonAddShoe.setValue(items.getFirst());
 
         } catch (Exception e) {
-            System.out.println(e);
+            showErrorNotification(e.getMessage());
         }
     }
 
@@ -159,8 +161,6 @@ public class AssortimentController extends BaseController {
                     size2AddShoe.setText(parts[1]);
                     complectionAddShoe.setValue(selectedItem.getComplection());
                     seasonAddShoe.setValue(selectedItem.getSeason());
-
-                    // И так далее
                 }
             }
         });
@@ -235,8 +235,8 @@ public class AssortimentController extends BaseController {
 
             exceptionLabel.setText("Обувь успешно добавлена.");
             refreshTable();
-        } catch (Exception e) {
-            exceptionLabel.setText("Обувь не была добавлена. Причина: " + e.getMessage());
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
         }
     }
 
@@ -245,11 +245,15 @@ public class AssortimentController extends BaseController {
             Connection connection = DbConnect.getConnect();
             int id = Integer.parseInt(idAddShoe.getText());
             String query = "DELETE FROM shoes WHERE id = " + id;
-            connection.prepareStatement(query).executeUpdate();
-            exceptionLabel.setText("Обувь успешно удалена.");
-            refreshTable();
+            int result = connection.prepareStatement(query).executeUpdate();
+            if (result > 0) {
+                exceptionLabel.setText("Обувь успешно удалена.");
+                refreshTable();
+            } else {
+                showErrorNotification("Failed to delete shoes. No shoes found with ID: " + id);
+            }
         } catch (Exception e) {
-            exceptionLabel.setText("Обувь не была удалена. Причина: " + e.getMessage());
+            showErrorNotification(e.getMessage());
         }
     }
 
@@ -273,7 +277,7 @@ public class AssortimentController extends BaseController {
                 preparedStatement.executeUpdate();
                 refreshTable();
             } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+                showErrorNotification(ex.getMessage());
         }
     }
 

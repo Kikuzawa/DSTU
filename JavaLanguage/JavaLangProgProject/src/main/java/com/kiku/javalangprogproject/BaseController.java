@@ -9,10 +9,11 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import com.kiku.javalangprogproject.controllers.NotificationUtils;
 
 public abstract class BaseController implements Initializable {
     @FXML
-    private Button ButtonComplain, ButtonReport, ButtonTaxService, ButtonDisposal, ButtonSuppliers, ButtonStock, ButtonAssortment, ButtonShops, buttonReturn, ButtonMainMenu, buttonLogin, exitAppButton;
+    private Button buttonReturn, ButtonComplain, ButtonReport, ButtonTaxService, ButtonDisposal, ButtonSuppliers, ButtonStock, ButtonAssortment, ButtonShops, ButtonMainMenu, buttonLogin, exitAppButton;
     protected final SceneController controller = SceneController.getInstance();
 
 
@@ -22,9 +23,6 @@ public abstract class BaseController implements Initializable {
     }
 
 
-    /**
-     * Точка запуска базового контролера, все методы точек запуска для ост. окон его обязательно должны переопределить.
-     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -33,11 +31,8 @@ public abstract class BaseController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        // try - catch стоит, так как у нас в главном меню, где стоит выбор лабораторных и приложений
-        // нет backButton. Ему важно, чтобы все ID были, поэтому вот такой костыль, чтобы убрать повторы кода.
 
         try {
-            // Обработка событий для кнопки с выходом из приложения
 
             ButtonConfigurator.setupButtonEvent(
                     buttonReturn,

@@ -17,6 +17,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static com.kiku.javalangprogproject.controllers.NotificationUtils.showErrorNotification;
+
 public class ShopsController extends BaseController {
     public TableView<Shop> shopsTable = new TableView<>();
     public TableColumn<Shop, Integer> idShop;
@@ -48,10 +50,6 @@ public class ShopsController extends BaseController {
     public TextField fioField;
     public Button exitAppButton;
 
-    private Stage stage;
-    private Scene scene;
-
-    String query = null;
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
@@ -62,7 +60,7 @@ public class ShopsController extends BaseController {
 
 
 
-    public void addNewShop(ActionEvent actionEvent) {
+    public void addNewShop() {
         try {
             Connection connection = DbConnect.getConnect();
 
@@ -82,24 +80,31 @@ public class ShopsController extends BaseController {
             exceptionLabel.setText("Магазин успешно добавлен.");
             refreshTable();
         } catch (Exception e) {
-            exceptionLabel.setText("Магазин не был добавлен. Причина: " + e.getMessage());
+            showErrorNotification(e.getMessage());
         }
     }
 
-    public void removeShop(ActionEvent actionEvent) {
+    public void removeShop() {
         try {
             Connection connection = DbConnect.getConnect();
             int id = Integer.parseInt(idField.getText());
             String query = "DELETE FROM shops WHERE id = " + id;
-            connection.prepareStatement(query).executeUpdate();
+            int result = connection.prepareStatement(query).executeUpdate();
+            if (result > 0) {
+                exceptionLabel.setText("Магазин успешно удален.");
+                refreshTable();
+            } else {
+                showErrorNotification("Failed to delete shop. No shop found with ID: " + id);
+            }
+
             exceptionLabel.setText("Магазин успешно удален.");
             refreshTable();
         } catch (Exception e) {
-            exceptionLabel.setText("Магазин не был удален. Причина: " + e.getMessage());
+            showErrorNotification(e.getMessage());
         }
     }
 
-    public void EditShop(ActionEvent actionEvent) {
+    public void EditShop() {
         try {
             Connection connection = DbConnect.getConnect();
 
@@ -117,7 +122,7 @@ public class ShopsController extends BaseController {
             preparedStatement.executeUpdate();
             refreshTable();
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            showErrorNotification(ex.getMessage());
         }
 
     }

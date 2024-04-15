@@ -6,16 +6,18 @@ import com.kiku.javalangprogproject.classes.Supplier;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import static com.kiku.javalangprogproject.controllers.NotificationUtils.showErrorNotification;
 
 public class SuppliersController extends BaseController {
     public TableView<Supplier> suppliersTable = new TableView<>();
@@ -49,10 +51,6 @@ public class SuppliersController extends BaseController {
     public TextField stockField;
     public Button exitAppButton;
 
-    private Stage stage;
-    private Scene scene;
-
-    String query = null;
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
@@ -63,7 +61,7 @@ public class SuppliersController extends BaseController {
 
 
 
-    public void addNewSupplier(ActionEvent actionEvent) {
+    public void addNewSupplier() {
         try {
             Connection connection = DbConnect.getConnect();
 
@@ -79,27 +77,31 @@ public class SuppliersController extends BaseController {
 
             preparedStatement.executeUpdate();
 
-            exceptionLabel.setText("Магазин успешно добавлен.");
+            exceptionLabel.setText("Поставщик успешно добавлен.");
             refreshTable();
         } catch (Exception e) {
-            exceptionLabel.setText("Магазин не был добавлен. Причина: " + e.getMessage());
+            showErrorNotification(e.getMessage());
         }
     }
 
-    public void removeSupplier(ActionEvent actionEvent) {
+    public void removeSupplier() {
         try {
             Connection connection = DbConnect.getConnect();
             int id = Integer.parseInt(idField.getText());
             String query = "DELETE FROM suppliers WHERE \uFEFFid = " + id;
-            connection.prepareStatement(query).executeUpdate();
-            exceptionLabel.setText("Магазин успешно удален.");
-            refreshTable();
+            int result = connection.prepareStatement(query).executeUpdate();
+            if (result > 0) {
+                exceptionLabel.setText("Поставщик успешно добавлен.");
+                refreshTable();
+            } else {
+                showErrorNotification("Failed to delete supplier. No supplier found with ID: " + id);
+            }
         } catch (Exception e) {
-            exceptionLabel.setText("Магазин не был удален. Причина: " + e.getMessage());
+            showErrorNotification(e.getMessage());
         }
     }
 
-    public void EditSupplier(ActionEvent actionEvent) {
+    public void EditSupplier() {
         try {
             Connection connection = DbConnect.getConnect();
 
@@ -116,7 +118,7 @@ public class SuppliersController extends BaseController {
             preparedStatement.executeUpdate();
             refreshTable();
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            showErrorNotification(ex.getMessage());
         }
 
     }

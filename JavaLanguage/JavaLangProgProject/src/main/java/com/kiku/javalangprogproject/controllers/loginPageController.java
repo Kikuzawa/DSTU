@@ -1,21 +1,14 @@
 package com.kiku.javalangprogproject.controllers;
 
 
-import com.kiku.javalangprogproject.config.ActionMainMenu;
 import com.kiku.javalangprogproject.BaseController;
-import com.kiku.javalangprogproject.config.ButtonLabsActionMainMenu;
 import com.kiku.javalangprogproject.Database.ConnectionFactory;
-import javafx.event.ActionEvent;
+import com.kiku.javalangprogproject.SOUND;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.stream.Stream;
 
 
 public class loginPageController extends BaseController {
@@ -29,36 +22,26 @@ public class loginPageController extends BaseController {
 
 
     @FXML
-    public void switchToMainMenu(ActionEvent event) throws IOException {
+    public void switchToMainMenu() {
         String login = loginField.getText();
         String password = passwordField.getText();
         String userType = "ADMINISTRATOR";
-        if (new ConnectionFactory().checkLogin(login, password, userType)){
-            controller.switchToMainMenu();}
-        else{exceptionLabel.setText("Invalid username or password.");}
+        if (new ConnectionFactory().checkLogin(login, password, userType)) {
+            controller.switchToMainMenu();
+        } else {
+            SOUND.ERROR.play();
+            exceptionLabel.setText("Неправильный логин или пароль");
+        }
     }
 
     public void clearAllFileds() {
+        exceptionLabel.setText("");
         loginField.clear();
         passwordField.clear();
     }
 
 
-    public void initialize(ResourceBundle resourceBundle, URL url){
-
-
-        super.initialize(url, resourceBundle);
-
-
-
-        Stream.of(
-                new ButtonLabsActionMainMenu(buttonLogin)
-        ).parallel().forEach(ActionMainMenu::execute);
-
-    }
-
-
-    public void exitApp(ActionEvent actionEvent) {
+    public void exitApp() {
         System.exit(0);
     }
 }

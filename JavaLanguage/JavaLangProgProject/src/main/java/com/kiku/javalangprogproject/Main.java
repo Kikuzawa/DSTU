@@ -12,14 +12,7 @@ public class Main extends Application {
         var stageInitialized = StageConfigurator.configureStage(stage);
 
         SceneController.getInstance(stage).setStartMenu();
-
-
         stageInitialized.show();
-
-
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
 }

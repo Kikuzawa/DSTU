@@ -11,6 +11,6 @@ public enum SOUND {
     ;
     public final static AudioClip HOVER = new AudioClip(Objects.requireNonNull(SOUND.class.getResource("hover.mp3")).toExternalForm());
     public final static AudioClip CLICK = new AudioClip(Objects.requireNonNull(SOUND.class.getResource("click.mp3")).toExternalForm());
-    public final static AudioClip NOTIFICATION = new AudioClip(Objects.requireNonNull(SOUND.class.getResource("click.mp3")).toExternalForm());
+    public final static AudioClip ERROR = new AudioClip(Objects.requireNonNull(SOUND.class.getResource("error.mp3")).toExternalForm());
 
 }

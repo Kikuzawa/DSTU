@@ -7,12 +7,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-
 import java.sql.*;
+
+import static com.kiku.javalangprogproject.controllers.NotificationUtils.showErrorNotification;
 
 public class DisposalController extends BaseController {
     public TableView<Disposal> disposalTable = new TableView<>();
@@ -40,8 +39,6 @@ public class DisposalController extends BaseController {
     public TextField idField;
     public TextField nameField;
     public TextField quantityField;
-    public TextField reasonField;
-    public TextField totalField;
 
     public Label exceptionLabel;
     public Button ButtonEditDisposal;
@@ -49,20 +46,15 @@ public class DisposalController extends BaseController {
     public ComboBox<String> reasonCombo;
 
 
-    private Stage stage;
-    private Scene scene;
-
-    String query = null;
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
 
 
     ObservableList<Disposal> DisposalList = FXCollections.observableArrayList();
-    private double totalResult;
 
 
-    public void addNewDisposal(ActionEvent actionEvent) {
+    public void addNewDisposal() {
         try {
             Connection connection = DbConnect.getConnect();
 
@@ -83,8 +75,7 @@ public class DisposalController extends BaseController {
             exceptionLabel.setText("Пункт успешно добавлен.");
             refreshTable();
         } catch (Exception e) {
-            exceptionLabel.setText("Пункт не был добавлен. Причина: " + e.getMessage());
-            System.out.println("++++++++++++++"+e.getMessage());
+            showErrorNotification(e.getMessage());
         }
     }
 
@@ -93,15 +84,19 @@ public class DisposalController extends BaseController {
             Connection connection = DbConnect.getConnect();
             int id = Integer.parseInt(idField.getText());
             String query = "DELETE FROM disposal WHERE id = " + id;
-            connection.prepareStatement(query).executeUpdate();
-            exceptionLabel.setText("Пункт успешно удален.");
-            refreshTable();
+            int result = connection.prepareStatement(query).executeUpdate();
+            if (result > 0) {
+                exceptionLabel.setText("Пункт успешно удален.");
+                refreshTable();
+            } else {
+                showErrorNotification("Failed to delete disposal. No disposal found with ID: " + id);
+            }
         } catch (Exception e) {
-            exceptionLabel.setText("Пункт не был удален. Причина: " + e.getMessage());
+            showErrorNotification(e.getMessage());
         }
     }
 
-    public void EditDisposal(ActionEvent actionEvent) {
+    public void EditDisposal() {
         try {
             Connection connection = DbConnect.getConnect();
 
@@ -117,7 +112,7 @@ public class DisposalController extends BaseController {
             preparedStatement.executeUpdate();
             refreshTable();
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            showErrorNotification(ex.getMessage());
         }
 
     }
@@ -139,8 +134,8 @@ public class DisposalController extends BaseController {
             reasonCombo.setItems(items);
             reasonCombo.setValue(items.getFirst());
 
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
         }
     }
 
@@ -228,7 +223,6 @@ public class DisposalController extends BaseController {
                             );
 
                             DisposalList.add(disposal);
-                            System.out.println("=========== "+disposal.getString());
                             disposalTable.setItems(DisposalList);
                         }
                     }

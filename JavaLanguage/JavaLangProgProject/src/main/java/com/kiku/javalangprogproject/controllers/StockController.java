@@ -17,6 +17,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static com.kiku.javalangprogproject.controllers.NotificationUtils.showErrorNotification;
+
 public class StockController extends BaseController {
     public TableView<Stock> stocksTable = new TableView<>();
     public TableColumn<Stock, Integer> idStock;
@@ -50,10 +52,6 @@ public class StockController extends BaseController {
     public Button exitAppButton;
 
 
-    private Stage stage;
-    private Scene scene;
-
-    String query = null;
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
@@ -64,7 +62,7 @@ public class StockController extends BaseController {
 
 
 
-    public void addNewStock(ActionEvent actionEvent) {
+    public void addNewStock() {
         try {
             Connection connection = DbConnect.getConnect();
 
@@ -82,24 +80,28 @@ public class StockController extends BaseController {
             exceptionLabel.setText("Сырье успешно добавлено.");
             refreshTable();
         } catch (Exception e) {
-            exceptionLabel.setText("Сырье не было добавлено. Причина: " + e.getMessage());
+            showErrorNotification(e.getMessage());
         }
     }
 
-    public void removeStock(ActionEvent actionEvent) {
+    public void removeStock() {
         try {
             Connection connection = DbConnect.getConnect();
             int id = Integer.parseInt(idField.getText());
             String query = "DELETE FROM stock WHERE id = " + id;
-            connection.prepareStatement(query).executeUpdate();
-            exceptionLabel.setText("Сырье успешно удалено.");
-            refreshTable();
+            int result = connection.prepareStatement(query).executeUpdate();
+            if (result > 0) {
+                exceptionLabel.setText("Сырье успешно удалено.");
+                refreshTable();
+            } else {
+                showErrorNotification("Failed to delete stock. No stock found with ID: " + id);
+            }
         } catch (Exception e) {
-            exceptionLabel.setText("Сырье не было удалено. Причина: " + e.getMessage());
+            showErrorNotification(e.getMessage());
         }
     }
 
-    public void EditStock(ActionEvent actionEvent) {
+    public void EditStock() {
         try {
             Connection connection = DbConnect.getConnect();
 
@@ -115,7 +117,7 @@ public class StockController extends BaseController {
             preparedStatement.executeUpdate();
             refreshTable();
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            showErrorNotification(ex.getMessage());
         }
 
     }
