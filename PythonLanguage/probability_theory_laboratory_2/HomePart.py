@@ -45,18 +45,15 @@ def plot_frequency_polygon(data): # Печать полигона частот
             data_counts[value] = 1
 
     values = sorted(data_counts.keys())
-    frequencies = [data_counts[value] / len(data) for value in values]
-
-    f = interp1d(values, frequencies, kind='linear')
-    x_new = np.linspace(min(values), max(values), num=150)
-    y_new = f(x_new)
+    frequencies = [data_counts[value] for value in values]  # Update frequencies to display count
 
     plt.figure(figsize=(10, 6))
-    plt.plot(x_new, y_new, '-')
+    plt.plot(values, frequencies, linestyle='-')  # Plot values against frequencies
     plt.xlabel('Значения выборки')
-    plt.ylabel('Значения частоты')
+    plt.ylabel('Количество совпадений')
     plt.title('Полигон частот')
     plt.grid(True)
+
     plt.show()
 
 def plot_histogram(data): # Печать гистограммы
@@ -68,7 +65,7 @@ def plot_histogram(data): # Печать гистограммы
     plt.show()
 
 def initialize_data(): # Инициализация данных из файла
-    p = open('test_statistics.txt')
+    p = open('statistics.txt')
     q = p.read().split('\n')
     data = []
     for i in range(len(q)):
