@@ -7,7 +7,7 @@ module com.kiku.javalangprogproject {
     requires mysql.connector.java;
     requires java.sql;
     requires javafx.media;
-
+    requires java.desktop;
 
 
     opens com.kiku.javalangprogproject.Database to javafx.base;

@@ -5,6 +5,7 @@ import com.kiku.javalangprogproject.Database.DbConnect;
 import com.kiku.javalangprogproject.classes.Shoe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -69,9 +70,6 @@ public class AssortimentController extends BaseController {
 
     private Stage stage;
     private Scene scene;
-
-
-
 
 
     public void getColours() {
@@ -172,7 +170,7 @@ public class AssortimentController extends BaseController {
 
     @FXML
     private void refreshTable() throws SQLException {
-        
+
 
         ShoeList.clear();
 
@@ -259,28 +257,29 @@ public class AssortimentController extends BaseController {
 
     public void EditShoe() {
         try {
-                Connection connection = DbConnect.getConnect();
+            Connection connection = DbConnect.getConnect();
 
-                String sizeNew = size1AddShoe.getText() + "-" + size2AddShoe.getText();
-                String query = "UPDATE shoes SET name = ?, cost = ?, color = ?, size = ?, complection = ?, stock = ?, season = ? where id = ?";
+            String sizeNew = size1AddShoe.getText() + "-" + size2AddShoe.getText();
+            String query = "UPDATE shoes SET name = ?, cost = ?, color = ?, size = ?, complection = ?, stock = ?, season = ? where id = ?";
 
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, nameAddShoe.getText());
-                preparedStatement.setString(2, costAddShoe.getText());
-                preparedStatement.setString(3, colorAddShoe.getSelectionModel().getSelectedItem());
-                preparedStatement.setString(4, sizeNew);
-                preparedStatement.setString(5, complectionAddShoe.getSelectionModel().getSelectedItem());
-                preparedStatement.setString(6, stackAddShoe.getText());
-                preparedStatement.setString(7, seasonAddShoe.getSelectionModel().getSelectedItem());
-                preparedStatement.setString(8, idAddShoe.getText());
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, nameAddShoe.getText());
+            preparedStatement.setString(2, costAddShoe.getText());
+            preparedStatement.setString(3, colorAddShoe.getSelectionModel().getSelectedItem());
+            preparedStatement.setString(4, sizeNew);
+            preparedStatement.setString(5, complectionAddShoe.getSelectionModel().getSelectedItem());
+            preparedStatement.setString(6, stackAddShoe.getText());
+            preparedStatement.setString(7, seasonAddShoe.getSelectionModel().getSelectedItem());
+            preparedStatement.setString(8, idAddShoe.getText());
 
-                preparedStatement.executeUpdate();
-                refreshTable();
-            } catch (SQLException ex) {
-                showErrorNotification(ex.getMessage());
+            preparedStatement.executeUpdate();
+            refreshTable();
+        } catch (SQLException ex) {
+            showErrorNotification(ex.getMessage());
         }
     }
 
-
+    public void generateReport(ActionEvent actionEvent) {
+    }
 }
 

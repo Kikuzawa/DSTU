@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import com.kiku.javalangprogproject.controllers.NotificationUtils;
 
 public abstract class BaseController implements Initializable {
     @FXML
