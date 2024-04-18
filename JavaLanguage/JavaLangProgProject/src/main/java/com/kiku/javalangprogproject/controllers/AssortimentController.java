@@ -9,9 +9,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 
+
+import java.awt.*;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.*;
 
 import static com.kiku.javalangprogproject.controllers.NotificationUtils.showErrorNotification;
@@ -280,6 +290,69 @@ public class AssortimentController extends BaseController {
     }
 
     public void generateReport(ActionEvent actionEvent) {
+        try {
+            XWPFDocument document = new XWPFDocument();
+            FileOutputStream out = new FileOutputStream("report.docx");
+
+            // Создание таблицы
+            XWPFTable table = document.createTable(ShoeList.size() + 1, 8); // +1 для заголовка
+
+// Заполнение заголовка таблицы
+            String[] headers = {"ID", "Name", "Cost", "Color", "Stock", "Size", "Season", "Complection"};
+            for (int i = 0; i < headers.length; i++) {
+                table.getRow(0).getCell(i).setText(headers[i]);
+            }
+
+// Заполнение данных из таблицы в таблицу Word
+            for (int i = 0; i < ShoeList.size(); i++) {
+                Shoe shoe = ShoeList.get(i);
+                for (int j = 0; j < 8; j++) {
+                    XWPFTableCell cell = table.getRow(i + 1).getCell(j);
+                    if (cell == null) {
+                        cell = table.getRow(i + 1).createCell();
+                    }
+                    switch (j) {
+                        case 0:
+                            cell.setText(shoe.getId());
+                            break;
+                        case 1:
+                            cell.setText(shoe.getName());
+                            break;
+                        case 2:
+                            cell.setText(String.valueOf(shoe.getCost()));
+                            break;
+                        case 3:
+                            cell.setText(shoe.getColor());
+                            break;
+                        case 4:
+                            cell.setText(String.valueOf(shoe.getStock()));
+                            break;
+                        case 5:
+                            cell.setText(String.valueOf(shoe.getSize()));
+                            break;
+                        case 6:
+                            cell.setText(shoe.getSeason());
+                            break;
+                        case 7:
+                            cell.setText(shoe.getComplection());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            // Сохранение документа
+            document.write(out);
+
+
+            // Открыть файл для просмотра или печати
+            Desktop.getDesktop().open(new File("report.docx"));
+        } catch (Exception e) {
+            showErrorNotification("Error generating Word report: " + e.getMessage());
+            System.out.println("Error generating Word report: " + e.getMessage());
+        }
+
     }
 }
 
