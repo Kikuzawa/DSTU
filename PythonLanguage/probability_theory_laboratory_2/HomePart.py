@@ -65,7 +65,7 @@ def plot_histogram(data): # Печать гистограммы
     plt.show()
 
 def initialize_data(): # Инициализация данных из файла
-    p = open('statistics.txt')
+    p = open('test_statistics.txt')
     q = p.read().split('\n')
     data = []
     for i in range(len(q)):
