@@ -9,6 +9,7 @@ module com.kiku.javalangprogproject {
     requires javafx.media;
     requires java.desktop;
     requires org.apache.poi.ooxml;
+    requires org.json;
 
 
     opens com.kiku.javalangprogproject.Database to javafx.base;

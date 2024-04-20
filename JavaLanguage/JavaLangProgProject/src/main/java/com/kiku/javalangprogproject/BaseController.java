@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -17,7 +18,7 @@ public abstract class BaseController implements Initializable {
 
 
 
-    protected void onInitialize() throws SQLException {
+    protected void onInitialize() throws SQLException, IOException {
 
     }
 
@@ -26,7 +27,7 @@ public abstract class BaseController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             onInitialize();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -76,6 +77,7 @@ public abstract class BaseController implements Initializable {
                     event -> controller.switchToDisposalPage(),
                     "Не получилось переключиться на прошлое окно"
             );
+
 
 
         } catch (RuntimeException ignored) {}

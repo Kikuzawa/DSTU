@@ -5,8 +5,11 @@ import com.kiku.javalangprogproject.Database.DbConnect;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -25,7 +28,7 @@ public class SceneController {
     }
 
 
-    private enum Scenes {
+    enum Scenes {
         ;
 
         public static Scene SHOPS = null;
@@ -36,6 +39,7 @@ public class SceneController {
         private static Scene DISPOSAL = null;
 
         private static Scene SUPPLIERS_REPORT = null;
+        private static Scene REPORT = null;
     }
 
     private enum ScenePath {
@@ -47,6 +51,7 @@ public class SceneController {
         private static final String STOCK_FXML_PATH = "stock.fxml";
         private static final String DISPOSAL_FXML_PATH = "disposal.fxml";
         private static final String SUPPLIERS_FXML_PATH = "suppliers.fxml";
+        private static final String REPORT_FXML_PATH = "reportFormatSelectionWindow.fxml";
 
     }
 
@@ -124,6 +129,11 @@ public class SceneController {
         sceneHistory.push(Scenes.MAIN_MENU);
     }
 
+    public void createReportWindow() throws IOException {
+        createAnimatedWindow(Scenes.REPORT);
+        sceneHistory.push(Scenes.MAIN_MENU);
+    }
+
 
     /**
      * Переключение с любого окна на меню.
@@ -140,6 +150,7 @@ public class SceneController {
         Scenes.STOCK = SceneConfigurator.createScene(stage, ScenePath.STOCK_FXML_PATH);
         Scenes.DISPOSAL = SceneConfigurator.createScene(stage, ScenePath.DISPOSAL_FXML_PATH);
         Scenes.SUPPLIERS_REPORT = SceneConfigurator.createScene(stage, ScenePath.SUPPLIERS_FXML_PATH);
+        Scenes.REPORT = SceneConfigurator.createScene(stage, ScenePath.REPORT_FXML_PATH);
 
         stage.setScene(Scenes.LOGIN_PAGE);
 
@@ -182,4 +193,24 @@ public class SceneController {
         // Запуск комбинированной анимации
         parallelTransition.play();
     }
+
+    public void createAnimatedWindow(Scene newScene) {
+        Stage newStage = new Stage();
+
+        newStage.setScene(newScene);
+        newStage.initStyle(StageStyle.UNDECORATED);
+        Pane root = (Pane) newScene.getRoot();
+        root.setOnMousePressed(event -> {
+            newStage.setUserData(new double[]{event.getScreenX() - newStage.getX(), event.getScreenY() - newStage.getY()});
+        });
+
+        root.setOnMouseDragged(event -> {
+            double[] userData = (double[]) newStage.getUserData();
+            newStage.setX(event.getScreenX() - userData[0]);
+            newStage.setY(event.getScreenY() - userData[1]);
+        });
+        newStage.show();
+    }
+
+
 }

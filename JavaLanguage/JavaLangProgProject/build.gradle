@@ -38,10 +38,12 @@ javafx {
 }
 
 dependencies {
+  implementation 'org.json:json:20210307'
   implementation("org.apache.poi:poi-ooxml:5.2.5")
   implementation("org.apache.logging.log4j:log4j-to-slf4j:2.8.2")
   implementation("org.apache.commons:commons-collections4:4.3")
-  implementation('org.controlsfx:controlsfx:11.1.2')
+
+  implementation("org.controlsfx:controlsfx:11.1.2")
   implementation("org.apache.commons:commons-math3:3.6.1")
   implementation('com.dlsc.formsfx:formsfx-core:11.6.0') {
     exclude(group: 'org.openjfx')
@@ -58,6 +60,7 @@ dependencies {
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
 }
 
 test {
