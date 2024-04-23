@@ -1,6 +1,7 @@
 package com.kiku.javalangprogproject.controllers;
 
 import com.kiku.javalangprogproject.BaseController;
+import com.kiku.javalangprogproject.CreateJsonFromTable;
 import com.kiku.javalangprogproject.Database.DbConnect;
 import com.kiku.javalangprogproject.SceneController;
 import com.kiku.javalangprogproject.classes.Shoe;
@@ -15,14 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 
 
-import java.awt.*;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.*;
 
@@ -204,6 +199,8 @@ public class AssortimentController extends BaseController {
 
         }
 
+        CreateJsonFromTable.jsonCreateShoe(shoesTable);
+
     }
 
     private void loadDate() throws SQLException {
@@ -292,7 +289,10 @@ public class AssortimentController extends BaseController {
     }
 
     public void generateReport(ActionEvent actionEvent) throws IOException {
+        ReportFormatSelectionWindow.help();
         SceneController.getInstance().createReportWindow();
     }
+
+
 }
 

@@ -67,7 +67,7 @@
          <Font size="12.0" />
       </font>
    </Button>
-   <Button fx:id="ButtonReport" layoutX="62.0" layoutY="493.0" mnemonicParsing="false" text="Отчёт">
+   <Button fx:id="ButtonReport" layoutX="62.0" layoutY="493.0" mnemonicParsing="false" onAction="#generateReport" text="Отчёт">
       <font>
          <Font size="12.0" />
       </font>
@@ -99,5 +99,4 @@
    </Button>
    <TextField fx:id="quantityField" layoutX="1088.0" layoutY="217.0" prefHeight="27.0" prefWidth="179.0" promptText="Количество" />
    <ComboBox fx:id="reasonCombo" layoutX="1090.0" layoutY="257.0" prefHeight="27.0" prefWidth="179.0" promptText="Причина" />
-
 </AnchorPane>

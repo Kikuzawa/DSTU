@@ -1,7 +1,9 @@
 package com.kiku.javalangprogproject.controllers;
 
 import com.kiku.javalangprogproject.BaseController;
+import com.kiku.javalangprogproject.CreateJsonFromTable;
 import com.kiku.javalangprogproject.Database.DbConnect;
+import com.kiku.javalangprogproject.SceneController;
 import com.kiku.javalangprogproject.classes.Disposal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +11,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.io.IOException;
 import java.sql.*;
 
 import static com.kiku.javalangprogproject.controllers.NotificationUtils.showErrorNotification;
@@ -229,6 +233,7 @@ public class DisposalController extends BaseController {
                 }
             }
         }
+        CreateJsonFromTable.jsonCreateDisposal(disposalTable);
         }
 
     private void loadDate() throws SQLException {
@@ -244,5 +249,10 @@ public class DisposalController extends BaseController {
         totalDisposal.setCellValueFactory(new PropertyValueFactory<>("totalDisposal"));
 
 
+    }
+
+    public void generateReport(ActionEvent actionEvent) throws IOException {
+        ReportFormatSelectionWindow.help();
+        SceneController.getInstance().createReportWindow();
     }
 }

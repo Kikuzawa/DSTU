@@ -10,6 +10,8 @@ module com.kiku.javalangprogproject {
     requires java.desktop;
     requires org.apache.poi.ooxml;
     requires org.json;
+    requires org.apache.pdfbox;
+    requires itextpdf;
 
 
     opens com.kiku.javalangprogproject.Database to javafx.base;
