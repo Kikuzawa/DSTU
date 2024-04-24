@@ -12,7 +12,7 @@ public class MainMenuController extends BaseController {
 
     @FXML
     public Button buttonReturn;
-    public Button ButtonComplain;
+    public Button ButtonCompalain;
     public Button ButtonReport;
     public Button ButtonTaxService;
     public Button ButtonDisposal;

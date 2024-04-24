@@ -50,6 +50,9 @@ public class ReportFormatSelectionWindow extends BaseController {
         if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.SuppliersController")) {
             WordDocxReportGenerator.createWordDocxAssortiment(ListHeaderTable.SUPPLIERS, "suppliers.json", "suppliers.docx");
         }
+        if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.FaxController")) {
+            WordDocxReportGenerator.createWordDocxAssortiment(ListHeaderTable.TAX, "fax.json", "fax.docx");
+        }
 
     }
 
@@ -69,6 +72,9 @@ public class ReportFormatSelectionWindow extends BaseController {
         if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.SuppliersController")) {
             ExcelReportGenerator.createExcelAssortiment(ListHeaderTable.SUPPLIERS, "suppliers.json", "suppliers");
         }
+        if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.FaxController")) {
+            ExcelReportGenerator.createExcelAssortiment(ListHeaderTable.TAX, "fax.json", "fax");
+        }
     }
 
     public void createPdf() throws IOException, DocumentException, PrinterException {
@@ -86,6 +92,9 @@ public class ReportFormatSelectionWindow extends BaseController {
         }
         if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.SuppliersController")) {
             PrinterReportGenerator.createPrinterAssortiment(ListHeaderTable.SUPPLIERS, "suppliers.json");
+        }
+        if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.FaxController")) {
+            PrinterReportGenerator.createPrinterAssortiment(ListHeaderTable.TAX, "fax.json");
         }
     }
 

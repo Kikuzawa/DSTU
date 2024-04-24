@@ -77,6 +77,11 @@ public abstract class BaseController implements Initializable {
                     event -> controller.switchToDisposalPage(),
                     "Не получилось переключиться на прошлое окно"
             );
+            ButtonConfigurator.setupButtonEvent(
+                    ButtonTaxService,
+                    event -> controller.switchToFaxPage(),
+                    "Не получилось переключиться на прошлое окно"
+            );
 
 
 

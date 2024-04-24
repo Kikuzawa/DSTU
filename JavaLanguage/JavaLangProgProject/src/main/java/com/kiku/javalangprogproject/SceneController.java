@@ -39,6 +39,7 @@ public class SceneController {
 
         private static Scene SUPPLIERS_REPORT = null;
         private static Scene REPORT = null;
+        private static Scene FAX = null;
     }
 
     private enum ScenePath {
@@ -51,6 +52,7 @@ public class SceneController {
         private static final String DISPOSAL_FXML_PATH = "disposal.fxml";
         private static final String SUPPLIERS_FXML_PATH = "suppliers.fxml";
         private static final String REPORT_FXML_PATH = "reportFormatSelectionWindow.fxml";
+        private static final String FAX_FXML_PATH = "fax.fxml";
 
     }
 
@@ -128,6 +130,12 @@ public class SceneController {
         sceneHistory.push(Scenes.MAIN_MENU);
     }
 
+    public void switchToFaxPage() {
+        animationSlideWindow(Scenes.FAX);
+        sceneHistory.push(Scenes.MAIN_MENU);
+    }
+
+
     public void createReportWindow() throws IOException {
         createAnimatedWindow(Scenes.REPORT);
         sceneHistory.push(Scenes.MAIN_MENU);
@@ -150,6 +158,7 @@ public class SceneController {
         Scenes.DISPOSAL = SceneConfigurator.createScene(stage, ScenePath.DISPOSAL_FXML_PATH);
         Scenes.SUPPLIERS_REPORT = SceneConfigurator.createScene(stage, ScenePath.SUPPLIERS_FXML_PATH);
         Scenes.REPORT = SceneConfigurator.createScene(stage, ScenePath.REPORT_FXML_PATH);
+        Scenes.FAX = SceneConfigurator.createScene(stage, ScenePath.FAX_FXML_PATH);
 
         stage.setScene(Scenes.LOGIN_PAGE);
 

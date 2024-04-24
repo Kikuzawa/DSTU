@@ -1,6 +1,7 @@
 package com.kiku.javalangprogproject;
 
 import com.kiku.javalangprogproject.classes.*;
+import com.kiku.javalangprogproject.controllers.Tax;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import org.json.JSONArray;
@@ -111,7 +112,6 @@ public class CreateJsonFromTable {
 
 
     private static void saveJsonFile(String name, JSONArray jsonArray) {
-        String basePath = name;
         try {
             try (FileWriter file = new FileWriter(name)) {
                 file.write("[");
@@ -129,4 +129,28 @@ public class CreateJsonFromTable {
 
     }
 
+    public static void jsonCreateTax(TableView<Tax> taxTable) {
+        ObservableList<Tax> data = taxTable.getItems();
+        JSONArray jsonArray = new JSONArray();
+        for (Tax item : data) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", String.valueOf(item.getIdTax()));
+            jsonObject.put("month", item.getMonthTax());
+            jsonObject.put("year", String.valueOf(item.getYearTax()));
+            jsonObject.put("totalIncome", String.valueOf(item.getTotalIncomeTax()));
+            jsonObject.put("totalExpense", String.valueOf(item.getTotalExpenseTax()));
+            jsonObject.put("procentEarthTax", String.valueOf(item.getProcentEarthTax()));
+            jsonObject.put("procentHouseTax", String.valueOf(item.getHouseTax()));
+            jsonObject.put("NDS", String.valueOf(item.getNdsTax()));
+            jsonObject.put("finalTax", String.valueOf(item.getFinalTax()));
+            jsonObject.put("baseTax", String.valueOf(item.getBaseTax()));
+            jsonObject.put("taxWithNDS", String.valueOf(item.getTaxWithNDS()));
+            jsonObject.put("taxWithNdsAndHouse", String.valueOf(item.getTaxWithNdsAndHouse()));
+
+
+            jsonArray.put(jsonObject);
+        }
+
+        saveJsonFile("tax.json", jsonArray);
+    }
 }
