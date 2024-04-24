@@ -51,7 +51,7 @@ public class ReportFormatSelectionWindow extends BaseController {
             WordDocxReportGenerator.createWordDocxAssortiment(ListHeaderTable.SUPPLIERS, "suppliers.json", "suppliers.docx");
         }
         if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.FaxController")) {
-            WordDocxReportGenerator.createWordDocxAssortiment(ListHeaderTable.TAX, "fax.json", "fax.docx");
+            WordDocxReportGenerator.createWordDocxAssortiment(ListHeaderTable.TAX, "tax.json", "fax.docx");
         }
 
     }
@@ -73,7 +73,7 @@ public class ReportFormatSelectionWindow extends BaseController {
             ExcelReportGenerator.createExcelAssortiment(ListHeaderTable.SUPPLIERS, "suppliers.json", "suppliers");
         }
         if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.FaxController")) {
-            ExcelReportGenerator.createExcelAssortiment(ListHeaderTable.TAX, "fax.json", "fax");
+            ExcelReportGenerator.createExcelAssortiment(ListHeaderTable.TAX, "tax.json", "fax");
         }
     }
 
@@ -94,7 +94,7 @@ public class ReportFormatSelectionWindow extends BaseController {
             PrinterReportGenerator.createPrinterAssortiment(ListHeaderTable.SUPPLIERS, "suppliers.json");
         }
         if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.FaxController")) {
-            PrinterReportGenerator.createPrinterAssortiment(ListHeaderTable.TAX, "fax.json");
+            PrinterReportGenerator.createPrinterAssortiment(ListHeaderTable.TAX, "tax.json");
         }
     }
 
