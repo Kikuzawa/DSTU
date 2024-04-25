@@ -15,6 +15,8 @@ public abstract class BaseController implements Initializable {
     @FXML
     private Button buttonReturn, ButtonComplain, ButtonReport, ButtonTaxService, ButtonDisposal, ButtonSuppliers, ButtonStock, ButtonAssortment, ButtonShops, ButtonMainMenu, buttonLogin, exitAppButton;
     protected final SceneController controller = SceneController.getInstance();
+    @FXML
+    private Button ButtonRefresh;
 
 
 
@@ -82,6 +84,14 @@ public abstract class BaseController implements Initializable {
                     event -> controller.switchToFaxPage(),
                     "Не получилось переключиться на прошлое окно"
             );
+
+            ButtonConfigurator.setupButtonEvent(
+                    ButtonComplain,
+                    event -> controller.switchToComplainPage(),
+                    "Не получилось переключиться на прошлое окно"
+            );
+
+
 
 
 

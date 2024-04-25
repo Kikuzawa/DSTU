@@ -1,13 +1,13 @@
-package com.kiku.javalangprogproject;
+package com.kiku.javalangprogproject.reportGenerators;
 
 import com.kiku.javalangprogproject.classes.*;
-import com.kiku.javalangprogproject.controllers.Tax;
+import com.kiku.javalangprogproject.config.Paths;
+import com.kiku.javalangprogproject.classes.Tax;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -113,7 +113,7 @@ public class CreateJsonFromTable {
 
     private static void saveJsonFile(String name, JSONArray jsonArray) {
         try {
-            try (FileWriter file = new FileWriter(name)) {
+            try (FileWriter file = new FileWriter(Paths.PATH_JSONS + name)) {
                 file.write("[");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     file.write(jsonArray.getJSONObject(i).toString());
@@ -152,5 +152,22 @@ public class CreateJsonFromTable {
         }
 
         saveJsonFile("tax.json", jsonArray);
+    }
+
+    public static void jsonCreateComplain(TableView<Complain> complainTable) {
+        ObservableList<Complain> data = complainTable.getItems();
+        JSONArray jsonArray = new JSONArray();
+        for (Complain item : data) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", String.valueOf(item.getId()));
+            jsonObject.put("number", item.getNumber());
+            jsonObject.put("sender", item.getSender());
+            jsonObject.put("type", item.getType());
+            jsonObject.put("comment", item.getComment());
+
+            jsonArray.put(jsonObject);
+        }
+
+        saveJsonFile("complain.json", jsonArray);
     }
 }

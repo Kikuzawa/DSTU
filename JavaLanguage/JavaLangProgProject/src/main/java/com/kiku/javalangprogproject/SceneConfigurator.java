@@ -1,9 +1,11 @@
 package com.kiku.javalangprogproject;
 
+import com.kiku.javalangprogproject.config.Paths;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -42,7 +44,7 @@ public class SceneConfigurator {
      * @return Возвращает созданную сцену
      */
     public static Scene createScene(Stage stage, String filePath) throws IOException {
-        Parent windowFXML = FXMLLoader.load(Objects.requireNonNull(SceneConfigurator.class.getResource(filePath)));
+        Parent windowFXML = FXMLLoader.load(Objects.requireNonNull(SceneConfigurator.class.getResource(Paths.PATH_FXML + filePath)));
         var scene = new Scene(windowFXML);
 
         setWindowDragged(stage, windowFXML);
@@ -56,6 +58,7 @@ public class SceneConfigurator {
         scene.setFill(Color.TRANSPARENT);
 
         scene.getStylesheets().add(CSS);
+
 
         return scene;
     }

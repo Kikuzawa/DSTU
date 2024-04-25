@@ -3,7 +3,7 @@ package com.kiku.javalangprogproject.controllers;
 
 import com.kiku.javalangprogproject.BaseController;
 import com.kiku.javalangprogproject.Database.ConnectionFactory;
-import com.kiku.javalangprogproject.SOUND;
+import com.kiku.javalangprogproject.config.SOUND;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

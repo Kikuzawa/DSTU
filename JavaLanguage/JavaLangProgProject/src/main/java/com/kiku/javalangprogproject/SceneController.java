@@ -7,6 +7,7 @@ import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -27,6 +28,7 @@ public class SceneController {
     }
 
 
+
     enum Scenes {
         ;
 
@@ -40,6 +42,8 @@ public class SceneController {
         private static Scene SUPPLIERS_REPORT = null;
         private static Scene REPORT = null;
         private static Scene FAX = null;
+
+        private static Scene COMPLAIN = null;
     }
 
     private enum ScenePath {
@@ -53,6 +57,8 @@ public class SceneController {
         private static final String SUPPLIERS_FXML_PATH = "suppliers.fxml";
         private static final String REPORT_FXML_PATH = "reportFormatSelectionWindow.fxml";
         private static final String FAX_FXML_PATH = "fax.fxml";
+
+        private static final String COMPLAIN_FXML_PATH = "complain.fxml";
 
     }
 
@@ -138,6 +144,12 @@ public class SceneController {
 
     public void createReportWindow() throws IOException {
         createAnimatedWindow(Scenes.REPORT);
+        Scenes.REPORT.setFill(Color.TRANSPARENT);
+        sceneHistory.push(Scenes.MAIN_MENU);
+    }
+
+    public void switchToComplainPage() throws IOException {
+        animationSlideWindow(Scenes.COMPLAIN);
         sceneHistory.push(Scenes.MAIN_MENU);
     }
 
@@ -159,6 +171,7 @@ public class SceneController {
         Scenes.SUPPLIERS_REPORT = SceneConfigurator.createScene(stage, ScenePath.SUPPLIERS_FXML_PATH);
         Scenes.REPORT = SceneConfigurator.createScene(stage, ScenePath.REPORT_FXML_PATH);
         Scenes.FAX = SceneConfigurator.createScene(stage, ScenePath.FAX_FXML_PATH);
+        Scenes.COMPLAIN = SceneConfigurator.createScene(stage, ScenePath.COMPLAIN_FXML_PATH);
 
         stage.setScene(Scenes.LOGIN_PAGE);
 
@@ -217,6 +230,7 @@ public class SceneController {
             newStage.setX(event.getScreenX() - userData[0]);
             newStage.setY(event.getScreenY() - userData[1]);
         });
+        newScene.setFill(Color.TRANSPARENT);
         newStage.show();
     }
 

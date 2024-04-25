@@ -4,18 +4,18 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kiku.javalangprogproject.controllers.ReportFormatSelectionWindow">
+<AnchorPane fx:id="paneReport" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kiku.javalangprogproject.controllers.ReportFormatSelectionWindow">
    <Button fx:id="exitAppButton" layoutX="360.0" layoutY="15.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="20.0" prefWidth="20.0" text="X" />
    <Button fx:id="wordButton" layoutX="172.0" layoutY="42.0" mnemonicParsing="false" onAction="#createWordDocx" text="Word" />
    <Button fx:id="excelButton" layoutX="62.0" layoutY="42.0" mnemonicParsing="false" onAction="#createExcel" text="Excel" />
    <Button fx:id="PdfButton" layoutX="282.0" layoutY="42.0" mnemonicParsing="false" onAction="#createPdf" text="PDF" />
    <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="56.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@images/imgExcel.png" />
+      <Image url="@../images/imgExcel.png" />
    </ImageView>
    <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="152.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@images/imgWord.png" />
+      <Image url="@../images/imgWord.png" />
    </ImageView>
    <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="276.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@images/imgPdf.png" />
+      <Image url="@../images/imgPdf.png" />
    </ImageView>
 </AnchorPane>

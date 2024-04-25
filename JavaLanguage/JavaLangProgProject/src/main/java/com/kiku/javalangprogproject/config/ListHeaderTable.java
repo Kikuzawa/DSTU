@@ -1,4 +1,4 @@
-package com.kiku.javalangprogproject.classes;
+package com.kiku.javalangprogproject.config;
 
 
 public class ListHeaderTable {
@@ -9,7 +9,7 @@ public class ListHeaderTable {
     public static final String[] STOCK = {"id", "name", "quantity", "cost", "total"};
 
     public static final String[] TAX = {"id", "month", "year", "totalIncome", "totalExpense", "procentEarthTax", "procentHouseTax", "NDS", "baseTax", "taxWithNDS", "taxWithNdsAndHouse", "finalTax"};
-    // TODO
-    public static final String PATH = "src/JSONs/";
 
+
+    public static final String[] COMPLAIN = {"id", "number", "sender", "type", "comment"};
 }

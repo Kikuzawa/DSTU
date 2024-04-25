@@ -1,4 +1,4 @@
-package com.kiku.javalangprogproject.reportGenerators;
+package com.kiku.javalangprogproject.classes;
 
 import java.awt.*;
 import java.awt.print.PageFormat;

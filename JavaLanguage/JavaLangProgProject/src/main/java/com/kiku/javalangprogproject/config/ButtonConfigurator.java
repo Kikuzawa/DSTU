@@ -1,7 +1,7 @@
 package com.kiku.javalangprogproject.config;
 
-import com.kiku.javalangprogproject.SOUND;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBase;
 import javafx.scene.input.MouseEvent;
 
@@ -55,6 +55,8 @@ public class ButtonConfigurator {
         };
         setupButtonEvent(button, eventHandler);
     }
+
+
 
 
 }

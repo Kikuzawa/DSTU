@@ -2,35 +2,66 @@
 
 #pane {
     -fx-background-color: #f5f5dc;
+    -fx-background-radius: 30;
+
+}
+
+#paneReport {
+    -fx-background-color: #f5f5dc;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-insets: 0;
 }
 
 
-/* Стилизация кнопок */
 .button {
     -fx-background-color: #4CAF50; /* Цвет фона кнопки */
     -fx-text-fill: white; /* Цвет текста */
+    -fx-background-radius: 20; /* Радиус закругления кнопки */
 }
 
 .button:hover {
     -fx-background-color: #29882e; /* Цвет фона кнопки при наведении */
 }
 
+/* Стилизация TableView */
+.table-view {
+    -fx-border-color: #000000; /* Цвет границы таблицы */
+    -fx-background-radius: 20; /* Радиус закругления TableView */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #d9ffb4;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
 /* Стилизация текстовых полей */
 .text-field {
     -fx-background-color: #ffffff; /* Цвет фона текстового поля */
     -fx-border-color: #000000; /* Цвет границы текстового поля */
+    -fx-background-radius: 20; /* Радиус закругления текстового поля */
 }
 
 /* Стилизация ComboBox */
 .combo-box {
     -fx-background-color: white; /* Цвет фона ComboBox */
     -fx-border-color: #000000; /* Цвет границы ComboBox */
+    -fx-background-radius: 20; /* Радиус закругления ComboBox */
 }
+
 
 /* Стилизация заголовков и текста */
 .label, .text-field, .combo-box {
     -fx-text-fill: #4CAF50; /* Акцентный цвет - салатовый */
     -fx-font-weight: bold; /* Жирный шрифт */
+    -fx-background-radius: 20;
 }
 
 .table-view{
@@ -48,6 +79,12 @@
     -fx-background-color: #d9ffb4;
     -fx-text-fill: black;
     -fx-font-weight: bold;
+}
+
+.password-field {
+    -fx-background-color: #ffffff; /* Цвет фона поля ввода пароля */
+    -fx-border-color: #000000; /* Цвет границы поля ввода пароля */
+    -fx-background-radius: 20; /* Радиус закругления поля ввода пароля */
 }
 
 

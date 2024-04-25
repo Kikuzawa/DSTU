@@ -1,5 +1,6 @@
 package com.kiku.javalangprogproject.reportGenerators;
 
+import com.kiku.javalangprogproject.config.Paths;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
@@ -15,7 +16,7 @@ import java.io.IOException;
 public class ExcelReportGenerator {
     public static void createExcelAssortiment(String[] headers, String filename, String nameTable) throws IOException {
         JSONArray jsonArray;
-        try (FileInputStream fis = new FileInputStream(filename)) {
+        try (FileInputStream fis = new FileInputStream(Paths.PATH_JSONS + filename)) {
             JSONTokener tokener = new JSONTokener(fis);
             jsonArray = new JSONArray(tokener);
         }
@@ -56,11 +57,11 @@ public class ExcelReportGenerator {
 
 
             // Сохранение документа Excel
-            FileOutputStream out = new FileOutputStream(nameTable+".xlsx");
+            FileOutputStream out = new FileOutputStream(Paths.PATH_SAVE + nameTable+".xlsx");
             workbook.write(out);
             out.close();
 
-            File file = new File(nameTable+".xlsx");
+            File file = new File(Paths.PATH_SAVE + nameTable+".xlsx");
             if (file.exists()) {
                 Desktop.getDesktop().open(file);
             }

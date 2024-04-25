@@ -1,5 +1,7 @@
 package com.kiku.javalangprogproject.reportGenerators;
 
+import com.kiku.javalangprogproject.classes.PrintableTable;
+import com.kiku.javalangprogproject.config.Paths;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -14,7 +16,7 @@ public class PrinterReportGenerator {
 
     public static void createPrinterAssortiment(String[] headers, String filename) throws PrinterException, FileNotFoundException {
         JSONArray jsonArray;
-        try (FileInputStream fis = new FileInputStream(filename)) {
+        try (FileInputStream fis = new FileInputStream(Paths.PATH_JSONS +filename)) {
             JSONTokener tokener = new JSONTokener(fis);
             jsonArray = new JSONArray(tokener);
         } catch (IOException e) {

@@ -22,7 +22,9 @@ module com.kiku.javalangprogproject {
     exports com.kiku.javalangprogproject.controllers;
     opens com.kiku.javalangprogproject.controllers to javafx.fxml;
     exports com.kiku.javalangprogproject.config;
-    opens com.kiku.javalangprogproject.config to javafx.fxml;
+    exports com.kiku.javalangprogproject.reportGenerators;
+    opens com.kiku.javalangprogproject.reportGenerators to javafx.fxml;
+    opens com.kiku.javalangprogproject.config to javafx.base, javafx.fxml;
 
 
 }

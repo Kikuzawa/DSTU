@@ -1,5 +1,5 @@
 package com.kiku.javalangprogproject.controllers;
-import com.kiku.javalangprogproject.SOUND;
+import com.kiku.javalangprogproject.config.SOUND;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.application.Platform;

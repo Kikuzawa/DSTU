@@ -1,7 +1,8 @@
 package com.kiku.javalangprogproject.controllers;
 
 import com.kiku.javalangprogproject.BaseController;
-import com.kiku.javalangprogproject.CreateJsonFromTable;
+import com.kiku.javalangprogproject.classes.Tax;
+import com.kiku.javalangprogproject.reportGenerators.CreateJsonFromTable;
 import com.kiku.javalangprogproject.Database.DbConnect;
 import com.kiku.javalangprogproject.SceneController;
 import javafx.collections.FXCollections;

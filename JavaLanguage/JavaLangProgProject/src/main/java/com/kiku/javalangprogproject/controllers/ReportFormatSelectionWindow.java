@@ -2,12 +2,13 @@ package com.kiku.javalangprogproject.controllers;
 
 import com.itextpdf.text.DocumentException;
 import com.kiku.javalangprogproject.BaseController;
-import com.kiku.javalangprogproject.classes.ListHeaderTable;
+import com.kiku.javalangprogproject.config.ListHeaderTable;
 import com.kiku.javalangprogproject.reportGenerators.ExcelReportGenerator;
 import com.kiku.javalangprogproject.reportGenerators.PrinterReportGenerator;
 import com.kiku.javalangprogproject.reportGenerators.WordDocxReportGenerator;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.awt.print.PrinterException;
@@ -23,6 +24,7 @@ public class ReportFormatSelectionWindow extends BaseController {
     public Button wordButton;
 
     public static String nameCallingController;
+    public AnchorPane pane;
 
     public static void help() {
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
@@ -53,6 +55,9 @@ public class ReportFormatSelectionWindow extends BaseController {
         if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.FaxController")) {
             WordDocxReportGenerator.createWordDocxAssortiment(ListHeaderTable.TAX, "tax.json", "fax.docx");
         }
+        if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.ComplainController")) {
+            WordDocxReportGenerator.createWordDocxAssortiment(ListHeaderTable.COMPLAIN, "complain.json", "complain.docx");
+        }
 
     }
 
@@ -75,6 +80,9 @@ public class ReportFormatSelectionWindow extends BaseController {
         if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.FaxController")) {
             ExcelReportGenerator.createExcelAssortiment(ListHeaderTable.TAX, "tax.json", "fax");
         }
+        if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.ComplainController")) {
+            ExcelReportGenerator.createExcelAssortiment(ListHeaderTable.COMPLAIN, "complain.json", "complain");
+        }
     }
 
     public void createPdf() throws IOException, DocumentException, PrinterException {
@@ -95,6 +103,9 @@ public class ReportFormatSelectionWindow extends BaseController {
         }
         if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.FaxController")) {
             PrinterReportGenerator.createPrinterAssortiment(ListHeaderTable.TAX, "tax.json");
+        }
+        if (nameCallingController.equals("com.kiku.javalangprogproject.controllers.ComplainController")) {
+            PrinterReportGenerator.createPrinterAssortiment(ListHeaderTable.COMPLAIN, "complain.json");
         }
     }
 

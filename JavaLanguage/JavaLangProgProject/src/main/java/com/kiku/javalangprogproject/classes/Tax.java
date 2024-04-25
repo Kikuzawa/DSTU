@@ -1,4 +1,4 @@
-package com.kiku.javalangprogproject.controllers;
+package com.kiku.javalangprogproject.classes;
 
 public class Tax {
     public Integer idTax;

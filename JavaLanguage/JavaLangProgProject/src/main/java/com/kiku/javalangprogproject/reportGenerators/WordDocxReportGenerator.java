@@ -1,5 +1,6 @@
 package com.kiku.javalangprogproject.reportGenerators;
 
+import com.kiku.javalangprogproject.config.Paths;
 import org.apache.poi.xwpf.usermodel.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,7 +16,7 @@ public class WordDocxReportGenerator {
 
     public static void createWordDocxAssortiment(String[] headers, String filename, String nameTable) throws IOException {
         JSONArray jsonArray;
-        try (FileInputStream fis = new FileInputStream(filename)) {
+        try (FileInputStream fis = new FileInputStream(Paths.PATH_JSONS + filename)) {
             JSONTokener tokener = new JSONTokener(fis);
             jsonArray = new JSONArray(tokener);
         }
@@ -43,11 +44,11 @@ public class WordDocxReportGenerator {
             }
 
             // Сохранение документа Word
-            FileOutputStream out = new FileOutputStream(nameTable);
+            FileOutputStream out = new FileOutputStream(Paths.PATH_SAVE + nameTable);
             document.write(out);
             out.close();
 
-            File file = new File(nameTable);
+            File file = new File(Paths.PATH_SAVE + nameTable);
             Desktop desktop = Desktop.getDesktop();
             if (file.exists()) {
                 desktop.open(file);
