@@ -12,6 +12,7 @@ module com.kiku.javalangprogproject {
     requires org.json;
     requires org.apache.pdfbox;
     requires itextpdf;
+    requires javafx.web;
 
 
     opens com.kiku.javalangprogproject.Database to javafx.base;

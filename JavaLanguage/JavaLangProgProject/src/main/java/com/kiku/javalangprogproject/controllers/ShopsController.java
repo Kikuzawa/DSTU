@@ -50,6 +50,7 @@ public class ShopsController extends BaseController {
     public TextField numberField;
     public TextField fioField;
     public Button exitAppButton;
+    public Button ButtonOpenMap;
 
     Connection connection = null;
     PreparedStatement preparedStatement = null;
@@ -195,5 +196,9 @@ public class ShopsController extends BaseController {
     public void generateReport(ActionEvent actionEvent) throws IOException {
         ReportFormatSelectionWindow.help();
         SceneController.getInstance().createReportWindow();
+    }
+
+    public void openMap(ActionEvent actionEvent) {
+
     }
 }

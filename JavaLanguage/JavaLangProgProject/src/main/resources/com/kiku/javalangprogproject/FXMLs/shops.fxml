@@ -100,7 +100,7 @@
    </Button>
    <TextField fx:id="numberField" layoutX="1089.0" layoutY="289.0" prefHeight="27.0" prefWidth="179.0" promptText="Номер телефона" />
    <TextField fx:id="fioField" layoutX="1089.0" layoutY="323.0" prefHeight="27.0" prefWidth="179.0" promptText="ФИО Директора" />
-   Copy
+
    <Button fx:id="ButtonOpenMap" layoutX="10.0" layoutY="491.0" mnemonicParsing="false" onAction="#openMap" prefHeight="51.0" prefWidth="151.0" text="Открыть карту">
       <font>
          <Font size="12.0" />
