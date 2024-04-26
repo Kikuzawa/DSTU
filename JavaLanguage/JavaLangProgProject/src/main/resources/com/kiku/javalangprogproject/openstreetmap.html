@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Быстрый старт. Размещение интерактивной карты на странице</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=b288fcb9-3931-426d-bc53-31de8880f8ae&lang=ru_RU" type="text/javascript">
+    </script>
+
+    <script type="text/javascript" src="TsForMap/common.ts"></script>
+    <script type="text/javascript">
+
+        ymaps.ready(init);
+        function init(){
+            var myMap = new ymaps.Map("map", {
+                center: [47.222078, 39.720358],
+                zoom: 12
+            });
+
+            markersGeoJsonSourc.forEach(marker => {
+                var placemark = new ymaps.Placemark(marker.coordinates, {
+                    hintContent: marker.title,
+                    balloonContent: marker.subtitle
+                }, {
+                    iconColor: marker.color
+                });
+                myMap.geoObjects.add(placemark);
+            });
+
+
+            // Set the size of the map to 100% width and height of the window
+            document.getElementById('map').style.width = '98vw';
+            document.getElementById('map').style.height = '95vh';
+            myMap.container.fitToViewport();
+        }
+
+
+    </script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="map" style="width: 800px; height: 600px"></div>
+</body>
+
+</html>

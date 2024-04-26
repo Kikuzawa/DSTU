@@ -1,22 +1,40 @@
 package com.kiku.javalangprogproject.controllers;
 
 import com.kiku.javalangprogproject.BaseController;
-import com.kiku.javalangprogproject.reportGenerators.CreateJsonFromTable;
 import com.kiku.javalangprogproject.Database.DbConnect;
 import com.kiku.javalangprogproject.SceneController;
 import com.kiku.javalangprogproject.classes.Shop;
+import com.kiku.javalangprogproject.config.Paths;
+import com.kiku.javalangprogproject.reportGenerators.CreateJsonFromTable;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import static com.kiku.javalangprogproject.controllers.NotificationUtils.showErrorNotification;
 
@@ -57,9 +75,7 @@ public class ShopsController extends BaseController {
     ResultSet resultSet = null;
 
 
-
     ObservableList<Shop> ShopList = FXCollections.observableArrayList();
-
 
 
     public void addNewShop() {
@@ -173,6 +189,11 @@ public class ShopsController extends BaseController {
         }
 
         CreateJsonFromTable.jsonCreateShops(shopsTable);
+        try {
+            generateCommonTSFile();
+        } catch (IOException | URISyntaxException e) {
+            showErrorNotification(e.getMessage());
+        }
 
     }
 
@@ -190,7 +211,6 @@ public class ShopsController extends BaseController {
         fioShop.setCellValueFactory(new PropertyValueFactory<>("fioShop"));
 
 
-
     }
 
     public void generateReport(ActionEvent actionEvent) throws IOException {
@@ -198,7 +218,75 @@ public class ShopsController extends BaseController {
         SceneController.getInstance().createReportWindow();
     }
 
-    public void openMap(ActionEvent actionEvent) {
+    public void openMap(ActionEvent actionEvent) throws IOException {
+        // Получить URL для файла openstreetmap.html
+        URL url = getClass().getResource(Paths.MAP_HTML);
+
+        // Открыть новое окно браузера и загрузить карту
+        Platform.runLater(() -> {
+            WebView webView = new WebView();
+            WebEngine webEngine = webView.getEngine();
+            webEngine.load(Objects.requireNonNull(url).toExternalForm());
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(new Group(webView));
+
+            // Set the initial size of the scene
+            stage.setWidth(800);
+
+            stage.setHeight(600);
+
+            // Add a listener to resize the scene when the stage is resized
+            stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+                stage.setWidth((double) newVal);
+                webView.setPrefWidth((double) newVal);
+                webView.setMaxWidth((double) newVal);
+            });
+
+            stage.heightProperty().addListener((obs, oldVal, newVal) -> {
+                stage.setHeight((double) newVal);
+                webView.setPrefHeight((double) newVal);
+                webView.setMaxHeight((double) newVal);
+            });
+
+            stage.setScene(scene);
+            stage.show();
+        });
+    }
+
+    public void generateCommonTSFile() throws IOException, SQLException, URISyntaxException {
+        StringBuilder commonTsContent = new StringBuilder();
+
+            Connection connection = DbConnect.getConnect();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT name, coordinates, fio FROM shops");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<String> shopData = new ArrayList<>();
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                String coordinates = resultSet.getString("coordinates");
+                String fio = resultSet.getString("fio");
+
+                shopData.add("{coordinates: [" + coordinates + "],\ntitle: '" + name + "',\nsubtitle: '" + fio + "',\ncolor: '#00CC00'\n}");
+            }
+
+            commonTsContent.append("const markersGeoJsonSourc = [").append(String.join(", \n", shopData)).append(" ];");
+
+            // Specify the path for the common.ts file
+            URL commonTsFilePath = getClass().getResource(Paths.PATH_TS);
+            File file = new File(Objects.requireNonNull(commonTsFilePath).toURI());
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.PATH_SAVE_TS))) {
+                writer.write(commonTsContent.toString());
+            }
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                writer.write(commonTsContent.toString());
+            }
+
 
     }
+
 }
+
+
