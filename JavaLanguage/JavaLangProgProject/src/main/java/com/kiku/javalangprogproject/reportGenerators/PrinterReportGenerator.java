@@ -6,15 +6,16 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
+
+import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 public class PrinterReportGenerator {
 
-    public static void createPrinterAssortiment(String[] headers, String filename) throws PrinterException, FileNotFoundException {
+    public static void createPrinterAssortiment(String[] headers, String filename)  { try {
         JSONArray jsonArray;
         try (FileInputStream fis = new FileInputStream(Paths.PATH_JSONS +filename)) {
             JSONTokener tokener = new JSONTokener(fis);
@@ -51,5 +52,9 @@ public class PrinterReportGenerator {
         if (job.printDialog()) {
             job.print();
         }
+    } catch (Exception ex) {
+        showErrorNotification(ex.getMessage());
     }
+    }
+
 }

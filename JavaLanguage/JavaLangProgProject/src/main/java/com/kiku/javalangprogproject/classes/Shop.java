@@ -23,47 +23,31 @@ public class Shop {
         return Integer.toString(idShop);
     }
 
-    public void setIdShop(int idShop) {
-        this.idShop = idShop;
-    }
 
     public String getNameShop() {
         return nameShop;
     }
 
-    public void setNameShop(String nameShop) {
-        this.nameShop = nameShop;
-    }
 
     public String getLocationsShop() {
         return locationsShop;
     }
 
-    public void setLocationsShop(String locationsShop) {
-        this.locationsShop = locationsShop;
-    }
 
     public String getEmailShop() {
         return emailShop;
     }
 
-    public void setEmailShop(String emailShop) {
-        this.emailShop = emailShop;
-    }
+
 
     public String getNumberShop() {
         return numberShop;
     }
 
-    public void setNumberShop(String numberShop) {
-        this.numberShop = numberShop;
-    }
 
     public String getFioShop() {
         return fioShop;
     }
 
-    public void setFioShop(String fioShop) {
-        this.fioShop = fioShop;
-    }
+
 }

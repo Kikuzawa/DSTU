@@ -1,7 +1,9 @@
 package com.kiku.javalangprogproject.reportGenerators;
 
 import com.kiku.javalangprogproject.config.Paths;
-import org.apache.poi.xwpf.usermodel.*;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -10,26 +12,28 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
+
+import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 public class WordDocxReportGenerator {
 
-    public static void createWordDocxAssortiment(String[] headers, String filename, String nameTable) throws IOException {
-        JSONArray jsonArray;
-        try (FileInputStream fis = new FileInputStream(Paths.PATH_JSONS + filename)) {
-            JSONTokener tokener = new JSONTokener(fis);
-            jsonArray = new JSONArray(tokener);
-        }
+    public static void createWordDocxAssortiment(String[] headers, String filename, String nameTable) {
+        try {
+            JSONArray jsonArray;
+            try (FileInputStream fis = new FileInputStream(Paths.PATH_JSONS + filename)) {
+                JSONTokener tokener = new JSONTokener(fis);
+                jsonArray = new JSONArray(tokener);
+            }
 
 // Заполните массив jsonArray вашими данными
 
-        try {
+
             XWPFDocument document = new XWPFDocument();
             XWPFTable table = document.createTable();
 
             // Создание заголовка таблицы
             XWPFTableRow headerRow = table.getRow(0);
-            for (int i = 1; i < headers.length; i++){
+            for (int i = 1; i < headers.length; i++) {
                 headerRow.addNewTableCell().setText("");
                 headerRow.getCell(i).setText(headers[i]);
             }
@@ -54,8 +58,8 @@ public class WordDocxReportGenerator {
                 desktop.open(file);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
         }
     }
 }

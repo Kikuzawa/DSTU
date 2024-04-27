@@ -8,15 +8,17 @@ import com.kiku.javalangprogproject.classes.Complain;
 import com.kiku.javalangprogproject.reportGenerators.CreateJsonFromTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 public class ComplainController extends BaseController {
 
@@ -31,56 +33,65 @@ public class ComplainController extends BaseController {
     public TableColumn<Complain, String> type;
 
     public TextArea commentArea;
-    String query = null;
+
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
-    Complain complain = null;
     ObservableList<Complain> ComplainList = FXCollections.observableArrayList();
 
 
-    public void onInitialize() throws SQLException {
-        loadDate();
-        complainTable.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 1) {
-                if (complainTable.getSelectionModel().getSelectedItem() != null) {
-                    Complain selectedItem = complainTable.getSelectionModel().getSelectedItem();
+    public void onInitialize() {
+        try {
 
-                    idField.setText(String.valueOf(selectedItem.getId()));
-                    numberField.setText(selectedItem.getNumber());
-                    senderField.setText(selectedItem.getSender());
-                    typeFIeld.setText(selectedItem.getType());
-                    commentArea.setText(selectedItem.getComment());
+
+            loadDate();
+            complainTable.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1) {
+                    if (complainTable.getSelectionModel().getSelectedItem() != null) {
+                        Complain selectedItem = complainTable.getSelectionModel().getSelectedItem();
+
+                        idField.setText(String.valueOf(selectedItem.getId()));
+                        numberField.setText(selectedItem.getNumber());
+                        senderField.setText(selectedItem.getSender());
+                        typeFIeld.setText(selectedItem.getType());
+                        commentArea.setText(selectedItem.getComment());
+                    }
                 }
-            }
-        });
-        TableSearchUtil.setupSearch(complainTable, searchField);
-
-    }
-
-    public void refreshTable() throws SQLException {
-
-        ComplainList.clear();
-
-        preparedStatement = connection.prepareStatement("SELECT * FROM complain");
-        resultSet = preparedStatement.executeQuery();
-
-        while (resultSet.next()) {
-            ComplainList.add(new Complain(
-                    resultSet.getInt("id"),
-                    resultSet.getString("number"),
-                    resultSet.getString("sender"),
-                    resultSet.getString("type"),
-                    resultSet.getString("comment")
-            ));
-            complainTable.setItems(ComplainList);
+            });
+            TableSearchUtil.setupSearch(complainTable, searchField);
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
         }
 
-        CreateJsonFromTable.jsonCreateComplain(complainTable);
+    }
+
+    public void refreshTable() {
+        try {
+
+            ComplainList.clear();
+
+            preparedStatement = connection.prepareStatement("SELECT * FROM complain");
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                ComplainList.add(new Complain(
+                        resultSet.getInt("id"),
+                        resultSet.getString("number"),
+                        resultSet.getString("sender"),
+                        resultSet.getString("type"),
+                        resultSet.getString("comment")
+                ));
+                complainTable.setItems(ComplainList);
+            }
+
+            CreateJsonFromTable.jsonCreateComplain(complainTable);
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
 
     }
 
-    private void loadDate() throws SQLException {
+    private void loadDate() {
         connection = DbConnect.getConnect();
 
         refreshTable();
@@ -95,11 +106,16 @@ public class ComplainController extends BaseController {
         complainTable.setItems(ComplainList);
 
 
-
     }
 
-    public void generateReport(ActionEvent actionEvent) throws IOException {
-        ReportFormatSelectionWindow.help();
-        SceneController.getInstance().createReportWindow();
+    public void generateReport() {
+        try {
+
+
+            ReportFormatSelectionWindow.help();
+            SceneController.getInstance().createReportWindow();
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
     }
 }

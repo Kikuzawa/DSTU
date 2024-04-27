@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 
 public class loginPageController extends BaseController {
@@ -35,9 +36,13 @@ public class loginPageController extends BaseController {
     }
 
     public void clearAllFileds() {
+        try {
         exceptionLabel.setText("");
         loginField.clear();
         passwordField.clear();
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
     }
 
 

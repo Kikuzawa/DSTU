@@ -1,7 +1,7 @@
 package com.kiku.javalangprogproject;
 
 
-import com.kiku.javalangprogproject.Database.DbConnect;
+
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -12,21 +12,20 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-import java.io.IOException;
-import java.sql.Connection;
+
 import java.util.Stack;
+
+import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 public class SceneController {
     private final Stage stage;
     private static SceneController instance;
     private final Stack<Scene> sceneHistory = new Stack<>();
 
-    Connection connection = DbConnect.getConnect();
 
     public void exitApp() {
         System.exit(0);
     }
-
 
 
     enum Scenes {
@@ -62,45 +61,38 @@ public class SceneController {
 
     }
 
-    /**
-     * Конструктор сделал приватным, чтобы реализовать Singleton - гугл в помощь
-     *
-     * @param stage окно Stage, к которому мы хотим прикрепить наш SceneController
-     */
+
     private SceneController(Stage stage) {
         this.stage = stage;
     }
 
-    /**
-     * Данный метод как раз и есть реализация паттерна Singleton на Java. Тут нет метода __new__, как в Python, чтобы
-     * работать не зная действие под капотом.
-     *
-     * @param stage окно Stage, к которому мы хотим прикрепить наш SceneController
-     * @return возвращает SceneController
-     */
+
     public static SceneController getInstance(Stage stage) {
+        try {
         if (instance == null) {
             instance = new SceneController(stage);
         }
         return instance;
+    } catch (Exception ex) {
+        showErrorNotification(ex.getMessage());
+    }
+        return null;
     }
 
-    /**
-     * Метод больше как костыль, потому что в
-     *
-     * @return SceneController, который используется в BaseController.
-     */
+
     public static SceneController getInstance() {
-        if (instance == null) {
-            throw new IllegalStateException("SceneController не был инициализирован");
+        try {
+            if (instance == null) {
+                throw new IllegalStateException("SceneController не был инициализирован");
+            }
+            return instance;
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
         }
-        return instance;
+        return null;
     }
 
 
-    /**
-     * Переключение с меню на проект
-     */
     public void switchToMainMenu() {
         animationSlideWindow(Scenes.MAIN_MENU);
         sceneHistory.push(Scenes.LOGIN_PAGE);
@@ -142,96 +134,93 @@ public class SceneController {
     }
 
 
-    public void createReportWindow() throws IOException {
+    public void createReportWindow() {
         createAnimatedWindow(Scenes.REPORT);
         Scenes.REPORT.setFill(Color.TRANSPARENT);
         sceneHistory.push(Scenes.MAIN_MENU);
     }
 
-    public void switchToComplainPage() throws IOException {
+    public void switchToComplainPage() {
         animationSlideWindow(Scenes.COMPLAIN);
         sceneHistory.push(Scenes.MAIN_MENU);
     }
 
 
-    /**
-     * Переключение с любого окна на меню.
-     * Здесь используется для удобства взаимодействия с самого начала приложения.
-     * При первом запуске
-     */
-    public void setStartMenu() throws IOException {
+    public void setStartMenu() {
+        try {
 
 
-        Scenes.LOGIN_PAGE = SceneConfigurator.createScene(stage, ScenePath.LOGIN_PAGE_FXML_PATH);
-        Scenes.MAIN_MENU = SceneConfigurator.createScene(stage, ScenePath.MAIN_MENU_FXML_PATH);
-        Scenes.ASSORTIMENT = SceneConfigurator.createScene(stage, ScenePath.ASSORTIMENT_FXML_PATH);
-        Scenes.SHOPS = SceneConfigurator.createScene(stage, ScenePath.SHOPS_FXML_PATH);
-        Scenes.STOCK = SceneConfigurator.createScene(stage, ScenePath.STOCK_FXML_PATH);
-        Scenes.DISPOSAL = SceneConfigurator.createScene(stage, ScenePath.DISPOSAL_FXML_PATH);
-        Scenes.SUPPLIERS_REPORT = SceneConfigurator.createScene(stage, ScenePath.SUPPLIERS_FXML_PATH);
-        Scenes.REPORT = SceneConfigurator.createScene(stage, ScenePath.REPORT_FXML_PATH);
-        Scenes.FAX = SceneConfigurator.createScene(stage, ScenePath.FAX_FXML_PATH);
-        Scenes.COMPLAIN = SceneConfigurator.createScene(stage, ScenePath.COMPLAIN_FXML_PATH);
+            Scenes.LOGIN_PAGE = SceneConfigurator.createScene(stage, ScenePath.LOGIN_PAGE_FXML_PATH);
+            Scenes.MAIN_MENU = SceneConfigurator.createScene(stage, ScenePath.MAIN_MENU_FXML_PATH);
+            Scenes.ASSORTIMENT = SceneConfigurator.createScene(stage, ScenePath.ASSORTIMENT_FXML_PATH);
+            Scenes.SHOPS = SceneConfigurator.createScene(stage, ScenePath.SHOPS_FXML_PATH);
+            Scenes.STOCK = SceneConfigurator.createScene(stage, ScenePath.STOCK_FXML_PATH);
+            Scenes.DISPOSAL = SceneConfigurator.createScene(stage, ScenePath.DISPOSAL_FXML_PATH);
+            Scenes.SUPPLIERS_REPORT = SceneConfigurator.createScene(stage, ScenePath.SUPPLIERS_FXML_PATH);
+            Scenes.REPORT = SceneConfigurator.createScene(stage, ScenePath.REPORT_FXML_PATH);
+            Scenes.FAX = SceneConfigurator.createScene(stage, ScenePath.FAX_FXML_PATH);
+            Scenes.COMPLAIN = SceneConfigurator.createScene(stage, ScenePath.COMPLAIN_FXML_PATH);
 
-        stage.setScene(Scenes.LOGIN_PAGE);
+            stage.setScene(Scenes.LOGIN_PAGE);
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
 
     }
 
 
-    /**
-     * Метод, чтобы была анимация переключения между окнами приложения.
-     *
-     * @param scene окно, на которое мы хотим переключиться.
-     */
     private void animationSlideWindow(Scene scene) {
-        var oldSceneRoot = this.stage.getScene().getRoot();
-        var newSceneRoot = scene.getRoot();
+        try {
+            var oldSceneRoot = this.stage.getScene().getRoot();
+            var newSceneRoot = scene.getRoot();
 
-        // Создание анимации изменения масштаба для старой сцены
-        var scaleOut = new ScaleTransition(Duration.millis(500), oldSceneRoot);
-        scaleOut.setToX(0.8);
-        scaleOut.setToY(0.8);
+            // Создание анимации изменения масштаба для старой сцены
+            var scaleOut = new ScaleTransition(Duration.millis(500), oldSceneRoot);
+            scaleOut.setToX(0.8);
+            scaleOut.setToY(0.8);
 
-        // Создание анимации изменения масштаба для новой сцены
-        var scaleIn = new ScaleTransition(Duration.millis(500), newSceneRoot);
-        scaleIn.setFromX(1.2);
-        scaleIn.setFromY(1.2);
-        scaleIn.setToX(1.0);
-        scaleIn.setToY(1.0);
+            var scaleIn = new ScaleTransition(Duration.millis(500), newSceneRoot);
+            scaleIn.setFromX(1.2);
+            scaleIn.setFromY(1.2);
+            scaleIn.setToX(1.0);
+            scaleIn.setToY(1.0);
 
-        // Создание анимации смещения для новой сцены
-        var translateIn = new TranslateTransition(Duration.millis(500), newSceneRoot);
-        translateIn.setToX(0);
 
-        // Комбинирование анимаций
-        var parallelTransition = new ParallelTransition(scaleOut, scaleIn, translateIn);
+            var translateIn = new TranslateTransition(Duration.millis(500), newSceneRoot);
+            translateIn.setToX(0);
 
-        // Установка обработчика завершения анимации
-        parallelTransition.setOnFinished(e -> {
-            this.stage.setScene(scene);
-        });
 
-        // Запуск комбинированной анимации
-        parallelTransition.play();
+            var parallelTransition = new ParallelTransition(scaleOut, scaleIn, translateIn);
+
+
+            parallelTransition.setOnFinished(e -> this.stage.setScene(scene));
+
+
+            parallelTransition.play();
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
     }
 
     public void createAnimatedWindow(Scene newScene) {
-        Stage newStage = new Stage();
+        try {
+            Stage newStage = new Stage();
 
-        newStage.setScene(newScene);
-        newStage.initStyle(StageStyle.UNDECORATED);
-        Pane root = (Pane) newScene.getRoot();
-        root.setOnMousePressed(event -> {
-            newStage.setUserData(new double[]{event.getScreenX() - newStage.getX(), event.getScreenY() - newStage.getY()});
-        });
+            newStage.setScene(newScene);
+            newStage.initStyle(StageStyle.UNDECORATED);
+            Pane root = (Pane) newScene.getRoot();
+            root.setOnMousePressed(event -> newStage.setUserData(new double[]{event.getScreenX() - newStage.getX(), event.getScreenY() - newStage.getY()}));
 
-        root.setOnMouseDragged(event -> {
-            double[] userData = (double[]) newStage.getUserData();
-            newStage.setX(event.getScreenX() - userData[0]);
-            newStage.setY(event.getScreenY() - userData[1]);
-        });
-        newScene.setFill(Color.TRANSPARENT);
-        newStage.show();
+            root.setOnMouseDragged(event -> {
+                double[] userData = (double[]) newStage.getUserData();
+                newStage.setX(event.getScreenX() - userData[0]);
+                newStage.setY(event.getScreenY() - userData[1]);
+            });
+            newScene.setFill(Color.TRANSPARENT);
+            newStage.show();
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
     }
 
 

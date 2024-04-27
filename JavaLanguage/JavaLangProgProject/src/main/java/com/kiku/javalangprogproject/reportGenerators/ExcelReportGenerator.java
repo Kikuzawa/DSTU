@@ -11,29 +11,30 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
+
+import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 public class ExcelReportGenerator {
-    public static void createExcelAssortiment(String[] headers, String filename, String nameTable) throws IOException {
-        JSONArray jsonArray;
-        try (FileInputStream fis = new FileInputStream(Paths.PATH_JSONS + filename)) {
+    public static void createExcelAssortiment(String[] headers, String filename, String nameTable) {
+        try {
+            JSONArray jsonArray;
+            FileInputStream fis = new FileInputStream(Paths.PATH_JSONS + filename);
             JSONTokener tokener = new JSONTokener(fis);
             jsonArray = new JSONArray(tokener);
-        }
 
-        try (Workbook workbook = new XSSFWorkbook()) {
+
+            Workbook workbook = new XSSFWorkbook();
             Sheet sheet = workbook.createSheet(nameTable);
 
-            // Создание заголовка таблицы
+
             Row headerRow = sheet.createRow(0);
 
             CellStyle style = workbook.createCellStyle();
             style.setAlignment(HorizontalAlignment.CENTER);
-            for (int i = 0; i < headers.length; i++){
+            for (int i = 0; i < headers.length; i++) {
                 Cell cell = headerRow.createCell(i);
                 cell.setCellValue(headers[i]);
-                cell.setCellStyle(style); // Установка стиля после создания ячейки
-            }
+                cell.setCellStyle(style); }
 
             for (int i = 0; i < 8; i++) {
                 Cell currentCell = headerRow.getCell(i);
@@ -42,11 +43,11 @@ public class ExcelReportGenerator {
                 }
             }
 
-            // Заполнение таблицы данными из JSON
+
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Row row = sheet.createRow(i + 1);
-                for (int j = 0; j < headers.length; j++){
+                for (int j = 0; j < headers.length; j++) {
                     row.createCell(j).setCellValue(jsonObject.getString(headers[j]));
                 }
             }
@@ -56,18 +57,20 @@ public class ExcelReportGenerator {
             }
 
 
-            // Сохранение документа Excel
-            FileOutputStream out = new FileOutputStream(Paths.PATH_SAVE + nameTable+".xlsx");
+
+            FileOutputStream out = new FileOutputStream(Paths.PATH_SAVE + nameTable + ".xlsx");
             workbook.write(out);
             out.close();
 
-            File file = new File(Paths.PATH_SAVE + nameTable+".xlsx");
+            File file = new File(Paths.PATH_SAVE + nameTable + ".xlsx");
             if (file.exists()) {
                 Desktop.getDesktop().open(file);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
+
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
+
+    }
 }

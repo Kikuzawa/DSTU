@@ -11,9 +11,6 @@ public class Disposal {
         return costDisposal;
     }
 
-    public void setCostDisposal(double costDisposal) {
-        this.costDisposal = costDisposal;
-    }
 
     public double costDisposal;
 
@@ -34,41 +31,26 @@ public class Disposal {
     public String getString(){
         return idDisposal + ' ' + nameDisposal + ' ' + reasonDisposal + ' ' + quantityDisposal + ' ' + costDisposal + ' ' + totalDisposal;
     }
-    public void setIdDisposal(int idDisposal) {
-        this.idDisposal = idDisposal;
-    }
 
     public String getNameDisposal() {
         return nameDisposal;
     }
 
-    public void setNameDisposal(String nameDisposal) {
-        this.nameDisposal = nameDisposal;
-    }
 
     public String getReasonDisposal() {
         return reasonDisposal;
     }
 
-    public void setReasonDisposal(String reasonDisposal) {
-        this.reasonDisposal = reasonDisposal;
-    }
 
     public double getQuantityDisposal() {
         return quantityDisposal;
     }
 
-    public void setQuantityDisposal(double quantityDisposal) {
-        this.quantityDisposal = quantityDisposal;
-    }
 
     public double getTotalDisposal() {
         return totalDisposal;
     }
 
-    public void setTotalDisposal(double totalDisposal) {
-        this.totalDisposal = totalDisposal;
-    }
 
     public double totalDisposal;
 

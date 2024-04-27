@@ -6,26 +6,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-
-import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 public abstract class BaseController implements Initializable {
     @FXML
-    private Button buttonReturn, ButtonComplain, ButtonReport, ButtonTaxService, ButtonDisposal, ButtonSuppliers, ButtonStock, ButtonAssortment, ButtonShops, ButtonMainMenu, buttonLogin, exitAppButton, searchButton;
+    private Button ButtonRefresh, buttonReturn, ButtonComplain, ButtonReport, ButtonTaxService, ButtonDisposal, ButtonSuppliers, ButtonStock, ButtonAssortment, ButtonShops, ButtonMainMenu, buttonLogin, exitAppButton, searchButton;
     protected final SceneController controller = SceneController.getInstance();
-    @FXML
-    private Button ButtonRefresh;
     @FXML
     protected TextField searchField;
 
 
-
-    protected void onInitialize() throws SQLException, IOException {
-
+    protected void onInitialize(){
     }
 
 
@@ -33,8 +27,9 @@ public abstract class BaseController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             onInitialize();
-        } catch (SQLException | IOException e) {
-            throw new RuntimeException(e);
+
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
         }
 
 
@@ -96,10 +91,8 @@ public abstract class BaseController implements Initializable {
             );
 
 
-
-
-
-        } catch (RuntimeException ignored) {}
+        } catch (RuntimeException ignored) {
+        }
     }
 
 }

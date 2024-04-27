@@ -30,97 +30,61 @@ public class Tax {
         return idTax;
     }
 
-    public void setIdTax(Integer idTax) {
-        this.idTax = idTax;
-    }
 
     public String getMonthTax() {
         return monthTax;
     }
 
-    public void setMonthTax(String monthTax) {
-        this.monthTax = monthTax;
-    }
 
     public Integer getYearTax() {
         return yearTax;
     }
 
-    public void setYearTax(Integer yearTax) {
-        this.yearTax = yearTax;
-    }
 
     public Double getTotalIncomeTax() {
         return totalIncomeTax;
     }
 
-    public void setTotalIncomeTax(Double totalIncomeTax) {
-        this.totalIncomeTax = totalIncomeTax;
-    }
 
     public Double getTotalExpenseTax() {
         return totalExpenseTax;
     }
 
-    public void setTotalExpenseTax(Double totalExpenseTax) {
-        this.totalExpenseTax = totalExpenseTax;
-    }
 
     public Double getProcentEarthTax() {
         return procentEarthTax;
     }
 
-    public void setProcentEarthTax(Double procentEarthTax) {
-        this.procentEarthTax = procentEarthTax;
-    }
 
     public Double getHouseTax() {
         return HouseTax;
     }
 
-    public void setHouseTax(Double houseTax) {
-        HouseTax = houseTax;
-    }
 
     public Double getNdsTax() {
         return NdsTax;
     }
 
-    public void setNdsTax(Double ndsTax) {
-        NdsTax = ndsTax;
-    }
 
     public Double getBaseTax() {
         return baseTax;
     }
 
-    public void setBaseTax(Double baseTax) {
-        this.baseTax = baseTax;
-    }
 
     public Double getTaxWithNDS() {
         return taxWithNDS;
     }
 
-    public void setTaxWithNDS(Double taxWithNDS) {
-        this.taxWithNDS = taxWithNDS;
-    }
 
     public Double getTaxWithNdsAndHouse() {
         return taxWithNdsAndHouse;
     }
 
-    public void setTaxWithNdsAndHouse(Double taxWithNdsAndHouse) {
-        this.taxWithNdsAndHouse = taxWithNdsAndHouse;
-    }
 
     public Double getFinalTax() {
         return finalTax;
     }
 
-    public void setFinalTax(Double finalTax) {
-        this.finalTax = finalTax;
-    }
 
     public Double procentEarthTax;
     public Double HouseTax;

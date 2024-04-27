@@ -21,41 +21,26 @@ public class Supplier {
         return String.valueOf(idSupplier);
     }
 
-    public void setIdSupplier(int idSupplier) {
-        this.idSupplier = idSupplier;
-    }
 
     public String getNameSupplier() {
         return nameSupplier;
     }
 
-    public void setNameSupplier(String nameSupplier) {
-        this.nameSupplier = nameSupplier;
-    }
 
     public String getLocationsSupplier() {
         return locationsSupplier;
     }
 
-    public void setLocationsSupplier(String locationsSupplier) {
-        this.locationsSupplier = locationsSupplier;
-    }
 
     public String getStockSupplier() {
         return stockSupplier;
     }
 
-    public void setStockSupplier(String stockSupplier) {
-        this.stockSupplier = stockSupplier;
-    }
 
     public String getNumberSupplier() {
         return numberSupplier;
     }
 
-    public void setNumberSupplier(String numberSupplier) {
-        this.numberSupplier = numberSupplier;
-    }
 
     public String numberSupplier;
 

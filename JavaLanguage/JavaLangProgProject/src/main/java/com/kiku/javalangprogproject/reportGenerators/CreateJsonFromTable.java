@@ -9,14 +9,16 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.FileWriter;
-import java.io.IOException;
+
+
+import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 public class CreateJsonFromTable {
 
 
-    private static String basePath;
 
     public static void jsonCreateShoe(TableView<Shoe> shoesTable) {
+        try {
 
         ObservableList<Shoe> data = shoesTable.getItems();
 
@@ -35,9 +37,13 @@ public class CreateJsonFromTable {
         }
 
         saveJsonFile("shoes.json", jsonArray);
+    } catch (Exception ex) {
+        showErrorNotification(ex.getMessage());
+    }
     }
 
     public static void jsonCreateShops(TableView<Shop> shopsTable) {
+        try {
 
         ObservableList<Shop> data = shopsTable.getItems();
 
@@ -53,10 +59,14 @@ public class CreateJsonFromTable {
             jsonArray.put(jsonObject);
         }
         saveJsonFile("shops.json", jsonArray);
+    } catch (Exception ex) {
+        showErrorNotification(ex.getMessage());
+    }
 
     }
 
     public static void jsonCreateSuppliers(TableView<Supplier> suppliersTable) {
+        try {
 
         ObservableList<Supplier> data = suppliersTable.getItems();
 
@@ -72,10 +82,14 @@ public class CreateJsonFromTable {
         }
 
         saveJsonFile("suppliers.json", jsonArray);
+    } catch (Exception ex) {
+        showErrorNotification(ex.getMessage());
+    }
 
     }
 
     public static void jsonCreateDisposal(TableView<Disposal> disposalTable) {
+        try {
 
         ObservableList<Disposal> data = disposalTable.getItems();
         JSONArray jsonArray = new JSONArray();
@@ -91,9 +105,13 @@ public class CreateJsonFromTable {
         }
 
         saveJsonFile("disposal.json", jsonArray);
+    } catch (Exception ex) {
+        showErrorNotification(ex.getMessage());
+    }
     }
 
     public static void jsonCreateStock(TableView<Stock> stockTable){
+        try {
 
         ObservableList<Stock> data = stockTable.getItems();
         JSONArray jsonArray = new JSONArray();
@@ -108,6 +126,9 @@ public class CreateJsonFromTable {
         }
 
         saveJsonFile("stock.json", jsonArray);
+    } catch (Exception ex) {
+        showErrorNotification(ex.getMessage());
+    }
     }
 
 
@@ -123,13 +144,14 @@ public class CreateJsonFromTable {
                 }
                 file.write("]");
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
         }
 
     }
 
     public static void jsonCreateTax(TableView<Tax> taxTable) {
+        try {
         ObservableList<Tax> data = taxTable.getItems();
         JSONArray jsonArray = new JSONArray();
         for (Tax item : data) {
@@ -152,9 +174,13 @@ public class CreateJsonFromTable {
         }
 
         saveJsonFile("tax.json", jsonArray);
+    } catch (Exception ex) {
+        showErrorNotification(ex.getMessage());
+    }
     }
 
     public static void jsonCreateComplain(TableView<Complain> complainTable) {
+        try {
         ObservableList<Complain> data = complainTable.getItems();
         JSONArray jsonArray = new JSONArray();
         for (Complain item : data) {
@@ -169,5 +195,8 @@ public class CreateJsonFromTable {
         }
 
         saveJsonFile("complain.json", jsonArray);
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
     }
 }

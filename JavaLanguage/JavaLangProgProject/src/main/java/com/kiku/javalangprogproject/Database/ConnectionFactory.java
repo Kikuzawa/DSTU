@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.kiku.javalangprogproject.Database;
 
 import java.io.FileInputStream;
@@ -13,10 +9,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
-/**
- *
- * @author asjad
- */
 
 //Class to retrieve connection for database and login verfication.
 @SuppressWarnings("ALL")
@@ -33,18 +25,7 @@ public class ConnectionFactory {
     Statement statement = null;
     ResultSet resultSet = null;
 
-    public Connection getConnection() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            this.conn = DriverManager.getConnection(
-                    url,
-                    username,
-                    password);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return conn;
-    }
+
     public ConnectionFactory(){
         try {
             //Username and Password saved as configurable properties to allow changes without recompilation.
@@ -65,18 +46,7 @@ public class ConnectionFactory {
         }
     }
 
-    public Connection getConn() {
-        try {
-            Class.forName(driver);
-            conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected successfully.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return conn;
-    }
 
-    //Login verification method
     public boolean checkLogin(String username, String password, String userType){
         String query = "SELECT * FROM users WHERE username='"
                 + username

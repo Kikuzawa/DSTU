@@ -14,9 +14,7 @@
 }
 
 
-
-
-
+/*noinspection ALL*/
 .text-area {
     -fx-background-color: transparent;
     -fx-background-radius: 15;
@@ -25,10 +23,12 @@
     -fx-border-color: #c6c6c6;
 }
 
+/*noinspection ALL*/
 .text-area .viewport{
     -fx-background-color: transparent;
 }
 
+/*noinspection ALL*/
 .text-area .content {
     -fx-background-color: peachpuff ;
     -fx-background-radius: 15;
@@ -39,6 +39,7 @@
 }
 
 
+/*noinspection ALL*/
 .some-node {
     -fx-border-radius: 20;
     -fx-background-radius: 20;
@@ -55,25 +56,28 @@
     -fx-background-color: #29882e; /* Цвет фона кнопки при наведении */
 }
 
-/* Стилизация TableView */
+
+/*noinspection ALL*/
 .table-view {
     -fx-border-color: #000000; /* Цвет границы таблицы */
     -fx-background-radius: 20; /* Радиус закругления TableView */
 }
 
+/*noinspection ALL*/
 .table-row-cell:selected {
     -fx-background-color: #4CAF50;
     -fx-text-fill: black;
     -fx-font-weight: bold;
 }
 
+/*noinspection ALL*/
 .table-row-cell:hover {
     -fx-background-color: #d9ffb4;
     -fx-text-fill: black;
     -fx-font-weight: bold;
 }
 
-/* Стилизация текстовых полей */
+/*noinspection ALL*/
 .text-field {
     -fx-background-color: #ffffff; /* Цвет фона текстового поля */
     -fx-border-color: #000000; /* Цвет границы текстового поля */
@@ -81,6 +85,7 @@
 }
 
 /* Стилизация ComboBox */
+/*noinspection ALL*/
 .combo-box {
     -fx-background-color: white; /* Цвет фона ComboBox */
     -fx-border-color: #000000; /* Цвет границы ComboBox */
@@ -88,7 +93,7 @@
 }
 
 
-/* Стилизация заголовков и текста */
+/*noinspection ALL*/
 .label, .text-field, .combo-box {
     -fx-text-fill: #4CAF50; /* Акцентный цвет - салатовый */
     -fx-font-weight: bold; /* Жирный шрифт */
@@ -96,24 +101,27 @@
 }
 
 
-
+/*noinspection ALL*/
 .table-view{
 
     -fx-border-color: #000000; /* Цвет границы таблицы */
 }
 
+/*noinspection ALL*/
 .table-row-cell:selected {
     -fx-background-color: #4CAF50;
     -fx-text-fill: black;
     -fx-font-weight: bold;
 }
 
+/*noinspection ALL*/
 .table-row-cell:hover {
     -fx-background-color: #d9ffb4;
     -fx-text-fill: black;
     -fx-font-weight: bold;
 }
 
+/*noinspection ALL*/
 .password-field {
     -fx-background-color: #ffffff; /* Цвет фона поля ввода пароля */
     -fx-border-color: #000000; /* Цвет границы поля ввода пароля */

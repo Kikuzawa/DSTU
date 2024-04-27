@@ -8,14 +8,12 @@ import com.kiku.javalangprogproject.classes.Shoe;
 import com.kiku.javalangprogproject.reportGenerators.CreateJsonFromTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.sql.*;
 
 import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
@@ -145,80 +143,93 @@ public class AssortimentController extends BaseController {
     }
 
 
+    protected void onInitialize() {
+        try {
+            loadDate();
 
-    protected void onInitialize() throws SQLException {
+            shoesTable.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1) {
+                    if (shoesTable.getSelectionModel().getSelectedItem() != null) {
+                        Shoe selectedItem = shoesTable.getSelectionModel().getSelectedItem();
 
-        loadDate();
-
-        shoesTable.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 1) {
-                if (shoesTable.getSelectionModel().getSelectedItem() != null) {
-                    Shoe selectedItem = shoesTable.getSelectionModel().getSelectedItem();
-
-                    String range = selectedItem.getSizeShoe();
-                    String[] parts = range.split("-");
-                    idAddShoe.setText(selectedItem.getIdShoe());
-                    nameAddShoe.setText(selectedItem.getNameShoe());
-                    costAddShoe.setText(Double.toString(selectedItem.getCostShoe()));
-                    colorAddShoe.setValue(selectedItem.getColorShoe());
-                    stackAddShoe.setText(selectedItem.getStockShoe());
-                    size1AddShoe.setText(parts[0]);
-                    size2AddShoe.setText(parts[1]);
-                    complectionAddShoe.setValue(selectedItem.getComplection());
-                    seasonAddShoe.setValue(selectedItem.getSeasonShoe());
+                        String range = selectedItem.getSizeShoe();
+                        String[] parts = range.split("-");
+                        idAddShoe.setText(selectedItem.getIdShoe());
+                        nameAddShoe.setText(selectedItem.getNameShoe());
+                        costAddShoe.setText(Double.toString(selectedItem.getCostShoe()));
+                        colorAddShoe.setValue(selectedItem.getColorShoe());
+                        stackAddShoe.setText(selectedItem.getStockShoe());
+                        size1AddShoe.setText(parts[0]);
+                        size2AddShoe.setText(parts[1]);
+                        complectionAddShoe.setValue(selectedItem.getComplection());
+                        seasonAddShoe.setValue(selectedItem.getSeasonShoe());
+                    }
                 }
-            }
-        });
-        TableSearchUtil.setupSearch(shoesTable, searchField);
-        getColours();
-        getComplection();
-        getSeason();
+            });
+            TableSearchUtil.setupSearch(shoesTable, searchField);
+            getColours();
+            getComplection();
+            getSeason();
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
     }
 
 
     @FXML
-    private void refreshTable() throws SQLException {
+    private void refreshTable() {
+
+        try {
 
 
-        ShoeList.clear();
+            ShoeList.clear();
 
-        preparedStatement = connection.prepareStatement("SELECT * FROM shoes");
-        resultSet = preparedStatement.executeQuery();
+            preparedStatement = connection.prepareStatement("SELECT * FROM shoes");
+            resultSet = preparedStatement.executeQuery();
 
-        while (resultSet.next()) {
-            ShoeList.add(new Shoe(
-                    resultSet.getInt("id"),
-                    resultSet.getString("name"),
-                    resultSet.getDouble("cost"),
-                    resultSet.getString("color"),
-                    resultSet.getString("stock"),
-                    resultSet.getString("size"),
-                    resultSet.getString("season"),
-                    resultSet.getString("complection")));
+            while (resultSet.next()) {
+                ShoeList.add(new Shoe(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getDouble("cost"),
+                        resultSet.getString("color"),
+                        resultSet.getString("stock"),
+                        resultSet.getString("size"),
+                        resultSet.getString("season"),
+                        resultSet.getString("complection")));
 
-            shoesTable.setItems(ShoeList);
+                shoesTable.setItems(ShoeList);
 
+            }
+
+            CreateJsonFromTable.jsonCreateShoe(shoesTable);
+            TableSearchUtil.setupSearch(shoesTable, searchField);
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
         }
-
-        CreateJsonFromTable.jsonCreateShoe(shoesTable);
-        TableSearchUtil.setupSearch(shoesTable, searchField);
-
     }
 
-    private void loadDate() throws SQLException {
-        connection = DbConnect.getConnect();
-
-        refreshTable();
+    private void loadDate() {
+        try {
 
 
-        idShoe.setCellValueFactory(new PropertyValueFactory<>("idShoe"));
-        nameShoe.setCellValueFactory(new PropertyValueFactory<>("nameShoe"));
-        costShoe.setCellValueFactory(new PropertyValueFactory<>("costShoe"));
-        colorShoe.setCellValueFactory(new PropertyValueFactory<>("colorShoe"));
-        stockShoe.setCellValueFactory(new PropertyValueFactory<>("stockShoe"));
-        sizeShoe.setCellValueFactory(new PropertyValueFactory<>("sizeShoe"));
-        seasonShoe.setCellValueFactory(new PropertyValueFactory<>("seasonShoe"));
-        complectionShoe.setCellValueFactory(new PropertyValueFactory<>("complection"));
+            connection = DbConnect.getConnect();
+
+            refreshTable();
+
+
+            idShoe.setCellValueFactory(new PropertyValueFactory<>("idShoe"));
+            nameShoe.setCellValueFactory(new PropertyValueFactory<>("nameShoe"));
+            costShoe.setCellValueFactory(new PropertyValueFactory<>("costShoe"));
+            colorShoe.setCellValueFactory(new PropertyValueFactory<>("colorShoe"));
+            stockShoe.setCellValueFactory(new PropertyValueFactory<>("stockShoe"));
+            sizeShoe.setCellValueFactory(new PropertyValueFactory<>("sizeShoe"));
+            seasonShoe.setCellValueFactory(new PropertyValueFactory<>("seasonShoe"));
+            complectionShoe.setCellValueFactory(new PropertyValueFactory<>("complection"));
+
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
 
 
     }
@@ -290,9 +301,13 @@ public class AssortimentController extends BaseController {
         }
     }
 
-    public void generateReport(ActionEvent actionEvent) throws IOException {
-        ReportFormatSelectionWindow.help();
-        SceneController.getInstance().createReportWindow();
+    public void generateReport() {
+        try {
+            ReportFormatSelectionWindow.help();
+            SceneController.getInstance().createReportWindow();
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
     }
 
 

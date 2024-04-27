@@ -8,12 +8,12 @@ import com.kiku.javalangprogproject.SceneController;
 import com.kiku.javalangprogproject.classes.Stock;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,18 +30,7 @@ public class StockController extends BaseController {
     public TableColumn<Stock, Integer> totalStock;
 
 
-    public Button buttonReturn;
-    public Button ButtonComplain;
-    public Button ButtonReport;
-    public Button ButtonTaxService;
-    public Button ButtonDisposal;
 
-    public Button ButtonStock;
-    public Button ButtonAssortment;
-    public Button ButtonShops;
-    public Button ButtonMainMenu;
-    public Button ButtonRefresh;
-    public Button ButtonSuppliers;
     public Button ButtonAddStock;
     public Button ButtonRemoveStock;
     public TextField idField;
@@ -124,7 +113,8 @@ public class StockController extends BaseController {
 
     }
 
-    public void onInitialize() throws SQLException {
+    public void onInitialize()  {
+        try {
         loadDate();
         stocksTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
@@ -144,13 +134,17 @@ public class StockController extends BaseController {
             }
         });
         TableSearchUtil.setupSearch(stocksTable, searchField);
+    } catch (Exception ex) {
+        showErrorNotification(ex.getMessage());
+    }
     }
 
 
 
 
     @FXML
-    private void refreshTable() throws SQLException {
+    private void refreshTable() {
+        try {
 
         StockList.clear();
 
@@ -162,17 +156,18 @@ public class StockController extends BaseController {
                     resultSet.getInt("id"),
                     resultSet.getString("name"),
                     resultSet.getInt("quantity"),
-                    resultSet.getInt("cost"),
-                    resultSet.getInt("total")));
+                    resultSet.getInt("cost")));
 
             stocksTable.setItems(StockList);
 
         }
         CreateJsonFromTable.jsonCreateStock(stocksTable);
-
+    } catch (Exception ex) {
+        showErrorNotification(ex.getMessage());
+    }
     }
 
-    private void loadDate() throws SQLException {
+    private void loadDate()  { try {
         connection = DbConnect.getConnect();
 
         refreshTable();
@@ -184,12 +179,18 @@ public class StockController extends BaseController {
         costStock.setCellValueFactory(new PropertyValueFactory<>("costStock"));
         totalStock.setCellValueFactory(new PropertyValueFactory<>("totalStock"));
 
-
+    } catch (Exception ex) {
+        showErrorNotification(ex.getMessage());
+    }
 
     }
 
-    public void generateReport(ActionEvent actionEvent) throws IOException {
+    public void generateReport() {
+        try {
         ReportFormatSelectionWindow.help();
         SceneController.getInstance().createReportWindow();
+    } catch (Exception ex) {
+        showErrorNotification(ex.getMessage());
+    }
     }
 }

@@ -1,7 +1,6 @@
 package com.kiku.javalangprogproject.config;
 
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBase;
 import javafx.scene.input.MouseEvent;
 

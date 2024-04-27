@@ -10,7 +10,6 @@ import com.kiku.javalangprogproject.reportGenerators.CreateJsonFromTable;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -23,8 +22,7 @@ import javafx.stage.Stage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URISyntaxException;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -44,17 +42,7 @@ public class ShopsController extends BaseController {
     public TableColumn<Shop, String> emailShop;
     public TableColumn<Shop, String> numberShop;
     public TableColumn<Shop, String> fioShop;
-    public Button buttonReturn;
-    public Button ButtonComplain;
-    public Button ButtonReport;
-    public Button ButtonTaxService;
-    public Button ButtonDisposal;
-    public Button ButtonSuppliers;
-    public Button ButtonStock;
-    public Button ButtonAssortment;
-    public Button ButtonShops;
-    public Button ButtonMainMenu;
-    public Button ButtonRefresh;
+
     public Button ButtonAddShop;
     public Button ButtonRemoveShop;
     public TextField idField;
@@ -143,7 +131,8 @@ public class ShopsController extends BaseController {
 
     }
 
-    public void onInitialize() throws SQLException {
+    public void onInitialize() {
+        try {
         loadDate();
         shopsTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
@@ -163,11 +152,15 @@ public class ShopsController extends BaseController {
             }
         });
         TableSearchUtil.setupSearch(shopsTable, searchField);
+    } catch (Exception ex) {
+        showErrorNotification(ex.getMessage());
+    }
     }
 
 
     @FXML
-    private void refreshTable() throws SQLException {
+    private void refreshTable() {
+        try {
 
         ShopList.clear();
 
@@ -188,15 +181,16 @@ public class ShopsController extends BaseController {
         }
 
         CreateJsonFromTable.jsonCreateShops(shopsTable);
-        try {
+
             generateCommonTSFile();
-        } catch (IOException | URISyntaxException e) {
-            showErrorNotification(e.getMessage());
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
         }
 
     }
 
-    private void loadDate() throws SQLException {
+    private void loadDate(){
+        try {
         connection = DbConnect.getConnect();
 
         refreshTable();
@@ -208,66 +202,67 @@ public class ShopsController extends BaseController {
         emailShop.setCellValueFactory(new PropertyValueFactory<>("emailShop"));
         numberShop.setCellValueFactory(new PropertyValueFactory<>("numberShop"));
         fioShop.setCellValueFactory(new PropertyValueFactory<>("fioShop"));
+    } catch (Exception ex) {
+        showErrorNotification(ex.getMessage());
+    }
 
 
     }
 
-    public void generateReport(ActionEvent actionEvent) throws IOException {
-        ReportFormatSelectionWindow.help();
-        SceneController.getInstance().createReportWindow();
+    public void generateReport() {
+        try {
+            ReportFormatSelectionWindow.help();
+            SceneController.getInstance().createReportWindow();
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
     }
 
-    public void openMap(ActionEvent actionEvent) throws IOException {
-        // Получить URL для файла openstreetmap.html
-        URL url = getClass().getResource(Paths.MAP_HTML);
+    public void openMap() {
+        try {
+            // Получить URL для файла openstreetmap.html
+            URL url = getClass().getResource(Paths.MAP_HTML);
 
-        // Открыть новое окно браузера и загрузить карту
-        Platform.runLater(() -> {
-            WebView webView = new WebView();
-            WebEngine webEngine = webView.getEngine();
-            webEngine.load(Objects.requireNonNull(url).toExternalForm());
+            // Открыть новое окно браузера и загрузить карту
+            Platform.runLater(() -> {
+                WebView webView = new WebView();
+                WebEngine webEngine = webView.getEngine();
+                webEngine.load(Objects.requireNonNull(url).toExternalForm());
 
-            Stage stage = new Stage();
-            Scene scene = new Scene(new Group(webView));
+                Stage stage = new Stage();
+                Scene scene = new Scene(new Group(webView));
 
-            // Set the initial size of the scene
-            stage.setWidth(800);
+                // Set the initial size of the scene
+                stage.setWidth(800);
 
-            stage.setHeight(600);
+                stage.setHeight(600);
 
-            // Add a listener to resize the scene when the stage is resized
-            stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-                stage.setWidth((double) newVal);
-                webView.setPrefWidth((double) newVal);
-                webView.setMaxWidth((double) newVal);
+                // Add a listener to resize the scene when the stage is resized
+                stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+                    stage.setWidth((double) newVal);
+                    webView.setPrefWidth((double) newVal);
+                    webView.setMaxWidth((double) newVal);
+                });
+
+                stage.heightProperty().addListener((obs, oldVal, newVal) -> {
+                    stage.setHeight((double) newVal);
+                    webView.setPrefHeight((double) newVal);
+                    webView.setMaxHeight((double) newVal);
+                });
+
+                stage.setScene(scene);
+                stage.show();
             });
-
-            stage.heightProperty().addListener((obs, oldVal, newVal) -> {
-                stage.setHeight((double) newVal);
-                webView.setPrefHeight((double) newVal);
-                webView.setMaxHeight((double) newVal);
-            });
-
-            stage.setScene(scene);
-            stage.show();
-        });
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
     }
 
-    public void generateCommonTSFile() throws IOException, SQLException, URISyntaxException {
-        StringBuilder commonTsContent = new StringBuilder();
+    public void generateCommonTSFile() {
+        try {
+            StringBuilder commonTsContent = new StringBuilder();
 
-            Connection connection = DbConnect.getConnect();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT name, coordinates, fio FROM shops");
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            List<String> shopData = new ArrayList<>();
-            while (resultSet.next()) {
-                String name = resultSet.getString("name");
-                String coordinates = resultSet.getString("coordinates");
-                String fio = resultSet.getString("fio");
-
-                shopData.add("{coordinates: [" + coordinates + "],\ntitle: '" + name + "',\nsubtitle: '" + fio + "',\ncolor: '#00CC00'\n}");
-            }
+            List<String> shopData = getStrings();
 
             commonTsContent.append("const markersGeoJsonSourc = [").append(String.join(", \n", shopData)).append(" ];");
 
@@ -284,6 +279,25 @@ public class ShopsController extends BaseController {
             }
 
 
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
+    }
+
+    private static List<String> getStrings() throws SQLException {
+        Connection connection = DbConnect.getConnect();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT name, coordinates, fio FROM shops");
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        List<String> shopData = new ArrayList<>();
+        while (resultSet.next()) {
+            String name = resultSet.getString("name");
+            String coordinates = resultSet.getString("coordinates");
+            String fio = resultSet.getString("fio");
+
+            shopData.add("{coordinates: [" + coordinates + "],\ntitle: '" + name + "',\nsubtitle: '" + fio + "',\ncolor: '#00CC00'\n}");
+        }
+        return shopData;
     }
 
 }

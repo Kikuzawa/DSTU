@@ -8,15 +8,12 @@ public class Stock {
         return totalStock;
     }
 
-    public void setTotalStock(int totalStock) {
-        this.totalStock = totalStock;
-    }
 
     public double totalStock;
 
 
 
-    public Stock(int idStock, String nameStock, int quantityStock, int costStock, double total) {
+    public Stock(int idStock, String nameStock, int quantityStock, int costStock) {
         this.idStock = idStock;
         this.nameStock = nameStock;
         this.quantityStock = quantityStock;
@@ -28,33 +25,21 @@ public class Stock {
         return idStock;
     }
 
-    public void setIdStock(int idStock) {
-        this.idStock = idStock;
-    }
 
     public String getNameStock() {
         return nameStock;
     }
 
-    public void setNameStock(String nameStock) {
-        this.nameStock = nameStock;
-    }
 
     public double getQuantityStock() {
         return quantityStock;
     }
 
-    public void setQuantityStock(int quantityStock) {
-        this.quantityStock = quantityStock;
-    }
 
     public double getCostStock() {
         return costStock;
     }
 
-    public void setCostStock(int costStock) {
-        this.costStock = costStock;
-    }
 
     public String nameStock;
     public double quantityStock;

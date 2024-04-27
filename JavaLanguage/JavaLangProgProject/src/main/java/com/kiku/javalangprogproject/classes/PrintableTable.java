@@ -100,7 +100,7 @@ public class PrintableTable implements Printable {
         int fontSize = 8; // Уменьшаем размер шрифта до 8
 
         for (String word : words) {
-            if (fm.stringWidth(currentLine.toString() + " " + word) > columnWidth) {
+            if (fm.stringWidth(currentLine + " " + word) > columnWidth) {
                 lines.add(currentLine.toString().trim());
                 currentLine = new StringBuilder();
             }
@@ -126,7 +126,7 @@ public class PrintableTable implements Printable {
 
         for (String word : words) {
             Font currentFont = g2d.getFont();
-            while (fm.stringWidth(shrunkText.toString() + " " + word) > columnWidth) {
+            while (fm.stringWidth(shrunkText + " " + word) > columnWidth) {
                 currentFontSize--; // Уменьшаем размер шрифта
                 g2d.setFont(new Font(g2d.getFont().getName(), Font.PLAIN, currentFontSize));
                 fm = g2d.getFontMetrics();

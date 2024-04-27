@@ -27,33 +27,23 @@ public class Complain {
         return number;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
+
 
     public String getSender() {
         return sender;
     }
 
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
+
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getComment() {
         return comment;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 
     String comment;
 }

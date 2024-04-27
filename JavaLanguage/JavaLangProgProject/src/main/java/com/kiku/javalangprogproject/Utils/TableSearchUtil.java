@@ -7,12 +7,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class TableSearchUtil<T> {
-    public static <T> void setupSearch(TableView<T> tableView, TextField searchField) {
-        FilteredList<T> filteredData = new FilteredList<>(tableView.getItems(), b -> true);
+import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(item -> {
+public class TableSearchUtil {
+    public static <T> void setupSearch(TableView<T> tableView, TextField searchField) {
+        try {
+            FilteredList<T> filteredData = new FilteredList<>(tableView.getItems(), b -> true);
+
+            searchField.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(item -> {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
@@ -26,11 +28,13 @@ public class TableSearchUtil<T> {
                     }
                 }
                 return false;
-            });
-        });
+            }));
 
-        SortedList<T> sortedData = new SortedList<>(filteredData);
-        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
-        tableView.setItems(sortedData);
+            SortedList<T> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+            tableView.setItems(sortedData);
+        } catch (Exception ex) {
+            showErrorNotification(ex.getMessage());
+        }
     }
 }
