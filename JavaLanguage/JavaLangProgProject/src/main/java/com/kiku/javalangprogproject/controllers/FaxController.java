@@ -1,6 +1,7 @@
 package com.kiku.javalangprogproject.controllers;
 
 import com.kiku.javalangprogproject.BaseController;
+import com.kiku.javalangprogproject.Utils.TableSearchUtil;
 import com.kiku.javalangprogproject.classes.Tax;
 import com.kiku.javalangprogproject.reportGenerators.CreateJsonFromTable;
 import com.kiku.javalangprogproject.Database.DbConnect;
@@ -22,7 +23,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 
-import static com.kiku.javalangprogproject.controllers.NotificationUtils.showErrorNotification;
+import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 
 public class FaxController extends BaseController {
@@ -117,6 +118,7 @@ public class FaxController extends BaseController {
                 }
             }
         });
+        TableSearchUtil.setupSearch(taxTable, searchField);
     }
 
     private void loadDate() throws SQLException {

@@ -2,73 +2,73 @@ package com.kiku.javalangprogproject.classes;
 
 public class Shoe {
 
-    int id;
-    String name;
-    Double cost;
-    String color;
-    String stock;
-    String size;
-    String season;
+    int idShoe;
+    String nameShoe;
+    Double costShoe;
+    String colorShoe;
+    String stockShoe;
+    String sizeShoe;
+    String seasonShoe;
     String complection;
 
 
-    public Shoe(int id, String name, Double cost, String color, String stock, String size, String season, String complection) {
-        this.id = id;
-        this.name = name;
-        this.cost = cost;
-        this.color = color;
-        this.stock = stock;
-        this.size = size;
-        this.season = season;
+    public Shoe(int idShoe, String nameShoe, Double costShoe, String colorShoe, String stockShoe, String sizeShoe, String seasonShoe, String complection) {
+        this.idShoe = idShoe;
+        this.nameShoe = nameShoe;
+        this.costShoe = costShoe;
+        this.colorShoe = colorShoe;
+        this.stockShoe = stockShoe;
+        this.sizeShoe = sizeShoe;
+        this.seasonShoe = seasonShoe;
         this.complection = complection;
     }
 
-    public String getId() {
-        return Integer.toString(id);
+    public String getIdShoe() {
+        return Integer.toString(idShoe);
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdShoe(int idShoe) {
+        this.idShoe = idShoe;
     }
 
-    public String getName() {
-        return name;
+    public String getNameShoe() {
+        return nameShoe;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameShoe(String nameShoe) {
+        this.nameShoe = nameShoe;
     }
 
-    public Double getCost() {
-        return cost;
+    public Double getCostShoe() {
+        return costShoe;
     }
 
-    public void setCost(Double cost) {
-        this.cost = cost;
+    public void setCostShoe(Double costShoe) {
+        this.costShoe = costShoe;
     }
 
-    public String getColor() {
-        return color;
+    public String getColorShoe() {
+        return colorShoe;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setColorShoe(String colorShoe) {
+        this.colorShoe = colorShoe;
     }
 
-    public String getStock() {
-        return stock;
+    public String getStockShoe() {
+        return stockShoe;
     }
 
-    public void setStock(String stock) {
-        this.stock = stock;
+    public void setStockShoe(String stockShoe) {
+        this.stockShoe = stockShoe;
     }
 
-    public String getSize() {
-        return size;
+    public String getSizeShoe() {
+        return sizeShoe;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setSizeShoe(String sizeShoe) {
+        this.sizeShoe = sizeShoe;
     }
 
     public String getComplection() {
@@ -79,11 +79,11 @@ public class Shoe {
         this.complection = complection;
     }
 
-    public String getSeason() {
-        return season;
+    public String getSeasonShoe() {
+        return seasonShoe;
     }
 
-    public void setSeason(String season) {
-        this.season = season;
+    public void setSeasonShoe(String seasonShoe) {
+        this.seasonShoe = seasonShoe;
     }
 }

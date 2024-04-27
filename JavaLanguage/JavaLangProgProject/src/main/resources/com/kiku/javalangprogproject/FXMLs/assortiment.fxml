@@ -131,7 +131,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <TextField fx:id="searchField" layoutX="20.0" layoutY="683.0" prefHeight="27.0" prefWidth="265.0" />
-      <Button fx:id="searchButton" layoutX="295.0" layoutY="683.0" mnemonicParsing="false" onAction="#searchInfo" prefHeight="27.0" prefWidth="34.0" text="🔎" />
+      <TextField fx:id="searchField" layoutX="127.0" layoutY="683.0" prefHeight="27.0" prefWidth="167.0" />
+      <Label layoutX="14.0" layoutY="687.0" prefHeight="19.0" prefWidth="105.0" text="Поиск-фильтр:" />
    </children>
 </AnchorPane>

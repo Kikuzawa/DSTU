@@ -14,6 +14,37 @@
 }
 
 
+
+
+
+.text-area {
+    -fx-background-color: transparent;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-border-color: #c6c6c6;
+}
+
+.text-area .viewport{
+    -fx-background-color: transparent;
+}
+
+.text-area .content {
+    -fx-background-color: peachpuff ;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    text-area-border: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+
+.some-node {
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+
+
 .button {
     -fx-background-color: #4CAF50; /* Цвет фона кнопки */
     -fx-text-fill: white; /* Цвет текста */
@@ -63,6 +94,8 @@
     -fx-font-weight: bold; /* Жирный шрифт */
     -fx-background-radius: 20;
 }
+
+
 
 .table-view{
 

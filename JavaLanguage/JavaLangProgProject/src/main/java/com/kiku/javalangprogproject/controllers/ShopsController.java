@@ -3,6 +3,7 @@ package com.kiku.javalangprogproject.controllers;
 import com.kiku.javalangprogproject.BaseController;
 import com.kiku.javalangprogproject.Database.DbConnect;
 import com.kiku.javalangprogproject.SceneController;
+import com.kiku.javalangprogproject.Utils.TableSearchUtil;
 import com.kiku.javalangprogproject.classes.Shop;
 import com.kiku.javalangprogproject.config.Paths;
 import com.kiku.javalangprogproject.reportGenerators.CreateJsonFromTable;
@@ -15,8 +16,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -25,7 +24,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Connection;
@@ -36,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static com.kiku.javalangprogproject.controllers.NotificationUtils.showErrorNotification;
+import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 public class ShopsController extends BaseController {
     public TableView<Shop> shopsTable = new TableView<>();
@@ -164,6 +162,7 @@ public class ShopsController extends BaseController {
                 }
             }
         });
+        TableSearchUtil.setupSearch(shopsTable, searchField);
     }
 
 

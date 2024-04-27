@@ -23,13 +23,13 @@ public class CreateJsonFromTable {
         JSONArray jsonArray = new JSONArray();
         for (Shoe item : data) {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("id", item.getId());
-            jsonObject.put("name", item.getName());
-            jsonObject.put("cost", item.getCost().toString());
-            jsonObject.put("color", item.getColor());
-            jsonObject.put("stock", item.getStock());
-            jsonObject.put("size", item.getSize());
-            jsonObject.put("season", item.getSeason());
+            jsonObject.put("id", item.getIdShoe());
+            jsonObject.put("name", item.getNameShoe());
+            jsonObject.put("cost", item.getCostShoe().toString());
+            jsonObject.put("color", item.getColorShoe());
+            jsonObject.put("stock", item.getStockShoe());
+            jsonObject.put("size", item.getSizeShoe());
+            jsonObject.put("season", item.getSeasonShoe());
             jsonObject.put("complection", item.getComplection());
             jsonArray.put(jsonObject);
         }

@@ -1,6 +1,7 @@
 package com.kiku.javalangprogproject.controllers;
 
 import com.kiku.javalangprogproject.BaseController;
+import com.kiku.javalangprogproject.Utils.TableSearchUtil;
 import com.kiku.javalangprogproject.reportGenerators.CreateJsonFromTable;
 import com.kiku.javalangprogproject.Database.DbConnect;
 import com.kiku.javalangprogproject.SceneController;
@@ -15,7 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.sql.*;
 
-import static com.kiku.javalangprogproject.controllers.NotificationUtils.showErrorNotification;
+import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 public class DisposalController extends BaseController {
     public TableView<Disposal> disposalTable = new TableView<>();
@@ -162,6 +163,7 @@ public class DisposalController extends BaseController {
                 }
             }
         });
+        TableSearchUtil.setupSearch(disposalTable, searchField);
     }
 
 

@@ -1,6 +1,7 @@
 package com.kiku.javalangprogproject.controllers;
 
 import com.kiku.javalangprogproject.BaseController;
+import com.kiku.javalangprogproject.Utils.TableSearchUtil;
 import com.kiku.javalangprogproject.reportGenerators.CreateJsonFromTable;
 import com.kiku.javalangprogproject.Database.DbConnect;
 import com.kiku.javalangprogproject.SceneController;
@@ -20,7 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static com.kiku.javalangprogproject.controllers.NotificationUtils.showErrorNotification;
+import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 public class SuppliersController extends BaseController {
     public TableView<Supplier> suppliersTable = new TableView<>();
@@ -145,6 +146,7 @@ public class SuppliersController extends BaseController {
                 }
             }
         });
+        TableSearchUtil.setupSearch(suppliersTable, searchField);
     }
 
 

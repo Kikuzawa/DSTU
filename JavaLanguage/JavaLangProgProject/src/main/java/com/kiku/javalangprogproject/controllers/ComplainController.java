@@ -3,6 +3,7 @@ package com.kiku.javalangprogproject.controllers;
 import com.kiku.javalangprogproject.BaseController;
 import com.kiku.javalangprogproject.Database.DbConnect;
 import com.kiku.javalangprogproject.SceneController;
+import com.kiku.javalangprogproject.Utils.TableSearchUtil;
 import com.kiku.javalangprogproject.classes.Complain;
 import com.kiku.javalangprogproject.reportGenerators.CreateJsonFromTable;
 import javafx.collections.FXCollections;
@@ -53,6 +54,7 @@ public class ComplainController extends BaseController {
                 }
             }
         });
+        TableSearchUtil.setupSearch(complainTable, searchField);
 
     }
 

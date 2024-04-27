@@ -26,6 +26,8 @@ module com.kiku.javalangprogproject {
     exports com.kiku.javalangprogproject.reportGenerators;
     opens com.kiku.javalangprogproject.reportGenerators to javafx.fxml;
     opens com.kiku.javalangprogproject.config to javafx.base, javafx.fxml;
+    exports com.kiku.javalangprogproject.Utils;
+    opens com.kiku.javalangprogproject.Utils to javafx.fxml;
 
 
 }

@@ -3,6 +3,7 @@ package com.kiku.javalangprogproject.controllers;
 import com.kiku.javalangprogproject.BaseController;
 import com.kiku.javalangprogproject.Database.DbConnect;
 import com.kiku.javalangprogproject.SceneController;
+import com.kiku.javalangprogproject.Utils.TableSearchUtil;
 import com.kiku.javalangprogproject.classes.Shoe;
 import com.kiku.javalangprogproject.reportGenerators.CreateJsonFromTable;
 import javafx.collections.FXCollections;
@@ -12,13 +13,12 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
 
-import static com.kiku.javalangprogproject.controllers.NotificationUtils.showErrorNotification;
+import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 
 @SuppressWarnings("ALL")
@@ -144,29 +144,32 @@ public class AssortimentController extends BaseController {
         }
     }
 
-    protected void onInitialize() throws SQLException {
-        loadDate();
 
+
+    protected void onInitialize() throws SQLException {
+
+        loadDate();
 
         shoesTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
                 if (shoesTable.getSelectionModel().getSelectedItem() != null) {
                     Shoe selectedItem = shoesTable.getSelectionModel().getSelectedItem();
 
-                    String range = selectedItem.getSize();
+                    String range = selectedItem.getSizeShoe();
                     String[] parts = range.split("-");
-                    idAddShoe.setText(selectedItem.getId());
-                    nameAddShoe.setText(selectedItem.getName());
-                    costAddShoe.setText(Double.toString(selectedItem.getCost()));
-                    colorAddShoe.setValue(selectedItem.getColor());
-                    stackAddShoe.setText(selectedItem.getStock());
+                    idAddShoe.setText(selectedItem.getIdShoe());
+                    nameAddShoe.setText(selectedItem.getNameShoe());
+                    costAddShoe.setText(Double.toString(selectedItem.getCostShoe()));
+                    colorAddShoe.setValue(selectedItem.getColorShoe());
+                    stackAddShoe.setText(selectedItem.getStockShoe());
                     size1AddShoe.setText(parts[0]);
                     size2AddShoe.setText(parts[1]);
                     complectionAddShoe.setValue(selectedItem.getComplection());
-                    seasonAddShoe.setValue(selectedItem.getSeason());
+                    seasonAddShoe.setValue(selectedItem.getSeasonShoe());
                 }
             }
         });
+        TableSearchUtil.setupSearch(shoesTable, searchField);
         getColours();
         getComplection();
         getSeason();
@@ -198,6 +201,7 @@ public class AssortimentController extends BaseController {
         }
 
         CreateJsonFromTable.jsonCreateShoe(shoesTable);
+        TableSearchUtil.setupSearch(shoesTable, searchField);
 
     }
 
@@ -207,13 +211,13 @@ public class AssortimentController extends BaseController {
         refreshTable();
 
 
-        idShoe.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameShoe.setCellValueFactory(new PropertyValueFactory<>("name"));
-        costShoe.setCellValueFactory(new PropertyValueFactory<>("cost"));
-        colorShoe.setCellValueFactory(new PropertyValueFactory<>("color"));
-        stockShoe.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        sizeShoe.setCellValueFactory(new PropertyValueFactory<>("size"));
-        seasonShoe.setCellValueFactory(new PropertyValueFactory<>("season"));
+        idShoe.setCellValueFactory(new PropertyValueFactory<>("idShoe"));
+        nameShoe.setCellValueFactory(new PropertyValueFactory<>("nameShoe"));
+        costShoe.setCellValueFactory(new PropertyValueFactory<>("costShoe"));
+        colorShoe.setCellValueFactory(new PropertyValueFactory<>("colorShoe"));
+        stockShoe.setCellValueFactory(new PropertyValueFactory<>("stockShoe"));
+        sizeShoe.setCellValueFactory(new PropertyValueFactory<>("sizeShoe"));
+        seasonShoe.setCellValueFactory(new PropertyValueFactory<>("seasonShoe"));
         complectionShoe.setCellValueFactory(new PropertyValueFactory<>("complection"));
 
 
@@ -292,6 +296,5 @@ public class AssortimentController extends BaseController {
     }
 
 
-    public void searchInfo(ActionEvent actionEvent) {
 }
 
