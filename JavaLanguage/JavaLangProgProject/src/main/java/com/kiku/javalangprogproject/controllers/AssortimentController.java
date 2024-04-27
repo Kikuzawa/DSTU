@@ -1,22 +1,19 @@
 package com.kiku.javalangprogproject.controllers;
 
 import com.kiku.javalangprogproject.BaseController;
-import com.kiku.javalangprogproject.reportGenerators.CreateJsonFromTable;
 import com.kiku.javalangprogproject.Database.DbConnect;
 import com.kiku.javalangprogproject.SceneController;
 import com.kiku.javalangprogproject.classes.Shoe;
+import com.kiku.javalangprogproject.reportGenerators.CreateJsonFromTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
-
 
 import java.io.IOException;
 import java.sql.*;
@@ -149,6 +146,7 @@ public class AssortimentController extends BaseController {
 
     protected void onInitialize() throws SQLException {
         loadDate();
+
 
         shoesTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
@@ -294,5 +292,6 @@ public class AssortimentController extends BaseController {
     }
 
 
+    public void searchInfo(ActionEvent actionEvent) {
 }
 

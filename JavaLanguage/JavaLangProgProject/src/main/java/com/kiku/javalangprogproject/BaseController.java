@@ -4,19 +4,23 @@ import com.kiku.javalangprogproject.config.ButtonConfigurator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public abstract class BaseController implements Initializable {
     @FXML
-    private Button buttonReturn, ButtonComplain, ButtonReport, ButtonTaxService, ButtonDisposal, ButtonSuppliers, ButtonStock, ButtonAssortment, ButtonShops, ButtonMainMenu, buttonLogin, exitAppButton;
+    private Button buttonReturn, ButtonComplain, ButtonReport, ButtonTaxService, ButtonDisposal, ButtonSuppliers, ButtonStock, ButtonAssortment, ButtonShops, ButtonMainMenu, buttonLogin, exitAppButton, searchButton;
     protected final SceneController controller = SceneController.getInstance();
     @FXML
     private Button ButtonRefresh;
+    @FXML
+    protected TextField searchField;
 
 
 
