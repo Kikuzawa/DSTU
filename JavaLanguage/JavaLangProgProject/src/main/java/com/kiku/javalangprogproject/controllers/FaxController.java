@@ -33,11 +33,11 @@ public class FaxController extends BaseController {
     public TextField propertyTaxField;
     public ChoiceBox<String> monthChoiceBox;
     public TextField landTaxPercentageField;
-    public Button calculateTaxesButton;
+
     public TextField expensesField;
 
     public TableView<Tax> taxTable;
-    public Button RemoveTaxesButton;
+
     public TextField idField;
     public TableColumn<Tax, String> idTax;
     public TableColumn<Tax, String> monthTax;

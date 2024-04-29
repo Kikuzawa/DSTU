@@ -78,12 +78,12 @@
       </font>
    </Label>
 
-   <Button fx:id="ButtonAddStock" layoutX="1102.0" layoutY="302.0" mnemonicParsing="false" onAction="#addNewStock" prefHeight="39.0" prefWidth="42.0" text="➕">
+   <Button fx:id="ButtonAdd" layoutX="1102.0" layoutY="302.0" mnemonicParsing="false" onAction="#addNewStock" prefHeight="39.0" prefWidth="42.0" text="➕">
       <font>
          <Font name="System Bold" size="18.0" />
       </font>
    </Button>
-   <Button fx:id="ButtonRemoveStock" layoutX="1212.0" layoutY="302.0" mnemonicParsing="false" onAction="#removeStock" prefHeight="39.0" prefWidth="42.0" text="🗑">
+   <Button fx:id="ButtonRemove" layoutX="1212.0" layoutY="302.0" mnemonicParsing="false" onAction="#removeStock" prefHeight="39.0" prefWidth="42.0" text="🗑">
       <font>
          <Font name="System Bold" size="18.0" />
       </font>
@@ -93,7 +93,7 @@
    <TextField fx:id="costField" layoutX="1090.0" layoutY="251.0" prefHeight="27.0" prefWidth="179.0" promptText="Стоимость" />
 
    <Label fx:id="exceptionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="624.0" layoutY="681.0" text="..." textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
-   <Button fx:id="ButtonEditStock" layoutX="1157.0" layoutY="302.0" mnemonicParsing="false" onAction="#EditStock" prefHeight="39.0" prefWidth="39.0" text="🖋">
+   <Button fx:id="ButtonEdit" layoutX="1157.0" layoutY="302.0" mnemonicParsing="false" onAction="#EditStock" prefHeight="39.0" prefWidth="39.0" text="🖋">
       <font>
          <Font name="System Bold" size="16.0" />
       </font>

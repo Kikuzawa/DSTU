@@ -98,7 +98,7 @@
     <Label layoutX="345.0" layoutY="404.0" text="Год" />
     <TextField fx:id="yearField" layoutX="186.0" layoutY="400.0" prefHeight="25.0" prefWidth="150.0" />
 
-    <Button fx:id="calculateTaxesButton" layoutX="207.0" layoutY="437.0" onAction="#calculateTaxes" prefHeight="27.0" prefWidth="109.0" text="Рассчитать" />
+    <Button fx:id="ButtonAdd" layoutX="207.0" layoutY="437.0" onAction="#calculateTaxes" prefHeight="27.0" prefWidth="109.0" text="Рассчитать" />
 
     <!-- Table View for MySQL Data -->
     <TableView fx:id="taxTable" editable="true" layoutX="485.0" layoutY="100.0" prefHeight="500.0" prefWidth="772.0" tableMenuButtonVisible="true">
@@ -118,10 +118,10 @@
         </columns>
     </TableView>
     <TextArea editable="false" layoutX="503.0" layoutY="608.0" prefHeight="92.0" prefWidth="736.0" text="Базовый налог = Общий доход - Общие расходы&#10;Налог с учетом НДС = Базовый налог - Базовый налог * Процент НДС&#10;Налог с учетом налога на имущество = Налог с учетом НДС + Стоимость имущества * Процент налога на имущество&#10;Итоговый налог = Налог с учетом налога на имущество + Стоимость земли * Процент земельного налога" />
-    <TextArea editable="false" layoutX="170.0" layoutY="478.0" prefHeight="122.0" prefWidth="292.0" text="                   Общие обозначения&#10;ЗН - Земельный налог&#10;ННИО - Налог На Имущество Организации&#10;НДС - Налоговая Добавочная Стоимость&#10;Н.С.НДС - Налог с учетом НДС&#10;Н.С.З.Н. - Налог с учетом земельног налога" />
+    <TextArea editable="false" layoutX="170.0" layoutY="478.0" prefHeight="139.0" prefWidth="292.0" text="                   Общие обозначения&#10;ЗН - Земельный налог&#10;ННИО - Налог На Имущество Организации&#10;НДС - Налоговая Добавочная Стоимость&#10;Н.С.НДС - Налог с учетом НДС&#10;Н.С.З.Н. - Налог с учетом земельног налога" />
    <Label layoutX="431.0" layoutY="404.0" text="id" />
    <TextField fx:id="idField" layoutX="381.0" layoutY="400.0" prefHeight="27.0" prefWidth="39.0" />
-   <Button fx:id="RemoveTaxesButton" layoutX="338.0" layoutY="437.0" onAction="#removeTaxes" prefHeight="27.0" prefWidth="109.0" text="Удалить" />
+   <Button fx:id="ButtonRemove" layoutX="338.0" layoutY="437.0" onAction="#removeTaxes" prefHeight="27.0" prefWidth="109.0" text="Удалить" />
     <Button fx:id="ButtonRefresh" layoutX="969.0" layoutY="28.0" mnemonicParsing="false" onAction="#refreshTable" text="🔃">
         <font>
             <Font size="18.0" />

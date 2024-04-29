@@ -32,17 +32,16 @@ public class SuppliersController extends BaseController {
     public TableColumn<Supplier, String> stockSupplier;
 
 
-    public Button ButtonAddSupplier;
-    public Button ButtonRemoveSupplier;
+
     public TextField idField;
     public TextField nameField;
     public TextField locationFIeld;
 
     public Label exceptionLabel;
-    public Button ButtonEditSupplier;
+
     public TextField numberField;
     public TextField stockField;
-    public Button exitAppButton;
+
 
     Connection connection = null;
     PreparedStatement preparedStatement = null;

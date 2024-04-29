@@ -42,8 +42,6 @@ public class AssortimentController extends BaseController {
     public TableColumn<Shoe, String> sizeShoe;
     public TableColumn<Shoe, String> seasonShoe;
     public TableColumn<Shoe, String> complectionShoe;
-    public Button ButtonAddShoe;
-    public Button ButtonRemoveShoe;
     public ComboBox<String> complectionAddShoe;
     public TextField stackAddShoe;
     public ComboBox<String> seasonAddShoe;
@@ -54,9 +52,7 @@ public class AssortimentController extends BaseController {
     public ComboBox<String> colorAddShoe;
     public TextField size1AddShoe;
     public TextField size2AddShoe;
-    public Button ButtonEditShoe;
-    public Button helpbtn;
-    public Button exitAppButton;
+
 
 
     String query = null;

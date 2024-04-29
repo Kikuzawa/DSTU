@@ -43,18 +43,16 @@ public class ShopsController extends BaseController {
     public TableColumn<Shop, String> numberShop;
     public TableColumn<Shop, String> fioShop;
 
-    public Button ButtonAddShop;
-    public Button ButtonRemoveShop;
+
     public TextField idField;
     public TextField nameField;
     public TextField locationFIeld;
     public TextField emailField;
     public Label exceptionLabel;
-    public Button ButtonEditShop;
     public TextField numberField;
     public TextField fioField;
-    public Button exitAppButton;
     public Button ButtonOpenMap;
+
 
     Connection connection = null;
     PreparedStatement preparedStatement = null;
@@ -212,7 +210,7 @@ public class ShopsController extends BaseController {
     public void generateReport() {
         try {
             ReportFormatSelectionWindow.help();
-            SceneController.getInstance().createReportWindow();
+            Objects.requireNonNull(SceneController.getInstance()).createReportWindow();
         } catch (Exception ex) {
             showErrorNotification(ex.getMessage());
         }

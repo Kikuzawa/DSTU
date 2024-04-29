@@ -81,12 +81,12 @@
          </font>
       </Label>
 
-      <Button fx:id="ButtonAddShoe" layoutX="1104.0" layoutY="518.0" mnemonicParsing="false" onAction="#addNewShoe" prefHeight="39.0" prefWidth="42.0" text="➕">
+      <Button fx:id="ButtonAdd" layoutX="1104.0" layoutY="518.0" mnemonicParsing="false" onAction="#addNewShoe" prefHeight="39.0" prefWidth="42.0" text="➕">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="ButtonRemoveShoe" layoutX="1214.0" layoutY="518.0" mnemonicParsing="false" onAction="#removeShoe" prefHeight="39.0" prefWidth="42.0" text="🗑">
+      <Button fx:id="ButtonRemove" layoutX="1214.0" layoutY="518.0" mnemonicParsing="false" onAction="#removeShoe" prefHeight="39.0" prefWidth="42.0" text="🗑">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -126,7 +126,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="ButtonEditShoe" layoutX="1159.0" layoutY="518.0" mnemonicParsing="false" onAction="#EditShoe" prefHeight="39.0" prefWidth="39.0" text="🖋">
+      <Button fx:id="ButtonEdit" layoutX="1159.0" layoutY="518.0" mnemonicParsing="false" onAction="#EditShoe" prefHeight="39.0" prefWidth="39.0" text="🖋">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

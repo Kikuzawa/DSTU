@@ -18,6 +18,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
@@ -31,16 +32,13 @@ public class StockController extends BaseController {
 
 
 
-    public Button ButtonAddStock;
-    public Button ButtonRemoveStock;
     public TextField idField;
     public TextField nameField;
     public TextField quantityField;
     public TextField costField;
 
     public Label exceptionLabel;
-    public Button ButtonEditStock;
-    public Button exitAppButton;
+
 
 
     Connection connection = null;
@@ -188,7 +186,7 @@ public class StockController extends BaseController {
     public void generateReport() {
         try {
         ReportFormatSelectionWindow.help();
-        SceneController.getInstance().createReportWindow();
+        Objects.requireNonNull(SceneController.getInstance()).createReportWindow();
     } catch (Exception ex) {
         showErrorNotification(ex.getMessage());
     }

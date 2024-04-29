@@ -78,12 +78,12 @@
       </font>
    </Label>
 
-   <Button fx:id="ButtonAddDisposal" layoutX="1102.0" layoutY="302.0" mnemonicParsing="false" onAction="#addNewDisposal" prefHeight="39.0" prefWidth="42.0" text="➕">
+   <Button fx:id="ButtonAdd" layoutX="1102.0" layoutY="302.0" mnemonicParsing="false" onAction="#addNewDisposal" prefHeight="39.0" prefWidth="42.0" text="➕">
       <font>
          <Font name="System Bold" size="18.0" />
       </font>
    </Button>
-   <Button fx:id="ButtonRemoveDisposal" layoutX="1212.0" layoutY="302.0" mnemonicParsing="false" onAction="#removeDisposal" prefHeight="39.0" prefWidth="42.0" text="🗑">
+   <Button fx:id="ButtonRemove" layoutX="1212.0" layoutY="302.0" mnemonicParsing="false" onAction="#removeDisposal" prefHeight="39.0" prefWidth="42.0" text="🗑">
       <font>
          <Font name="System Bold" size="18.0" />
       </font>
@@ -92,7 +92,7 @@
    <TextField fx:id="nameField" layoutX="1090.0" layoutY="178.0" prefHeight="27.0" prefWidth="179.0" promptText="Название" />
 
    <Label fx:id="exceptionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="624.0" layoutY="681.0" text="..." textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
-   <Button fx:id="ButtonEditDisposal" layoutX="1157.0" layoutY="302.0" mnemonicParsing="false" onAction="#EditDisposal" prefHeight="39.0" prefWidth="39.0" text="🖋">
+   <Button fx:id="ButtonEdit" layoutX="1157.0" layoutY="302.0" mnemonicParsing="false" onAction="#EditDisposal" prefHeight="39.0" prefWidth="39.0" text="🖋">
       <font>
          <Font name="System Bold" size="16.0" />
       </font>

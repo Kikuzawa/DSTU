@@ -9,22 +9,12 @@ public class ButtonConfigurator {
 
     private static ButtonConfigurator instance;
 
-    /**
-     * Реализация SingleTone
-     * @return возвращает наш объект, который был создан 1 раз за время действия программы
-     */
     public static ButtonConfigurator getInstance() {
         if (instance == null)
             instance = new ButtonConfigurator();
         return instance;
     }
 
-    /**
-     * Настройка кнопки с определенными параметрами.
-     *
-     * @param button       кнопка, на которую мы хотим назначить настройку по нажатию и т.п.
-     * @param eventHandler событие, которое мы хотим обработать.
-     */
 
     public static void setupButtonEvent(ButtonBase button, EventHandler<MouseEvent> eventHandler) {
         // Обработка того момента, когда мышка наводится на кнопку.
@@ -37,13 +27,10 @@ public class ButtonConfigurator {
         });
     }
 
-    /**
-     * Настройка кнопки с определенными параметрами.
-     *
-     * @param button       кнопка, на которую мы хотим назначить настройку по нажатию и т.п.
-     * @param action       действие, которое мы хотим выполнить при нажатии на кнопку.
-     * @param errorMessage сообщение об ошибке, если действие не удалось выполнить.
-     */
+
+
+
+
     public static void setupButtonEvent(ButtonBase button, CheckedConsumer action, String errorMessage) {
         EventHandler<MouseEvent> eventHandler = event -> {
             try {
@@ -55,6 +42,22 @@ public class ButtonConfigurator {
         setupButtonEvent(button, eventHandler);
     }
 
+    public static void setupButtonEvent(ButtonBase button) {
+        EventHandler<MouseEvent> eventHandler = event -> {
+            try {
+                SOUND.CLICK.play(); // Воспроизведение звука щелчка
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        };
+
+        // Настройка звука наведения
+        button.setOnMouseEntered(event -> {
+            SOUND.HOVER.play();
+        });
+
+        setupButtonEvent(button, eventHandler);
+    }
 
 
 

@@ -37,14 +37,14 @@ public class DisposalController extends BaseController {
     public Button ButtonMainMenu;
     public Button ButtonRefresh;
     public Button ButtonSuppliers;
-    public Button ButtonAddDisposal;
-    public Button ButtonRemoveDisposal;
+    public Button ButtonAdd;
+    public Button ButtonRemove;
     public TextField idField;
     public TextField nameField;
     public TextField quantityField;
 
     public Label exceptionLabel;
-    public Button ButtonEditDisposal;
+    public Button ButtonEdit;
     public Button exitAppButton;
     public ComboBox<String> reasonCombo;
 

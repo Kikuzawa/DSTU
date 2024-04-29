@@ -1,6 +1,7 @@
 package com.kiku.javalangprogproject.config;
 
 
+
 public class ListHeaderTable {
     public static final String[] ASSORTIMENT = {"id", "name", "cost", "color", "stock", "size", "season", "complection"};
     public static final String[] SHOPS = {"id", "name", "location", "email", "number", "fio"};
@@ -12,4 +13,6 @@ public class ListHeaderTable {
 
 
     public static final String[] COMPLAIN = {"id", "number", "sender", "type", "comment"};
+
+
 }

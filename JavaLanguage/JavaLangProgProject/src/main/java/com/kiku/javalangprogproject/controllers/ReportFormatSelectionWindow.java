@@ -6,7 +6,7 @@ import com.kiku.javalangprogproject.config.ListHeaderTable;
 import com.kiku.javalangprogproject.reportGenerators.ExcelReportGenerator;
 import com.kiku.javalangprogproject.reportGenerators.PrinterReportGenerator;
 import com.kiku.javalangprogproject.reportGenerators.WordDocxReportGenerator;
-import javafx.event.ActionEvent;
+
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -19,11 +19,9 @@ public class ReportFormatSelectionWindow extends BaseController {
     public Button excelButton;
 
 
-    public Button PdfButton;
-    public Button wordButton;
-
     public static String nameCallingController;
     public AnchorPane pane;
+    public AnchorPane paneReport;
 
     public static void help() {
         try {

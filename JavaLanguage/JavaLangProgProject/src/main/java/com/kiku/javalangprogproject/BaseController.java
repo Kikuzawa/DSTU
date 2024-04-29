@@ -1,10 +1,12 @@
 package com.kiku.javalangprogproject;
 
 import com.kiku.javalangprogproject.config.ButtonConfigurator;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,13 +15,20 @@ import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNoti
 
 public abstract class BaseController implements Initializable {
     @FXML
-    private Button ButtonRefresh, buttonReturn, ButtonComplain, ButtonReport, ButtonTaxService, ButtonDisposal, ButtonSuppliers, ButtonStock, ButtonAssortment, ButtonShops, ButtonMainMenu, buttonLogin, exitAppButton, searchButton;
+    private Button wordButton, PdfButton, ButtonOpenMap, excelButton, ButtonEdit, ButtonAdd, ButtonRemove,
+            ButtonRefresh, buttonReturn, ButtonComplain, ButtonReport, ButtonTaxService, ButtonDisposal,
+            ButtonSuppliers, ButtonStock, ButtonAssortment, ButtonShops, ButtonMainMenu, buttonLogin,
+            exitAppButton;
+
     protected final SceneController controller = SceneController.getInstance();
     @FXML
     protected TextField searchField;
+    @FXML
+    public AnchorPane pane;
 
 
     protected void onInitialize(){
+
     }
 
 
@@ -31,6 +40,11 @@ public abstract class BaseController implements Initializable {
         } catch (Exception ex) {
             showErrorNotification(ex.getMessage());
         }
+
+
+
+
+
 
 
         try {
@@ -89,6 +103,45 @@ public abstract class BaseController implements Initializable {
                     event -> controller.switchToComplainPage(),
                     "Не получилось переключиться на прошлое окно"
             );
+
+
+
+            ButtonConfigurator.setupButtonEvent(
+                    ButtonOpenMap
+            );
+
+            ButtonConfigurator.setupButtonEvent(
+                    ButtonReport
+            );
+
+            ButtonConfigurator.setupButtonEvent(
+                    ButtonEdit
+            );
+
+            ButtonConfigurator.setupButtonEvent(
+                    ButtonAdd
+            );
+
+            ButtonConfigurator.setupButtonEvent(
+                    ButtonRemove
+            );
+
+            ButtonConfigurator.setupButtonEvent(
+                    ButtonRefresh
+            );
+
+            ButtonConfigurator.setupButtonEvent(
+                    wordButton
+            );
+
+            ButtonConfigurator.setupButtonEvent(
+                    PdfButton
+            );
+
+            ButtonConfigurator.setupButtonEvent(
+                    excelButton
+            );
+
 
 
         } catch (RuntimeException ignored) {
