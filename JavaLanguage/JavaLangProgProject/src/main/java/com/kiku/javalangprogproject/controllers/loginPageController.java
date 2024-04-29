@@ -21,6 +21,11 @@ public class loginPageController extends BaseController {
     public Label exceptionLabel;
     public Button exitAppButton;
 
+    /* Этот код на Java определяет метод switchToMainMenu,
+     * который получает ввод логина и пароля, затем пытается
+     * аутентифицировать пользователя с предоставленными учетными данными.
+     * В случае успешной аутентификации происходит переход на главное меню;
+     * в противном случае проигрывается звук ошибки и выводится соответствующее сообщение. */
 
     @FXML
     public void switchToMainMenu() {
@@ -37,9 +42,9 @@ public class loginPageController extends BaseController {
 
     public void clearAllFileds() {
         try {
-        exceptionLabel.setText("");
-        loginField.clear();
-        passwordField.clear();
+            exceptionLabel.setText("");
+            loginField.clear();
+            passwordField.clear();
         } catch (Exception ex) {
             showErrorNotification(ex.getMessage());
         }

@@ -14,12 +14,20 @@ import java.util.Objects;
 import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 
+// Конфигуратор сцен
+
 public class SceneConfigurator {
 
     private static final String CSS = Objects.requireNonNull(SceneConfigurator.class.getResource("Styles.css")).toExternalForm();
 
     private static double xOffset = 0, yOffset = 0;
 
+    /**
+     * Устанавливает возможность перетаскивания окна в приложении.
+     *
+     * @param  stage      JavaFX сцена, которую нужно сделать перетаскиваемой
+     * @param  windowFXML родительский узел содержимого окна в формате FXML
+     */
 
     private static void setWindowDragged(Stage stage, Parent windowFXML) {
         try {
@@ -39,6 +47,13 @@ public class SceneConfigurator {
     }
 
 
+    /**
+     * Создает сцену для указанного Stage, используя указанный путь к файлу.
+     *
+     * @param  stage    Stage для создания сцены
+     * @param  filePath путь к файлу FXML
+     * @return          созданная сцена
+     */
     public static Scene createScene(Stage stage, String filePath)  {
         try {
         Parent windowFXML = FXMLLoader.load(Objects.requireNonNull(SceneConfigurator.class.getResource(Paths.PATH_FXML + filePath)));
@@ -52,8 +67,10 @@ public class SceneConfigurator {
         }
 
 
+        // Заполняем сцену прозрачным фоном
         scene.setFill(Color.TRANSPARENT);
 
+        // Подключаем стили
         scene.getStylesheets().add(CSS);
 
 

@@ -9,7 +9,10 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
+// Главный класс, который запускает приложение
+
 public class Main extends Application {
+
 
 
     @Override

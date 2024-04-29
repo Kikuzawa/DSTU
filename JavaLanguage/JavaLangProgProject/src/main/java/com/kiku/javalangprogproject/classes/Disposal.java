@@ -2,6 +2,8 @@ package com.kiku.javalangprogproject.classes;
 
 public class Disposal {
 
+    // Класс "Утилизация"
+
     public int idDisposal;
     public String nameDisposal;
     public String reasonDisposal;

@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="">
 <head>
+    <!-- Устанавливаем заголовок страницы -->
     <title>Быстрый старт. Размещение интерактивной карты на странице</title>
+
+    <!-- Определяем набор символов для документа -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- Включаем скрипт API Яндекс.Карт с ключом API и настройками языка -->
     <script src="https://api-maps.yandex.ru/2.1/?apikey=b288fcb9-3931-426d-bc53-31de8880f8ae&lang=ru_RU" type="text/javascript">
     </script>
 
+    <!-- Включаем файл TypeScript с названием common.ts -->
     <script type="text/javascript" src="common.ts"></script>
-    <script type="text/javascript">
 
+    <!-- JavaScript код для инициализации карты -->
+    <script type="text/javascript">
         ymaps.ready(init);
         function init(){
+            // Создаем карту с центром в [47.222078, 39.720358] и масштабом 12
             var myMap = new ymaps.Map("map", {
                 center: [47.222078, 39.720358],
                 zoom: 12
             });
 
+            // Добавляем маркеры на карту на основе массива markersGeoJsonSourc
             markersGeoJsonSourc.forEach(marker => {
                 var placemark = new ymaps.Placemark(marker.coordinates, {
                     hintContent: marker.title,
@@ -26,15 +35,14 @@
                 myMap.geoObjects.add(placemark);
             });
 
-
-            // Set the size of the map to 100% width and height of the window
+            // Устанавливаем размер карты на 100% ширины и высоты окна
             document.getElementById('map').style.width = '98vw';
             document.getElementById('map').style.height = '95vh';
             myMap.container.fitToViewport();
         }
-
-
     </script>
+
+    <!-- Стилизация для элементов HTML и body -->
     <style>
         html, body {
             margin: 0;
@@ -44,9 +52,8 @@
     </style>
 </head>
 
-
 <body>
-    <div id="map" style="width: 800px; height: 600px"></div>
+<!-- Место для карты с начальной шириной и высотой -->
+<div id="map" style="width: 800px; height: 600px"></div>
 </body>
-
 </html>

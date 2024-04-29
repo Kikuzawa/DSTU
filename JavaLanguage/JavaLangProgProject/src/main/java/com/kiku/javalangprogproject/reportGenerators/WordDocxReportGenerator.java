@@ -17,6 +17,13 @@ import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNoti
 
 public class WordDocxReportGenerator {
 
+    /* Этот код на Java создает документ Word и заполняет его данными из массива JSON.
+    Он принимает заголовки, имя файла и имя таблицы в качестве параметров. Код читает
+    JSON файл, создает таблицу в документе Word, заполняет таблицу данными из массива JSON,
+    сохраняет документ Word и открывает его на рабочем столе. Если происходит исключение,
+    показывается уведомление об ошибке.
+     */
+
     public static void createWordDocxAssortiment(String[] headers, String filename, String nameTable) {
         try {
             JSONArray jsonArray;

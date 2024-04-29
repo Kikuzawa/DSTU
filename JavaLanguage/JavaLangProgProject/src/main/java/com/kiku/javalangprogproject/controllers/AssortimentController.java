@@ -1,3 +1,7 @@
+/**
+ * Контроллер для управления ассортиментом обуви.
+ */
+
 package com.kiku.javalangprogproject.controllers;
 
 import com.kiku.javalangprogproject.BaseController;
@@ -70,6 +74,10 @@ public class AssortimentController extends BaseController {
     private Scene scene;
 
 
+
+    /**
+     * Метод для извлечения цветов из базы данных и заполнения JavaFX ObservableList.
+     */
     public void getColours() {
         try {
             ObservableList<String> items = FXCollections.observableArrayList();
@@ -94,6 +102,13 @@ public class AssortimentController extends BaseController {
         }
     }
 
+    /**
+     * Метод для получения элементов из базы данных 'complection',
+     * инициализирует список 'items' с данными, создает соединение с базой данных,
+     * выполняет SQL-запрос, извлекает значения из результата запроса и добавляет их в список 'items',
+     * устанавливает значения 'items' в элемент 'complectionAddShoe' и устанавливает первое значение в качестве выбранного.
+     * В случае возникновения исключения, вызывается функция showErrorNotification с сообщением об ошибке.
+     */
     public void getComplection() {
         try {
             ObservableList<String> items = FXCollections.observableArrayList();
@@ -116,6 +131,13 @@ public class AssortimentController extends BaseController {
         }
     }
 
+    /**
+     * Метод для получения элементов из базы данных 'season',
+     * инициализирует список 'items' с данными, создает соединение с базой данных,
+     * выполняет SQL-запрос, извлекает значения из результата запроса и добавляет их в список 'items',
+     * устанавливает значения 'items' в элемент 'seasonAddShoe' и устанавливает первое значение в качестве выбранного.
+     * В случае возникновения исключения, вызывается функция showErrorNotification с сообщением об ошибке.
+     */
     public void getSeason() {
         try {
             ObservableList<String> items = FXCollections.observableArrayList();

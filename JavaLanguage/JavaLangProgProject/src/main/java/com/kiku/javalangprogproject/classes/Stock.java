@@ -2,6 +2,8 @@ package com.kiku.javalangprogproject.classes;
 
 public class Stock {
 
+    // Класс "Сырье"
+
     public int idStock;
 
     public double getTotalStock() {

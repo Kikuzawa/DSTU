@@ -15,6 +15,7 @@ import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNoti
 
 public class CreateJsonFromTable {
 
+    // Методы для сохранения JSON файлов каждой таблицы в контроллерах
 
 
     public static void jsonCreateShoe(TableView<Shoe> shoesTable) {

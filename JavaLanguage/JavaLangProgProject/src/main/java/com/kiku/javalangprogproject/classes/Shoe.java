@@ -2,6 +2,7 @@ package com.kiku.javalangprogproject.classes;
 
 public class Shoe {
 
+    // Класс "Обувь"
     int idShoe;
     String nameShoe;
     Double costShoe;

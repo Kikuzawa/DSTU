@@ -10,6 +10,7 @@ public class DbConnect {
     private static Connection connection;
 
 
+    // Создание соединения к базе данных
     public static Connection getConnect (){
         try {
             String password = "root";

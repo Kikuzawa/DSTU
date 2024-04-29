@@ -15,6 +15,11 @@ import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNoti
 
 public class PrinterReportGenerator {
 
+    /* Этот фрагмент кода на Java определяет метод createPrinterAssortiment, который считывает JSON-файл,
+    создает таблицу на основе предоставленных заголовков, заполняет таблицу данными из JSON-файла,
+    а затем печатает таблицу с помощью задания на печать принтера. Если в процессе возникают исключения,
+    отображается уведомление об ошибке.
+     */
     public static void createPrinterAssortiment(String[] headers, String filename)  { try {
         JSONArray jsonArray;
         try (FileInputStream fis = new FileInputStream(Paths.PATH_JSONS +filename)) {

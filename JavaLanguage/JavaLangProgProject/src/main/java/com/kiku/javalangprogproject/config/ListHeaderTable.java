@@ -1,7 +1,9 @@
 package com.kiku.javalangprogproject.config;
 
 
-
+/**
+ * Содержит константные массивы заголовков для различных таблиц.
+ */
 public class ListHeaderTable {
     public static final String[] ASSORTIMENT = {"id", "name", "cost", "color", "stock", "size", "season", "complection"};
     public static final String[] SHOPS = {"id", "name", "location", "email", "number", "fio"};

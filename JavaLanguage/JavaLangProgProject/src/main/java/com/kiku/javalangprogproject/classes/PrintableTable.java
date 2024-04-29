@@ -7,18 +7,29 @@ import java.awt.print.PrinterException;
 import java.util.ArrayList;
 import java.util.List;
 
+//Класс PrintableTable предоставляет функционал для печати таблиц на печатной странице.
 public class PrintableTable implements Printable {
 
-    private String tableData;
+    private final String tableData;
     private static final int PAGE_WIDTH = 595; // A4 paper size width in points
     private static final int PAGE_HEIGHT = 842; // A4 paper size height in points
     private static final int ROW_HEIGHT = 20; // Height of each row in points
-    private int numRowsPerPage;
+    private final int numRowsPerPage;
 
     public PrintableTable(String tableData) {
         this.tableData = tableData;
         this.numRowsPerPage = PAGE_HEIGHT / ROW_HEIGHT;
     }
+
+
+    /**
+     * Генерирует печатный отчет для указанных данных таблицы на каждой странице документа.
+     *
+     * @param  graphics       графический контекст для печати
+     * @param  pageFormat     размер и ориентация печатаемой страницы
+     * @param  pageIndex      индекс страницы (с нуля) для печати
+     * @return                NO_SUCH_PAGE, если pageIndex выходит за пределы, PAGE_EXISTS в противном случае
+     */
 
     @Override
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
@@ -91,7 +102,15 @@ public class PrintableTable implements Printable {
         return PAGE_EXISTS;
     }
 
-    // Method to wrap text to fit within a given width
+    /**
+     * Генерирует массив строк, оборачивая входной текст так, чтобы он вписывался в указанную ширину столбца.
+     *
+     * @param  column       имя столбца
+     * @param  g2d          графический контекст
+     * @param  columnWidth  ширина столбца
+     * @param  text         входной текст для оборачивания
+     * @return              массив строк, представляющий обернутый текст
+     */
     private String[] wrapText(String column, Graphics2D g2d, int columnWidth, String text) {
         FontMetrics fm = g2d.getFontMetrics();
         List<String> lines = new ArrayList<>();
@@ -113,6 +132,18 @@ public class PrintableTable implements Printable {
                 .map(line -> shrinkFont(g2d, line, columnWidth, fontSize))
                 .toArray(String[]::new);
     }
+
+
+    /**
+     * Генерирует уменьшенную версию заданного текста, чтобы он поместился в указанной ширине столбца путем
+     *  настройки размера шрифта.
+     *
+     * @param  g2d            объект Graphics2D для отрисовки
+     * @param  text           текст, который нужно уменьшить
+     * @param  columnWidth    ширина столбца для помещения текста
+     * @param  targetFontSize начальный размер шрифта
+     * @return                уменьшенный текст, который помещается в ширину столбца
+     */
 
     private String shrinkFont(Graphics2D g2d, String text, int columnWidth, int targetFontSize) {
         FontMetrics fm = g2d.getFontMetrics(new Font(g2d.getFont().getName(), Font.PLAIN, targetFontSize));
@@ -139,7 +170,5 @@ public class PrintableTable implements Printable {
         return shrunkText.toString().trim();
     }
 
-    public int getWidthOfString(String text, FontMetrics fontMetrics) {
-        return fontMetrics.stringWidth(text);
-    }
+
 }

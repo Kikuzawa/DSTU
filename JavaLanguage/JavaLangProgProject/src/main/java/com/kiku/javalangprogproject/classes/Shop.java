@@ -1,6 +1,7 @@
 package com.kiku.javalangprogproject.classes;
 
 public class Shop {
+    // Класс "Магазин"
 
     public int idShop;
     public String nameShop;

@@ -9,9 +9,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
+
+
+/**
+ * Это базовый класс контроллера, который реализует интерфейс Initializable.
+ * Он предоставляет общий функционал и поля, которые могут быть использованы в различных классах контроллеров.
+ */
 
 public abstract class BaseController implements Initializable {
     @FXML
@@ -44,63 +51,60 @@ public abstract class BaseController implements Initializable {
 
 
 
-
-
-
         try {
 
             ButtonConfigurator.setupButtonEvent(
                     buttonReturn,
-                    event -> controller.switchToLoginPage(),
+                    event -> Objects.requireNonNull(controller).switchToLoginPage(),
                     "Не получилось переключиться на прошлое окно"
             );
 
             ButtonConfigurator.setupButtonEvent(
                     ButtonAssortment,
-                    event -> controller.switchToAssortimentPage(),
+                    event -> Objects.requireNonNull(controller).switchToAssortimentPage(),
                     "Не получилось переключиться на прошлое окно"
             );
 
             ButtonConfigurator.setupButtonEvent(
                     ButtonShops,
-                    event -> controller.switchToShopsPage(),
+                    event -> Objects.requireNonNull(controller).switchToShopsPage(),
                     "Не получилось переключиться на прошлое окно"
             );
             ButtonConfigurator.setupButtonEvent(
                     ButtonMainMenu,
-                    event -> controller.switchToMainMenu(),
+                    event -> Objects.requireNonNull(controller).switchToMainMenu(),
                     "Не получилось переключиться на прошлое окно"
             );
             ButtonConfigurator.setupButtonEvent(
                     ButtonStock,
-                    event -> controller.switchToStockPage(),
+                    event -> Objects.requireNonNull(controller).switchToStockPage(),
                     "Не получилось переключиться на прошлое окно"
             );
             ButtonConfigurator.setupButtonEvent(
                     ButtonSuppliers,
-                    event -> controller.switchToSuppliersPage(),
+                    event -> Objects.requireNonNull(controller).switchToSuppliersPage(),
                     "Не получилось переключиться на прошлое окно"
             );
 
             ButtonConfigurator.setupButtonEvent(
                     exitAppButton,
-                    event -> controller.exitApp(),
+                    event -> Objects.requireNonNull(controller).exitApp(),
                     "Не получилось переключиться на прошлое окно"
             );
             ButtonConfigurator.setupButtonEvent(
                     ButtonDisposal,
-                    event -> controller.switchToDisposalPage(),
+                    event -> Objects.requireNonNull(controller).switchToDisposalPage(),
                     "Не получилось переключиться на прошлое окно"
             );
             ButtonConfigurator.setupButtonEvent(
                     ButtonTaxService,
-                    event -> controller.switchToFaxPage(),
+                    event -> Objects.requireNonNull(controller).switchToFaxPage(),
                     "Не получилось переключиться на прошлое окно"
             );
 
             ButtonConfigurator.setupButtonEvent(
                     ButtonComplain,
-                    event -> controller.switchToComplainPage(),
+                    event -> Objects.requireNonNull(controller).switchToComplainPage(),
                     "Не получилось переключиться на прошлое окно"
             );
 

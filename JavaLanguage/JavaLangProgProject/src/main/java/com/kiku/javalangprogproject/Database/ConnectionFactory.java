@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.Properties;
 
 
-//Class to retrieve connection for database and login verfication.
+//Класс для получения соединения с базой данных и проверки логина.
 @SuppressWarnings("ALL")
 public class ConnectionFactory {
 
@@ -28,7 +28,7 @@ public class ConnectionFactory {
 
     public ConnectionFactory(){
         try {
-            //Username and Password saved as configurable properties to allow changes without recompilation.
+            //Логин и пароль сохраняются как конфигурируемые свойства, чтобы избежать перекомпиляции.
             prop = new Properties();
             prop.loadFromXML(new FileInputStream("lib/DBCredentials.xml"));
         } catch (IOException e) {
@@ -47,6 +47,9 @@ public class ConnectionFactory {
     }
 
 
+    //* Этот код на Java определяет метод checkLogin, который выполняет запрос к базе данных
+    // для проверки существования указанного username, password и userType в таблице users.
+    // Если найдена соответствующая запись, возвращается true; в противном случае возвращается false.
     public boolean checkLogin(String username, String password, String userType){
         String query = "SELECT * FROM users WHERE username='"
                 + username

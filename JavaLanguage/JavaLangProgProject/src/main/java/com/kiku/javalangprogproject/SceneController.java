@@ -1,7 +1,6 @@
 package com.kiku.javalangprogproject;
 
 
-
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -11,7 +10,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-
 
 import java.util.Stack;
 
@@ -23,11 +21,14 @@ public class SceneController {
     private final Stack<Scene> sceneHistory = new Stack<>();
 
 
+
+
     public void exitApp() {
         System.exit(0);
     }
 
 
+    //  Сцены
     enum Scenes {
         ;
 
@@ -45,6 +46,8 @@ public class SceneController {
         private static Scene COMPLAIN = null;
     }
 
+
+    //  Пути к файлам
     private enum ScenePath {
         ;
         private static final String MAIN_MENU_FXML_PATH = "mainMenu.fxml";
@@ -62,28 +65,17 @@ public class SceneController {
     }
 
 
+    // Конструктор
     private SceneController(Stage stage) {
         this.stage = stage;
     }
 
 
+    // Создание экземпляра
     public static SceneController getInstance(Stage stage) {
         try {
-        if (instance == null) {
-            instance = new SceneController(stage);
-        }
-        return instance;
-    } catch (Exception ex) {
-        showErrorNotification(ex.getMessage());
-    }
-        return null;
-    }
-
-
-    public static SceneController getInstance() {
-        try {
             if (instance == null) {
-                throw new IllegalStateException("SceneController не был инициализирован");
+                instance = new SceneController(stage);
             }
             return instance;
         } catch (Exception ex) {
@@ -92,7 +84,12 @@ public class SceneController {
         return null;
     }
 
+    public static SceneController getInstance() {
+        return instance;
+    }
 
+
+    // Переходы по сценам
     public void switchToMainMenu() {
         animationSlideWindow(Scenes.MAIN_MENU);
         sceneHistory.push(Scenes.LOGIN_PAGE);
@@ -146,6 +143,8 @@ public class SceneController {
     }
 
 
+
+    // Установка начальной сцены
     public void setStartMenu() {
         try {
 
@@ -169,6 +168,7 @@ public class SceneController {
     }
 
 
+    // Анимация переключения сцен
     private void animationSlideWindow(Scene scene) {
         try {
             var oldSceneRoot = this.stage.getScene().getRoot();
@@ -202,6 +202,7 @@ public class SceneController {
         }
     }
 
+    // Создание новой сцены  без анимации
     public void createAnimatedWindow(Scene newScene) {
         try {
             Stage newStage = new Stage();

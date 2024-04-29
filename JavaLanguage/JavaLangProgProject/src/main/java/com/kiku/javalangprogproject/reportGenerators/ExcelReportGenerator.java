@@ -15,6 +15,12 @@ import java.io.FileOutputStream;
 import static com.kiku.javalangprogproject.Utils.NotificationUtils.showErrorNotification;
 
 public class ExcelReportGenerator {
+
+    /* Этот фрагмент кода на Java создает файл Excel с указанным именем и именем таблицы.
+     Он читает данные из файла JSON, заполняет лист Excel этими данными, оформляет заголовки,
+    автоматически настраивает размеры столбцов, затем сохраняет и открывает файл Excel. Если происходит
+    ошибка во время этого процесса, показывается уведомление с сообщением об ошибке. */
+
     public static void createExcelAssortiment(String[] headers, String filename, String nameTable) {
         try {
             JSONArray jsonArray;

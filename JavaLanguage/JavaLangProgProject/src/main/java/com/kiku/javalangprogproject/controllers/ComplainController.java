@@ -1,3 +1,5 @@
+// Контроллер "Жалобы и Предложения"
+
 package com.kiku.javalangprogproject.controllers;
 
 import com.kiku.javalangprogproject.BaseController;

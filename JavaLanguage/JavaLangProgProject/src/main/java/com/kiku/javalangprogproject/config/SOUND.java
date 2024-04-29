@@ -4,6 +4,9 @@ import javafx.scene.media.AudioClip;
 
 import java.util.Objects;
 
+/**
+ * Перечисление звуковых эффектов для наведения, клика и ошибок.
+ */
 
 public enum SOUND {
     ;

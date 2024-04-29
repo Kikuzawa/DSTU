@@ -9,12 +9,21 @@ public class ButtonConfigurator {
 
     private static ButtonConfigurator instance;
 
+
+
     public static ButtonConfigurator getInstance() {
         if (instance == null)
             instance = new ButtonConfigurator();
         return instance;
     }
 
+
+    /**
+     * Метод для настройки обработки событий кнопки при наведении мыши и клике.
+     *
+     * @param  button        кнопка ButtonBase, для которой обрабатываются события
+     * @param  eventHandler  обработчик событий для событий нажатия мыши
+     */
 
     public static void setupButtonEvent(ButtonBase button, EventHandler<MouseEvent> eventHandler) {
         // Обработка того момента, когда мышка наводится на кнопку.
@@ -31,6 +40,13 @@ public class ButtonConfigurator {
 
 
 
+    /**
+     * Метод для настройки события кнопки с обработкой ошибок.
+     *
+     * @param  button       объект ButtonBase, к которому присоединяется событие
+     * @param  action       действие CheckedConsumer, которое будет выполнено
+     * @param  errorMessage сообщение об ошибке, которое будет сгенерировано в случае исключения
+     */
     public static void setupButtonEvent(ButtonBase button, CheckedConsumer action, String errorMessage) {
         EventHandler<MouseEvent> eventHandler = event -> {
             try {
@@ -42,6 +58,12 @@ public class ButtonConfigurator {
         setupButtonEvent(button, eventHandler);
     }
 
+    /**
+     * Настройка события кнопки с звуковыми эффектами для нажатия и наведения.
+     *
+     * @param  button	Кнопка ButtonBase для настройки события
+     * @return        	void
+     */
     public static void setupButtonEvent(ButtonBase button) {
         EventHandler<MouseEvent> eventHandler = event -> {
             try {

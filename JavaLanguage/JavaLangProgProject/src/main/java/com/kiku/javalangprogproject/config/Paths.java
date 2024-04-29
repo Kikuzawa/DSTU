@@ -1,5 +1,8 @@
 package com.kiku.javalangprogproject.config;
 
+/**
+ * Содержит пути к различным ресурсам в проекте.
+ */
 public class Paths {
 
     public static final String PATH_JSONS = "JSONs\\";

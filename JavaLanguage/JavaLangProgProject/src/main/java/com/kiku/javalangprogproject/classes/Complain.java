@@ -1,6 +1,8 @@
 package com.kiku.javalangprogproject.classes;
 
 public class Complain {
+
+    // Класс "Жалобы и предложения"
     Integer id;
 
     public Complain(Integer id, String number, String sender, String type, String comment) {

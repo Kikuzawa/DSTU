@@ -1,6 +1,10 @@
 package com.kiku.javalangprogproject.classes;
 
+
+
 public class Tax {
+
+    // Класс "Налоги"
     public Integer idTax;
     public String monthTax;
     public Integer yearTax;

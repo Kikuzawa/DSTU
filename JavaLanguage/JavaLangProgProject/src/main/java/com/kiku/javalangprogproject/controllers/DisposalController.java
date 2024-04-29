@@ -1,3 +1,5 @@
+// Контроллер "Утилизация"
+
 package com.kiku.javalangprogproject.controllers;
 
 import com.kiku.javalangprogproject.BaseController;

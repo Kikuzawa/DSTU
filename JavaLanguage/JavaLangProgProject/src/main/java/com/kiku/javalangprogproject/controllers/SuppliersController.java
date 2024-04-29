@@ -1,3 +1,5 @@
+// Контроллер Поставщики
+
 package com.kiku.javalangprogproject.controllers;
 
 import com.kiku.javalangprogproject.BaseController;

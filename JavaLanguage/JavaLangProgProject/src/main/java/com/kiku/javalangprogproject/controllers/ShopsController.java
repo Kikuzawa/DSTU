@@ -1,3 +1,4 @@
+// Контроллер "Магазины"
 package com.kiku.javalangprogproject.controllers;
 
 import com.kiku.javalangprogproject.BaseController;
@@ -216,6 +217,13 @@ public class ShopsController extends BaseController {
         }
     }
 
+
+    /**
+     * Этот код на Java определяет метод openMap, который пытается загрузить HTML-файл
+     * (openstreetmap.html) из ресурсов, открывает новое окно браузера и отображает карту
+     * с помощью компонента WebView. Размер окна установлен на 800x600 пикселей.
+     * Если происходит исключение во время этого процесса, отображается уведомление об ошибке.
+     */
     public void openMap() {
         try {
             // Получить URL для файла openstreetmap.html
@@ -227,15 +235,19 @@ public class ShopsController extends BaseController {
                 WebEngine webEngine = webView.getEngine();
                 webEngine.load(Objects.requireNonNull(url).toExternalForm());
 
+
+
                 Stage stage = new Stage();
                 Scene scene = new Scene(new Group(webView));
 
-                // Set the initial size of the scene
-                stage.setWidth(800);
+                // Установить название окна на "Карта магазинов"
+                stage.setTitle("Карта магазинов");
 
+                // Установить начальный размер сцены
+                stage.setWidth(800);
                 stage.setHeight(600);
 
-                // Add a listener to resize the scene when the stage is resized
+                // Добавить слушатель для изменения размера сцены при изменении размера окна
                 stage.widthProperty().addListener((obs, oldVal, newVal) -> {
                     stage.setWidth((double) newVal);
                     webView.setPrefWidth((double) newVal);
@@ -256,6 +268,10 @@ public class ShopsController extends BaseController {
         }
     }
 
+    // Этот код на Java генерирует файл TypeScript с именем common.ts, необходимый для карт. Он извлекает данные,
+    // формирует строку определенного формата и записывает ее в два разных места:
+    // по указанному пути и на основе пути к ресурсному файлу. Если в процессе возникают
+    // исключения, то выводится уведомление об ошибке с сообщением об исключении.
     public void generateCommonTSFile() {
         try {
             StringBuilder commonTsContent = new StringBuilder();

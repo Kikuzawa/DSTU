@@ -2,6 +2,8 @@ package com.kiku.javalangprogproject.classes;
 
 public class Supplier {
 
+    // Класс "Поставщики"
+
     public int idSupplier;
     public String nameSupplier;
     public String locationsSupplier;
