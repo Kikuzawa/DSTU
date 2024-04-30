@@ -215,8 +215,8 @@ public class BaiesController {
         Set<String> uniqueWords = new HashSet<>();
         Set<String> spamWords = new HashSet<>();
         Set<String> noSpamWords = new HashSet<>();
-        List<String> spamMessages = getMessages("СПАМ");
-        List<String> noSpamMessages = getMessages("НЕ СПАМ");
+        List<String> spamMessages = getMessages("SPAM");
+        List<String> noSpamMessages = getMessages("NO SPAM");
 
 
         String[] wordsCorrectMessage = removePrepositions(removePunctuation(messageField.getText().toLowerCase())).split("\\s+");
