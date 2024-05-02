@@ -23,6 +23,7 @@ public class BaiesController {
     public TextField pSpamField;
     public TextField pNoSpamField;
     public Label stavniLabel;
+    public TextField clearWordField;
     Double countSpamP;
     Double countNoSpamP;
 
@@ -191,7 +192,7 @@ public class BaiesController {
      */
 
     public String removePrepositions(String message) {
-        List<String> prepositions = Arrays.asList("в", "на", "из", "от", "до", "по", "за", "под", "над", "к", "с", "у", "о", "об", "перед", "через", "между", "подо");
+        List<String> prepositions = Arrays.asList(clearWordField.getText().split("\\s+"));
 
         String[] words = message.split("\\s+");
         StringBuilder result = new StringBuilder();

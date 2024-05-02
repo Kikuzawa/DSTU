@@ -62,4 +62,6 @@
    <Label layoutX="523.0" layoutY="534.0" text="P (&quot;СПАМ&quot;)" />
    <Label layoutX="503.0" layoutY="591.0" text="P (&quot;НЕ СПАМ&quot;)" />
    <Label fx:id="stavniLabel" layoutX="677.0" layoutY="561.0" text="||" />
+   <Label layoutX="498.0" layoutY="738.0" prefWidth="90.0" text="Слова исключения" textAlignment="CENTER" wrapText="true" />
+   <TextField fx:id="clearWordField" layoutX="590.0" layoutY="726.0" prefHeight="58.0" prefWidth="580.0" promptText="Слова-исключения" text="в на из от до по за под над к с у о об перед через между подо и" />
 </Pane>
