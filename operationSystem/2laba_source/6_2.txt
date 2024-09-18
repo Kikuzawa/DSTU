@@ -1,0 +1,7 @@
+@ECHO OFF
+setlocal enabledelayedexpansion
+
+for /f %%n in ( 'dir /s %1*.%2 /b /s /os ^| find /c /v **' ) do
+set /a ss~%%n-3 & (for /f usebackq %%k in ('dir /s %1*.%2 /b /s /os ^|more +!ss!') do set s1=!s1! %%k)
+for %%k in (!s1!) do @echo %%~ztnxk
+pause>nul

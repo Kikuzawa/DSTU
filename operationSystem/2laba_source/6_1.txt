@@ -1,0 +1,10 @@
+@ECHO OFF
+setlocal enabledelayedexpansion
+
+set size=0
+cd /d %1
+if %ERRORLEVEL% NEQ 0 exit /b
+for /r %%a in (*) do if "%%~xa"=="%2" if %%~za GTR !size! set size=%%~za
+for /r %%a in (*) do if "%%~xa"=="%2" if %%~za EQU %size% echo %%~fa
+endlocal
+pause>nul

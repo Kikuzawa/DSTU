@@ -1,0 +1,128 @@
+Displays a list of files and subdirectories in a directory.
+
+DIR [drive:][path][filename] [/A[[:]attributes]] [/B] [/C] [/D] [/L] [/N]
+  [/O[[:]sortorder]] [/P] [/Q] [/R] [/S] [/T[[:]timefield]] [/W] [/X] [/4]
+
+  [drive:][path][filename]
+              Specifies drive, directory, and/or files to list.
+
+  /A          Displays files with specified attributes.
+  attributes   D  Directories                R  Read-only files
+               H  Hidden files               A  Files ready for archiving
+               S  System files               I  Not content indexed files
+               L  Reparse Points             O  Offline files
+               -  Prefix meaning not
+  /B          Uses bare format (no heading information or summary).
+  /C          Display the thousand separator in file sizes.  This is the
+              default.  Use /-C to disable display of separator.
+  /D          Same as wide but files are list sorted by column.
+  /L          Uses lowercase.
+  /N          New long list format where filenames are on the far right.
+  /O          List by files in sorted order.
+  sortorder    N  By name (alphabetic)       S  By size (smallest first)
+               E  By extension (alphabetic)  D  By date/time (oldest first)
+               G  Group directories first    -  Prefix to reverse order
+  /P          Pauses after each screenful of information.
+  /Q          Display the owner of the file.
+  /R          Display alternate data streams of the file.
+  /S          Displays files in specified directory and all subdirectories.
+  /T          Controls which time field displayed or used for sorting
+  timefield   C  Creation
+              A  Last Access
+              W  Last Written
+  /W          Uses wide list format.
+  /X          This displays the short names generated for non-8dot3 file
+              names.  The format is that of /N with the short name inserted
+              before the long name. If no short name is present, blanks are
+              displayed in its place.
+  /4          Displays four-digit years
+
+Switches may be preset in the DIRCMD environment variable.  Override
+preset switches by prefixing any switch with - (hyphen)--for example, /-W.
+Copies files and directory trees.
+
+XCOPY source [destination] [/A | /M] [/D[:date]] [/P] [/S [/E]] [/V] [/W]
+                           [/C] [/I] [/-I] [/Q] [/F] [/L] [/G] [/H] [/R] [/T]
+                           [/U] [/K] [/N] [/O] [/X] [/Y] [/-Y] [/Z] [/B] [/J]
+                           [/EXCLUDE:file1[+file2][+file3]...] [/COMPRESS]
+
+  source       Specifies the file(s) to copy.
+  destination  Specifies the location and/or name of new files.
+  /A           Copies only files with the archive attribute set,
+               doesn't change the attribute.
+  /M           Copies only files with the archive attribute set,
+               turns off the archive attribute.
+  /D:m-d-y     Copies files changed on or after the specified date.
+               If no date is given, copies only those files whose
+               source time is newer than the destination time. 
+  /EXCLUDE:file1[+file2][+file3]...
+               Specifies a list of files containing strings.  Each string
+               should be in a separate line in the files.  When any of the
+               strings match any part of the absolute path of the file to be
+               copied, that file will be excluded from being copied.  For
+               example, specifying a string like \obj\ or .obj will exclude
+               all files underneath the directory obj or all files with the
+               .obj extension respectively.
+  /P           Prompts you before creating each destination file.
+  /S           Copies directories and subdirectories except empty ones.
+  /E           Copies directories and subdirectories, including empty ones.
+               Same as /S /E. May be used to modify /T.
+  /V           Verifies the size of each new file.
+  /W           Prompts you to press a key before copying.
+  /C           Continues copying even if errors occur.
+  /I           If destination does not exist and copying more than one file,
+               assumes that destination must be a directory.
+  /-I          If destination does not exist and copying a single specified file,
+               assumes that destination must be a file.
+  /Q           Does not display file names while copying.
+  /F           Displays full source and destination file names while copying.
+  /L           Displays files that would be copied.
+  /G           Allows the copying of encrypted files to destination that does
+               not support encryption.
+  /H           Copies hidden and system files also.
+  /R           Overwrites read-only files.
+  /T           Creates directory structure, but does not copy files. Does not
+               include empty directories or subdirectories. /T /E includes
+               empty directories and subdirectories.
+  /U           Copies only files that already exist in destination.
+  /K           Copies attributes. Normal Xcopy will reset read-only attributes.
+  /N           Copies using the generated short names.
+  /O           Copies file ownership and ACL information.
+  /X           Copies file audit settings (implies /O).
+  /Y           Suppresses prompting to confirm you want to overwrite an
+               existing destination file.
+  /-Y          Causes prompting to confirm you want to overwrite an
+               existing destination file.
+  /Z           Copies networked files in restartable mode.
+  /B           Copies the Symbolic Link itself versus the target of the link.
+  /J           Copies using unbuffered I/O. Recommended for very large files.
+  /COMPRESS    Request network compression during file transfer where
+               applicable.
+  /SPARSE      Preserves the sparse state when copying a sparse file.
+
+The switch /Y may be preset in the COPYCMD environment variable.
+This may be overridden with /-Y on the command line.
+Белый
+Галичев
+Заболотный
+Колпаков
+Котелевец
+Павленко
+Секунов
+Смирнов
+Таварацян
+Товмасян
+Фукаревич
+Штепа
+Алферов
+Ермак
+Картошкин
+Колтакова
+Маковкин
+Рябухин
+Слюсарев
+Соколов
+Тисейко
+Турчанинов
+Ширин
+Юрченко
