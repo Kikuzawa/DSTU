@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A793DB4D-CCF3-4770-B850-4508D6E540EE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DoAnPaint</RootNamespace>
+    <AssemblyName>DoAnPaint</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.WinForms, Version=0.9.7.1, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.WinForms.0.9.7.1\lib\net45\LiveCharts.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ReaLTaiizor, Version=3.8.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReaLTaiizor.3.8.0.7\lib\net48\ReaLTaiizor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\Graphs\Core\Abstract\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Properties\Graphs\Core\Abstract\BaseForm.Designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Graphs\Core\Helpers\FormFactory.cs" />
+    <Compile Include="Properties\Graphs\Core\Interfaces\IFormFactory.cs" />
+    <Compile Include="Properties\Graphs\Core\Interfaces\IMainPresenter.cs" />
+    <Compile Include="Properties\Graphs\Core\Interfaces\IMainView.cs" />
+    <Compile Include="Properties\Graphs\Core\Interfaces\IModel.cs" />
+    <Compile Include="Properties\Graphs\Core\Interfaces\IPresenter.cs" />
+    <Compile Include="Properties\Graphs\Core\Interfaces\IView.cs" />
+    <Compile Include="Properties\Graphs\Core\MDIProperties.cs" />
+    <Compile Include="Properties\Graphs\Models\NinthQuestion\FirstModel.cs" />
+    <Compile Include="Properties\Graphs\Models\NinthQuestion\SecondModel.cs" />
+    <Compile Include="Properties\Graphs\Models\NinthQuestion\ThirdModel.cs" />
+    <Compile Include="Properties\Graphs\Presenters\BasePresenter.cs" />
+    <Compile Include="Properties\Graphs\Presenters\MainPresenter.cs" />
+    <Compile Include="Properties\Graphs\Views\FormNinthQuestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Properties\Graphs\Views\FormNinthQuestion.Designer.cs">
+      <DependentUpon>FormNinthQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paint\PaintView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paint\PaintView.Designer.cs">
+      <DependentUpon>PaintView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paint\Model\DataManager.cs" />
+    <Compile Include="Paint\Model\GroupShape.cs" />
+    <Compile Include="Paint\Model\MCurve.cs" />
+    <Compile Include="Paint\Model\MEllipse.cs" />
+    <Compile Include="Paint\Model\MLine.cs" />
+    <Compile Include="Paint\Model\MPen.cs" />
+    <Compile Include="Paint\Model\MPolygon.cs" />
+    <Compile Include="Paint\Model\MRectangle.cs" />
+    <Compile Include="Paint\Model\Shape.cs" />
+    <Compile Include="Paint\Presenter\Alter\IPresenterAlter.cs" />
+    <Compile Include="Paint\Presenter\Alter\PresenterAlterImp.cs" />
+    <Compile Include="Paint\Presenter\Draws\IPresenterDraw.cs" />
+    <Compile Include="Paint\Presenter\Draws\PresenterDrawImp.cs" />
+    <Compile Include="Paint\Presenter\Updates\IPresenterUpdate.cs" />
+    <Compile Include="Paint\Presenter\Updates\PresenterUpdateImp.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Paint\Utils\CurrentShapeStatus.cs" />
+    <Compile Include="Paint\Utils\FindRegion.cs" />
+    <Compile Include="Paint\View\IViewPaint.cs" />
+    <EmbeddedResource Include="Properties\Graphs\Core\Abstract\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Graphs\Views\FormNinthQuestion.resx">
+      <DependentUpon>FormNinthQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paint\PaintView.resx">
+      <DependentUpon>PaintView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_edit_color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_curve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_ellipse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_eraser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_fill.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_line.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_pen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_polygon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_rectangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_select.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_ungroup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_apple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_about.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_clear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_location.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
