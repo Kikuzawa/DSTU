@@ -19,8 +19,8 @@ namespace laboratory1
         {
             InitializeComponent();
             allowedChars = new HashSet<char>(
-               " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-*/().,".ToCharArray() +
-               " абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789+-*/().,"
+               " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-().,".ToCharArray() +
+               " абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789!\"\'`?.,"
            );
         }
 
@@ -101,6 +101,7 @@ namespace laboratory1
 
                 // Расчет энтропии
                 double entropy = CalculateEntropy(charFrequencies.Select(f => (f.Character, f.Frequency)).ToList());
+                double kol_info = entropy * inputText.Length / 8 / 1024;
 
                 // Отображение результатов
                 dataGridView.DataSource = charFrequencies;
@@ -109,6 +110,7 @@ namespace laboratory1
 
                 // Отображение энтропии
                 HresultLabel.Text = entropy.ToString();
+                IResultLabel.Text = kol_info.ToString() + " KB or " + (kol_info / 1024).ToString() + " MB";
 
                 CreateHistogram();
 
@@ -175,8 +177,10 @@ namespace laboratory1
 
         }
 
-       
-        
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

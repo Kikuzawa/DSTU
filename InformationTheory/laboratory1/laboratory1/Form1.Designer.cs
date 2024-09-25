@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.runButton = new System.Windows.Forms.Button();
@@ -43,6 +43,8 @@
             this.HresultLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.IResultLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -51,18 +53,18 @@
             // 
             // chart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart.Legends.Add(legend2);
             this.chart.Location = new System.Drawing.Point(13, 21);
             this.chart.Name = "chart";
             this.chart.Size = new System.Drawing.Size(791, 544);
             this.chart.TabIndex = 0;
             this.chart.Text = "chart1";
-            title1.Name = "Title1";
-            title1.Text = "Character Frequencies";
-            this.chart.Titles.Add(title1);
+            title2.Name = "Title1";
+            title2.Text = "Character Frequencies";
+            this.chart.Titles.Add(title2);
             this.chart.Click += new System.EventHandler(this.chart_Click);
             // 
             // groupBox1
@@ -145,6 +147,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.IResultLabel);
+            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.HresultLabel);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.chart);
@@ -159,7 +163,7 @@
             // 
             this.HresultLabel.AutoSize = true;
             this.HresultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HresultLabel.Location = new System.Drawing.Point(73, 604);
+            this.HresultLabel.Location = new System.Drawing.Point(73, 589);
             this.HresultLabel.Name = "HresultLabel";
             this.HresultLabel.Size = new System.Drawing.Size(63, 25);
             this.HresultLabel.TabIndex = 2;
@@ -169,7 +173,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(26, 604);
+            this.label1.Location = new System.Drawing.Point(26, 589);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 25);
             this.label1.TabIndex = 1;
@@ -187,6 +191,26 @@
             this.dataGridView.Size = new System.Drawing.Size(311, 361);
             this.dataGridView.TabIndex = 3;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(26, 629);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 25);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "I = ";
+            // 
+            // IResultLabel
+            // 
+            this.IResultLabel.AutoSize = true;
+            this.IResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IResultLabel.Location = new System.Drawing.Point(73, 629);
+            this.IResultLabel.Name = "IResultLabel";
+            this.IResultLabel.Size = new System.Drawing.Size(63, 25);
+            this.IResultLabel.TabIndex = 4;
+            this.IResultLabel.Text = "None";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -197,7 +221,8 @@
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Лабораторная работа 1 - Энтропия. Котелевец К.А. ВКБ31";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -222,6 +247,8 @@
         private System.Windows.Forms.Label HresultLabel;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.Label IResultLabel;
+        private System.Windows.Forms.Label label2;
     }
 }
 
