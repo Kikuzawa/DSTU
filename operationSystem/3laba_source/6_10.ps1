@@ -1,0 +1,3 @@
+﻿Compress-Archive -Path "C:\Users\5555k\Documents\ДГТУ-MSI\-- 3 курс - 5 семестр\Операционные системы\3laba_source\*" -DestinationPath "C:\Users\5555k\Documents\ДГТУ-MSI\-- 3 курс - 5 семестр\Операционные системы\3laba_source\MyZip.zip"
+
+Expand-Archive -Path "C:\Users\5555k\Documents\ДГТУ-MSI\-- 3 курс - 5 семестр\Операционные системы\3laba_source\MyZip.zip" -DestinationPath "C:\Users\5555k\Documents\ДГТУ-MSI\-- 3 курс - 5 семестр\Операционные системы\3laba_source\tut_zip"
