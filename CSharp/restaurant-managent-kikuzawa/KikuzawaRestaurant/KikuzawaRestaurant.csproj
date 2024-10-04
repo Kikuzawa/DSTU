@@ -530,6 +530,15 @@
   <ItemGroup>
     <None Include="Images\a1.PNG" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="DB\candyDB.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\candyDB_log.ldf">
+      <DependentUpon>candyDB.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
