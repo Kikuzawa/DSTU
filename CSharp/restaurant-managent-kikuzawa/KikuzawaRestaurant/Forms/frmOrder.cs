@@ -481,7 +481,7 @@ namespace KikuzawaRestaurant.Forms
             for (i = 0; i <= j - 1; i++)
             {
 
-                string strTotalQty, proPrice, proName;
+                string strTotalQty, proName;
                 proName = listView1.Items[i].SubItems[2].Text;
                 strTotalQty = Convert.ToInt32(listView1.Items[i].SubItems[1].Text).ToString();
                 //  proPrice = Convert.ToInt32(listView1.Items[i].SubItems[3].Text).ToString();

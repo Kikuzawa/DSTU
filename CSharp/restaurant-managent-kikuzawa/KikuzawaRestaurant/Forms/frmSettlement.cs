@@ -28,7 +28,6 @@ namespace KikuzawaRestaurant.Forms
         double parseAmt, parseRateConvert;
         clsView viewClass = new clsView();
         frmViewOrderSettlement fvos = new frmViewOrderSettlement();
-        frmReceiptPreview rcs;
         public string getCashierName;
         public string KOTnum;
         private void button1_Click(object sender, EventArgs e)
