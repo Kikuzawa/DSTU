@@ -10,15 +10,23 @@ namespace Laboratory2
 
     public partial class Form1 : Form
     {
-        BitReader bRead;
-        BitWriter bWrite;
-        Huffman huff;
         FileInfo FilePath;
+
+
+        Queue<HuffmanNode> queueTempNodes = new Queue<HuffmanNode>();
+
+        List<HuffmanNode> listTempOrderedNodes = new List<HuffmanNode>();
+
+        List<HuffmanNode> listFixedNodes = new List<HuffmanNode>();
+
+        List<EncodedChar> listBinary = new List<EncodedChar>();
+
+
 
         public Form1()
         {
             InitializeComponent();
-            huff = new Huffman();
+            
         }
 
         private void ButtonLoadFile_Click(object sender, EventArgs e)
@@ -45,15 +53,9 @@ namespace Laboratory2
             fileNameDialog.FileName = "outputTXT.txt";
             fileNameDialog.AddExtension = true;
             string filePath = "C:\\decode.txt";
-
-            // Открываем диалог выбора каталога
-
-            // Если пользователь выбрал каталог, открываем диалог ввода имени файла
             if (fileNameDialog.ShowDialog() == DialogResult.OK)
             {
                 filePath = Path.Combine(fileNameDialog.FileName);
-
-                // Здесь вы можете использовать filePath для сохранения файла
 
             }
 
@@ -74,15 +76,9 @@ namespace Laboratory2
             fileNameDialog.FileName = "outputHS.hs";
             fileNameDialog.AddExtension = true;
             string filePath = "C:\\code.hs";
-
-            // Открываем диалог выбора каталога
-
-            // Если пользователь выбрал каталог, открываем диалог ввода имени файла
             if (fileNameDialog.ShowDialog() == DialogResult.OK)
             {
                 filePath = Path.Combine(fileNameDialog.FileName);
-
-                // Здесь вы можете использовать filePath для сохранения файла
 
             }
 
@@ -92,97 +88,113 @@ namespace Laboratory2
         private void ButtonHaffCode_Click(object sender, EventArgs e)
         {
 
-            string fileName = saveTextBoxHaffCode.Text;
 
-            if (!fileName.Equals(""))
+            Huffman_tree_and_log();
+
+
+
+        }
+
+        private void Huffman_tree_and_log()
+        {
+            string inputText;
+            using (StreamReader reader = new StreamReader(loadTextBox.Text))
             {
-                List<byte> inputList = new List<byte>();
-                bRead = new BitReader(FilePath.FullName);
-                long fileSize = 8 * new FileInfo(FilePath.FullName).Length;
+                inputText = reader.ReadToEnd();
+            }
 
-                do
+            listTempOrderedNodes.Clear();
+            queueTempNodes.Clear();
+            listFixedNodes.Clear();
+            listBinary.Clear();
+            listBoxNodeList.Items.Clear();
+
+            string input = inputText;
+            while (input != "")
+            {
+                string txt = input.Substring(0, 1);
+                input = input.Remove(0, 1);
+
+                if (listTempOrderedNodes.Count > 0)
                 {
-                    int readBits = 8;
-                    if (readBits > fileSize)
+                    bool valid = false;
+                    for (int i = 0; i < listTempOrderedNodes.Count; i++)
                     {
-                        readBits = (int)fileSize;
+                        if (listTempOrderedNodes[i].NodeString == txt)
+                        {
+                            listTempOrderedNodes[i].Frequency += 1;
+                            valid = true;
+                            break;
+                        }
                     }
-                    uint value = bRead.ReadNBits(readBits);
-                    inputList.Add(Convert.ToByte(value));
-                    fileSize -= readBits;
-                } while (fileSize > 0);
-
-                bRead.Dispose();
-
-                List<byte> huffCodes = huff.Encode(inputList.ToArray());
-
-                var modelCharacters = huff.GetModel();
-
-                // Создаем список для хранения данных
-                List<CharacterCode> characterCodes = new List<CharacterCode>();
-
-                // Преобразуем данные из SortedDictionary
-                foreach (var kvp in modelCharacters)
-                {
-                    characterCodes.Add(new CharacterCode
-                    {
-                        Character = kvp.Key,
-                        Codes = kvp.Value
-                    });
+                    if (!valid) NewNode(txt);
                 }
-
-                // Очищаем DataGridView от предыдущих данных
-                dataGridHaffCode.Rows.Clear();
-
-                // Проверяем, есть ли столбцы в DataGridView
-                if (dataGridHaffCode.Columns.Count == 0)
-                {
-                    // Добавляем столбцы программно
-                    dataGridHaffCode.Columns.Add("Character", "Символ");
-                    dataGridHaffCode.Columns.Add("Codes", "Коды");
-                }
-
-                // Заполняем DataGridView данными
-                foreach (var code in characterCodes)
-                {
-                    dataGridHaffCode.Rows.Add(
-                        code.Character,
-                        string.Join(", ", code.Codes)
-                    );
-                }
-
-
-
-
-                bWrite = new BitWriter(Path.Combine(FilePath.DirectoryName, fileName));
-
-                var statistic = huff.GetStatistic();
-                var sortedStatistic = new SortedDictionary<byte, int>(statistic);
-                for (int i = 0; i <= 255; i++)
-                {
-                    if (sortedStatistic.ContainsKey((byte)i))
-                        bWrite.WriteNBits(1, 1);
-                    else
-                        bWrite.WriteNBits(1, 0);
-                }
-
-                foreach (var item in sortedStatistic)
-                {
-                    bWrite.WriteNBits(8, (uint)item.Value);
-                }
-
-                foreach (var code in huffCodes)
-                {
-                    bWrite.WriteNBits(8, code);
-                }
-
-                bWrite.WriteNBits(7, 1);
-                bWrite.Dispose();
+                else NewNode(txt);
             }
-            else
+
+            RefreshOrder();
+
+
+            while (queueTempNodes.Count > 1)
             {
-                MessageBox.Show("Ошибка, выберите файл для сохранения");
+                HuffmanNode leftNode = queueTempNodes.Dequeue();
+                HuffmanNode rightNode = queueTempNodes.Dequeue();
+                HuffmanNode newParent = new HuffmanNode();
+                newParent.NodeString = leftNode.NodeString + rightNode.NodeString;
+                newParent.Frequency = leftNode.Frequency + rightNode.Frequency;
+                newParent.Left = leftNode;
+                newParent.Right = rightNode;
+                queueTempNodes.Enqueue(newParent);
+                listFixedNodes.Add(newParent);
+                RefreshOrder();
             }
+
+            dataGridViewEncodedChars.Rows.Clear();
+
+            for (int i = 0; i < listFixedNodes.Count; i++)
+            {
+                listBoxNodeList.Items.Add("Node\t\t: " + listFixedNodes[i].NodeString);
+                listBoxNodeList.Items.Add("Frequency\t: " + listFixedNodes[i].Frequency);
+
+                if (listFixedNodes[i].Left != null) listBoxNodeList.Items.Add("Left\t\t: " + listFixedNodes[i].Left.NodeString);
+                else listBoxNodeList.Items.Add("Left\t\t: " + "Null");
+                if (listFixedNodes[i].Right != null) listBoxNodeList.Items.Add("Right\t\t: " + listFixedNodes[i].Right.NodeString);
+                else listBoxNodeList.Items.Add("Right\t\t: " + "Null");
+
+                listBoxNodeList.Items.Add("");
+
+                if (listFixedNodes[i].NodeString.Length == 1)
+                {
+                    EncodedChar en = new EncodedChar();
+                    en.Character = listFixedNodes[i].NodeString;
+                    en.Binary = AnalyzeBinary(en.Character, listFixedNodes[listFixedNodes.Count - 1]);
+                    listBinary.Add(en);
+                    dataGridViewEncodedChars.Rows.Add(en.Character, en.Binary);
+                }
+            }
+
+            input = inputText;
+            string output = "";
+            while (input != "")
+            {
+                string txt = input.Substring(0, 1);
+                input = input.Remove(0, 1);
+                for (int i = 0; i < listBinary.Count; i++)
+                {
+                    if (listBinary[i].Character == txt) output = output + listBinary[i].Binary;
+                }
+            }
+
+            textBoxOutput.Text = output;
+
+            using (StreamWriter writer = new StreamWriter(saveTextBoxHaffCode.Text, false))
+            {
+                writer.Write(output);
+            }
+
+
+
+
         }
 
         private void ButtonHaffDecode_Click(object sender, EventArgs e)
@@ -191,63 +203,144 @@ namespace Laboratory2
 
             if (!fileName.Equals(""))
             {
-                bRead = new BitReader(FilePath.FullName);
-
-                List<byte> statsList = new List<byte>();
-                Dictionary<byte, int> statistic = new Dictionary<byte, int>();
-
-                for (int i = 0; i < 256; i++)
-                {
-                    uint value = bRead.ReadNBits(1);
-                    if (value == 1)
-                        statsList.Add((byte)i);
-                }
-
-                int length = statsList.Count;
-                for (int i = 0; i < length; i++)
-                {
-                    uint nr = bRead.ReadNBits(8);
-                    statistic.Add(statsList[i], (int)nr);
-                }
-
-                List<byte> codedValues = new List<byte>();
-                long fileSize = 8 * new FileInfo(FilePath.FullName).Length - (256 + (length * 8));
-
-                do
-                {
-                    int readBits = 8;
-                    if (readBits > fileSize)
-                    {
-                        readBits = (int)fileSize;
-                    }
-                    uint value = bRead.ReadNBits(readBits);
-                    codedValues.Add(Convert.ToByte(value));
-                    fileSize -= readBits;
-                } while (fileSize > 0);
-
-                bRead.Dispose();
-
-                var decodedValues = huff.Decode(codedValues, statistic);
-
-               
-                    
-                    bWrite = new BitWriter(Path.Combine(fileName));
-                
-
-                foreach (var item in decodedValues)
-                {
-                    bWrite.WriteNBits(8, item);
-                }
-                bWrite.Dispose();
-
+                DecodeMethod();
             }
             else
             {
                 MessageBox.Show("Ошибка, выберите файл для сохранения");
             }
+
+
         }
 
+
+
+
         private void dataGridHaffDecode_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridHaffCode_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+
+
+        public void RefreshOrder()
+        {
+            int value = 1;
+            if (queueTempNodes.Count > 0)
+            {
+                listTempOrderedNodes.Clear();
+                while (queueTempNodes.Count != 0) listTempOrderedNodes.Add(queueTempNodes.Dequeue());
+            }
+            while (queueTempNodes.Count < listTempOrderedNodes.Count)
+            {
+                for (int i = 0; i < listTempOrderedNodes.Count; i++)
+                {
+                    if (listTempOrderedNodes[i].Frequency == value) queueTempNodes.Enqueue(listTempOrderedNodes[i]);
+                }
+                value++;
+            }
+        }
+
+        public void NewNode(string p)
+        {
+            HuffmanNode node = new HuffmanNode();
+            node.NodeString = p;
+            node.Frequency = 1;
+            node.Left = null;
+            node.Right = null;
+            listFixedNodes.Add(node);
+            listTempOrderedNodes.Add(node);
+        }
+
+        public string AnalyzeBinary(string txt, HuffmanNode parent)
+        {
+            HuffmanNode helper = parent;
+            string returnValue = "";
+            bool valid = true;
+            while ((helper.Left != null || helper.Right != null) && valid)
+            {
+                if (helper.Left.NodeString.Contains(txt))
+                {
+                    helper = helper.Left; valid = true; returnValue = returnValue + "0";
+                }
+                else if (helper.Right.NodeString.Contains(txt))
+                {
+                    helper = helper.Right; valid = true; returnValue = returnValue + "1";
+                }
+                else valid = false;
+            }
+            if (valid) return returnValue;
+            else return "error";
+        }
+
+        public void DecodeMethod()
+        {
+            if (listFixedNodes.Count > 0)
+            {
+                string input;
+                using (StreamReader reader = new StreamReader(loadTextBox.Text))
+                {
+                    input = reader.ReadToEnd();
+                }
+
+                string output = "";
+                HuffmanNode root = new HuffmanNode();
+                for (int i = 0; i < listFixedNodes.Count; i++)
+                {
+                    if (root.NodeString.Length < listFixedNodes[i].NodeString.Length) root = listFixedNodes[i];
+                }
+                int repetition = input.Length;
+                bool finished = false;
+                HuffmanNode helper = new HuffmanNode();
+                helper = root;
+                for (int j = 0; j < repetition; j++)
+                {
+                    finished = false;
+                    string biner = "";
+                    if (input != "") biner = input.Substring(0, 1);
+                    if (biner == "0" && helper.Left != null)
+                    {
+                        helper = helper.Left;
+                        input = input.Remove(0, 1);
+                    }
+                    else if (biner == "1" && helper.Right != null)
+                    {
+                        helper = helper.Right;
+                        input = input.Remove(0, 1);
+                    }
+                    if (helper.Left == null && helper.Right == null)
+                    {
+                        output = output + helper.NodeString;
+                        helper = root;
+                        finished = true;
+                    }
+                }
+                if (finished)
+                {
+                    textBoxOutput.Text = output;
+                    using (StreamWriter writer = new StreamWriter(saveTextBoxHaffDecode.Text, false))
+                    {
+                        writer.Write(output);
+                    }
+                }
+                else
+                {
+                    textBoxOutput.Text = "Unknown binary sequence detected. Make sure you've inputed the correct binary sequence according to the tree."
+                        + "\n\n" + "Please note that binary numbers consists only number 0 and or 1";
+                }
+            }
+            else
+            {
+                textBoxOutput.Text = "Please encode something to make the HuffmanTree for decoding process...";
+            }
+        }
+
+        private void textBoxOutput_TextChanged(object sender, EventArgs e)
         {
 
         }

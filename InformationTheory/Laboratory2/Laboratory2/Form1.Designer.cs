@@ -40,12 +40,10 @@ namespace Laboratory2
             this.ButtonSelectFolderHaffDecode1 = new System.Windows.Forms.Button();
             this.ButtonHaffDecode = new System.Windows.Forms.Button();
             this.saveTextBoxHaffDecode = new System.Windows.Forms.TextBox();
-            this.dataGridHaffDecode = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ButtonSelectFolderHaffCode = new System.Windows.Forms.Button();
             this.ButtonHaffCode = new System.Windows.Forms.Button();
             this.saveTextBoxHaffCode = new System.Windows.Forms.TextBox();
-            this.dataGridHaffCode = new System.Windows.Forms.DataGridView();
             this.tabPageLZ77 = new System.Windows.Forms.TabPage();
             this.ButtonRunLZ77 = new System.Windows.Forms.Button();
             this.dataGridLZ77 = new System.Windows.Forms.DataGridView();
@@ -60,17 +58,21 @@ namespace Laboratory2
             this.saveTextBoxLZ78 = new System.Windows.Forms.TextBox();
             this.tabPageLZW = new System.Windows.Forms.TabPage();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.listBoxNodeList = new System.Windows.Forms.ListBox();
+            this.dataGridViewEncodedChars = new System.Windows.Forms.DataGridView();
+            this.Character = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Binary = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBoxOutput = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageHaffman.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridHaffDecode)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridHaffCode)).BeginInit();
             this.tabPageLZ77.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridLZ77)).BeginInit();
             this.tabPageLZ78.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridLZ78)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEncodedChars)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -131,10 +133,10 @@ namespace Laboratory2
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.textBoxOutput);
             this.groupBox3.Controls.Add(this.ButtonSelectFolderHaffDecode1);
             this.groupBox3.Controls.Add(this.ButtonHaffDecode);
             this.groupBox3.Controls.Add(this.saveTextBoxHaffDecode);
-            this.groupBox3.Controls.Add(this.dataGridHaffDecode);
             this.groupBox3.Location = new System.Drawing.Point(585, 12);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(554, 582);
@@ -170,21 +172,13 @@ namespace Laboratory2
             this.saveTextBoxHaffDecode.Size = new System.Drawing.Size(365, 20);
             this.saveTextBoxHaffDecode.TabIndex = 0;
             // 
-            // dataGridHaffDecode
-            // 
-            this.dataGridHaffDecode.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridHaffDecode.Location = new System.Drawing.Point(7, 62);
-            this.dataGridHaffDecode.Name = "dataGridHaffDecode";
-            this.dataGridHaffDecode.Size = new System.Drawing.Size(541, 514);
-            this.dataGridHaffDecode.TabIndex = 0;
-            this.dataGridHaffDecode.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridHaffDecode_CellContentClick);
-            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.dataGridViewEncodedChars);
+            this.groupBox2.Controls.Add(this.listBoxNodeList);
             this.groupBox2.Controls.Add(this.ButtonSelectFolderHaffCode);
             this.groupBox2.Controls.Add(this.ButtonHaffCode);
             this.groupBox2.Controls.Add(this.saveTextBoxHaffCode);
-            this.groupBox2.Controls.Add(this.dataGridHaffCode);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(554, 582);
@@ -219,15 +213,6 @@ namespace Laboratory2
             this.saveTextBoxHaffCode.ReadOnly = true;
             this.saveTextBoxHaffCode.Size = new System.Drawing.Size(365, 20);
             this.saveTextBoxHaffCode.TabIndex = 0;
-            // 
-            // dataGridHaffCode
-            // 
-            this.dataGridHaffCode.AllowUserToOrderColumns = true;
-            this.dataGridHaffCode.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridHaffCode.Location = new System.Drawing.Point(7, 62);
-            this.dataGridHaffCode.Name = "dataGridHaffCode";
-            this.dataGridHaffCode.Size = new System.Drawing.Size(541, 514);
-            this.dataGridHaffCode.TabIndex = 0;
             // 
             // tabPageLZ77
             // 
@@ -352,6 +337,50 @@ namespace Laboratory2
             this.tabPageLZW.Text = "LZW";
             this.tabPageLZW.UseVisualStyleBackColor = true;
             // 
+            // listBoxNodeList
+            // 
+            this.listBoxNodeList.FormattingEnabled = true;
+            this.listBoxNodeList.Location = new System.Drawing.Point(7, 71);
+            this.listBoxNodeList.Margin = new System.Windows.Forms.Padding(2);
+            this.listBoxNodeList.Name = "listBoxNodeList";
+            this.listBoxNodeList.Size = new System.Drawing.Size(253, 498);
+            this.listBoxNodeList.TabIndex = 4;
+            // 
+            // dataGridViewEncodedChars
+            // 
+            this.dataGridViewEncodedChars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEncodedChars.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Character,
+            this.Binary});
+            this.dataGridViewEncodedChars.Location = new System.Drawing.Point(271, 71);
+            this.dataGridViewEncodedChars.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridViewEncodedChars.Name = "dataGridViewEncodedChars";
+            this.dataGridViewEncodedChars.RowTemplate.Height = 24;
+            this.dataGridViewEncodedChars.Size = new System.Drawing.Size(277, 498);
+            this.dataGridViewEncodedChars.TabIndex = 6;
+            // 
+            // Character
+            // 
+            this.Character.HeaderText = "Char";
+            this.Character.Name = "Character";
+            this.Character.Width = 50;
+            // 
+            // Binary
+            // 
+            this.Binary.HeaderText = "Binary";
+            this.Binary.Name = "Binary";
+            this.Binary.Width = 300;
+            // 
+            // textBoxOutput
+            // 
+            this.textBoxOutput.Location = new System.Drawing.Point(7, 71);
+            this.textBoxOutput.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxOutput.Name = "textBoxOutput";
+            this.textBoxOutput.Size = new System.Drawing.Size(541, 498);
+            this.textBoxOutput.TabIndex = 11;
+            this.textBoxOutput.Text = "";
+            this.textBoxOutput.TextChanged += new System.EventHandler(this.textBoxOutput_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -367,16 +396,15 @@ namespace Laboratory2
             this.tabPageHaffman.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridHaffDecode)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridHaffCode)).EndInit();
             this.tabPageLZ77.ResumeLayout(false);
             this.tabPageLZ77.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridLZ77)).EndInit();
             this.tabPageLZ78.ResumeLayout(false);
             this.tabPageLZ78.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridLZ78)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEncodedChars)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -395,10 +423,8 @@ namespace Laboratory2
         private System.Windows.Forms.TabPage tabPageLZ78;
         private System.Windows.Forms.TabPage tabPageLZW;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.DataGridView dataGridHaffDecode;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button ButtonHaffCode;
-        private System.Windows.Forms.DataGridView dataGridHaffCode;
         private System.Windows.Forms.Button ButtonHaffDecode;
         private System.Windows.Forms.TextBox saveTextBoxLZ77;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
@@ -415,6 +441,11 @@ namespace Laboratory2
         private System.Windows.Forms.TextBox saveTextBoxHaffCode;
         private System.Windows.Forms.Button ButtonSelectFolderHaffDecode1;
         private System.Windows.Forms.TextBox saveTextBoxHaffDecode;
+        private System.Windows.Forms.ListBox listBoxNodeList;
+        private System.Windows.Forms.DataGridView dataGridViewEncodedChars;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Character;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Binary;
+        private System.Windows.Forms.RichTextBox textBoxOutput;
     }
 }
 
